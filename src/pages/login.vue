@@ -112,10 +112,10 @@ import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import logo from '@images/logo.svg?raw'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
-import { getCurrentInstance } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 import permissions from '@/plugins/acl/permissions'
 import router from '@/router'
-import axios, { axiosIns } from '@/plugins/axios'
+import axios from '@/plugins/axios'
 
 const isPasswordVisible = ref(false)
 const vm = getCurrentInstance().proxy
@@ -136,18 +136,21 @@ const handleFormSubmit = () => {
   const isFormValid = loginForm.value.validate()
 
   if (!isFormValid) return
-  axiosIns.post('auth/login', { email: email.value, password: password.value })
+  axios.post('auth/login', { email: email.value, password: password.value })
     .then(response => {
+      localStorage.setItem('accessToken', response.data.data.accessToken)
+
       return response
     })
     .then(() => {
       axios.get('sys-users/profile').then(response => {
-        console.log(permissions)
+        localStorage.setItem('userData', JSON.stringify(response.data))
 
         const userAbility = permissions
 
         vm.$ability.update(userAbility)
         localStorage.setItem('userAbility', JSON.stringify(userAbility))
+
         router.push('/dashboard')
       })
     })
