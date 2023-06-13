@@ -144,7 +144,7 @@ const handleFormSubmit = () => {
     })
     .then(() => {
       axios.get('sys-users/profile').then(response => {
-        localStorage.setItem('userData', JSON.stringify(response.data))
+        localStorage.setItem('userData', JSON.stringify(response.data.data))
 
         const userAbility = permissions
 
