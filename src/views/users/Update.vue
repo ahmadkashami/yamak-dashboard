@@ -1,8 +1,7 @@
 <template>
   <div>
     <VDialog
-      v-model="
-{/* eslint-disable-next-line vue/no-mutating-props */}isOpenUpdateDialog"
+      :value="isOpenUpdateDialog"
       max-width="900"
       persistent
     >
@@ -16,7 +15,7 @@
             @click="$emit('update:is-open-update-dialog',false)"
           >
             <VIcon size="22">
-              {{ icons.mdiClose }}
+              {{ mdiClose }}
             </VIcon>
           </VBtn>
         </div>
@@ -73,105 +72,78 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { mdiClose, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import { store } from '@/store'
 import useUsers from './useUsers'
-import { required } from '../../utils/validation'
 import { onMounted, ref, watch } from 'vue'
+import * as validation from '@/utils/validation'
 
-export default {
-  model: {
-    prop: 'isOpenUpdateDialog',
-    event: 'update:is-open-update-dialog',
+const props=defineProps({
+  isOpenUpdateDialog: {
+    type: Boolean,
+    required: true,
   },
-  props: {
-    isOpenUpdateDialog: {
-      type: Boolean,
-      required: true,
-    },
-    itemData: {
-      required: true,
-    },
+  itemData: {
+    required: true,
   },
-  setup(props, { emit }) {
-    const {
-      isOutlinedSnackbarVisible,
-      msgSnackbarVisible,
-      isOutlinedSnackbarColor,
-      valid,
-      form,
-      validate,
-      name,
-      resetForm,
-    } = useUsers()
+})
 
-    onMounted(() => {
-    })
+const emit = defineEmits(['update-date', 'update:is-open-update-dialog'])
 
-    const resetData = () => {
-      resetForm()
-      emit('update:is-open-update-dialog', false)
-      loading.value = false
-    }
+const {
+  isOutlinedSnackbarVisible,
+  msgSnackbarVisible,
+  isOutlinedSnackbarColor,
+  valid,
+  form,
+  validate,
+  name,
+  resetForm,
+} = useUsers()
 
-    const loading = ref(false)
+onMounted(() => {
+})
 
-    const onSubmit = () => {
-      if (valid.value) {
-        loading.value = true
-        store.dispatch('update$Example', {
-          id: props.itemData.id,
-          queryParams: {
-            name: name.value,
-          },
-        }).then(response => {
-          if (response) {
-            // eslint-disable-next-line vue/custom-event-name-casing
-            emit('update-date')
-            loading.value = false
-            msgSnackbarVisible.value = "Updated Successfully"
-            isOutlinedSnackbarColor.value = "success"
-            isOutlinedSnackbarVisible.value = true
-            resetData()
-          }
-        }).catch(error => {
-          msgSnackbarVisible.value = error.response.data.error
-          isOutlinedSnackbarVisible.value = true
-          isOutlinedSnackbarColor.value = 'error'
-          loading.value = false
-        })
-      } else {
-        validate()
-      }
-    }
-
-    watch(
-      () => (props.isOpenUpdateDialog),
-      () => {name.value = props.itemData?.name},
-    )
-
-    return {
-      form,
-      valid,
-      isOutlinedSnackbarVisible,
-      msgSnackbarVisible,
-      isOutlinedSnackbarColor,
-      onSubmit,
-      resetData,
-      validate,
-      loading,
-      icons: {
-        mdiClose,
-        mdiEyeOffOutline,
-        mdiEyeOutline,
-      },
-      resetForm,
-      name,
-      validation: {
-        required,
-      },
-    }
-  },
+const resetData = () => {
+  resetForm()
+  emit('update:is-open-update-dialog', false)
+  loading.value = false
 }
+
+const loading = ref(false)
+
+const onSubmit = () => {
+  if (valid.value) {
+    loading.value = true
+    store.dispatch('update$Example', {
+      id: props.itemData.id,
+      queryParams: {
+        name: name.value,
+      },
+    }).then(response => {
+      if (response) {
+        emit('updateDate')
+        loading.value = false
+        msgSnackbarVisible.value = "Updated Successfully"
+        isOutlinedSnackbarColor.value = "success"
+        isOutlinedSnackbarVisible.value = true
+        resetData()
+      }
+    }).catch(error => {
+      msgSnackbarVisible.value = error.response.data.error
+      isOutlinedSnackbarVisible.value = true
+      isOutlinedSnackbarColor.value = 'error'
+      loading.value = false
+    })
+  } else {
+    validate()
+  }
+}
+
+watch(
+  () => (props.isOpenUpdateDialog),
+  () => {name.value = props.itemData?.name},
+)
+
 </script>

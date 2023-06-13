@@ -6,8 +6,8 @@ export default function useUsers() {
   const { t } = useUtils()
 
   const tableColumns = [
-    { text: t('AccountId'), value: 'id' },
     { text: t('Name'), value: 'name' },
+    { text: t('Email'), value: 'email' },
     { text: t('Actions'), value: 'actions', align: 'center', sortable: false },
   ]
 
@@ -42,14 +42,15 @@ export default function useUsers() {
   const name = ref(null)
 
   const fetchDataList = () => {
-    store.dispatch('fetchDataList', {
+    store.dispatch('fetchUsers', {
       page: currentPage.value ?? 1,
       limit: itemsPerPage.value,
     })
       .then(response => {
-        dataList.value = response.data.data.data
+
+        dataList.value = response.data.data.list
         pageInfo.value = {
-          totalPages: Math.ceil(response.data.data.total / itemsPerPage.value),
+          totalPages: response.data.data.metadata.lastPage,
         }
         loading.value = false
       }).catch(error => {

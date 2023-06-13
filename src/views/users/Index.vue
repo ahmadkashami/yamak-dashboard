@@ -1,182 +1,151 @@
 <template>
   <div>
-    <v-card id='$$example-list'>
-      <v-card-text class='d-flex align-center flex-wrap pb-0'>
-        <div class='d-flex align-center  pb-5'>
-          <h2>{{ $t('$examples') }}</h2>
+    <VCard id="$$example-list">
+      <VCardText class="d-flex align-center flex-wrap pb-0">
+        <div class="d-flex align-center  pb-5">
+          <h2>{{ $t('Users') }}</h2>
         </div>
-        <v-spacer></v-spacer>
-        <div class='d-flex align-center pb-5'>
-          <v-btn
-            color='primary'
-            class='me-3'
-            @click='isOpenCreateDialog=!isOpenCreateDialog'
+        <VSpacer />
+        <div class="d-flex align-center pb-5">
+          <VBtn
+            color="primary"
+            class="me-3"
+            @click="isOpenCreateDialog=!isOpenCreateDialog"
           >
-            <v-icon
-              size='18'
-              class='me-1'
+            <VIcon
+              size="18"
+              class="me-1"
             >
-              {{ icons.mdiPlus }}
-            </v-icon>
+              {{ mdiPlus }}
+            </VIcon>
             <span>{{ $t('Create') }}</span>
-          </v-btn>
+          </VBtn>
         </div>
-      </v-card-text>
+      </VCardText>
       <!-- table -->
-      <v-data-table
-        :headers='tableColumns'
-        :items='dataList'
-        :options.sync='options'
-        :loading='loading'
-        class='text-no-wrap'
+      <VDataTable
+        v-model:options="options"
+        :headers="tableColumns"
+        :items="dataList"
+        :loading="loading"
+        class="text-no-wrap"
         hide-default-footer
       >
-        <template #[`item.id`]='{item}'>
-          {{ item.id }}#
+        <template #[`item.id`]="{item}">
+          #{{ item.id }}
         </template>
-        <template #[`item.actions`]='{item}'>
-          <v-tooltip color='secondary' bottom>
-            <template #activator='{ on, attrs }'>
-              <v-btn
-                v-bind='attrs'
-                v-on='on'
+        <template #[`item.actions`]="{item}">
+          <VTooltip
+            color="secondary"
+            bottom
+          >
+            <template #activator="{ on, attrs }">
+              <VBtn
+                v-bind="attrs"
                 icon
                 small
-                color='secondary'
-                @click.stop.prevent='editItem(item)'
-                class='m-19'>
-                <v-icon size='21'>
-                  {{ icons.mdiPencil }}
-                </v-icon>
-              </v-btn>
+                color="secondary"
+                class="m-19"
+                v-on="on"
+                @click.stop.prevent="editItem(item)"
+              >
+                <VIcon size="21">
+                  {{ mdiPencil }}
+                </VIcon>
+              </VBtn>
             </template>
             <span>{{ $t('Edit') }}</span>
-          </v-tooltip>
+          </VTooltip>
         </template>
-      </v-data-table>
-      <v-divider></v-divider>
-      <v-card-text class='pt-2'>
-        <v-row>
-          <v-col
-            lg='2'
-            cols='3'
+      </VDataTable>
+      <VDivider />
+      <VCardText class="pt-2">
+        <VRow>
+          <VCol
+            lg="2"
+            cols="3"
           >
-            <v-select
-              :items='[5,10,15,20]'
-              v-model='itemsPerPage'
+            <VSelect
+              v-model="itemsPerPage"
+              :items="[5,10,15,20]"
               :label="$t('Rows per page')"
               hide-details
-              @change='updateItemsPerPage'
-            ></v-select>
-          </v-col>
-          <v-col
-            lg='10'
-            cols='9'
-            class='d-flex justify-end'
+              @change="updateItemsPerPage"
+            />
+          </VCol>
+          <VCol
+            lg="10"
+            cols="9"
+            class="d-flex justify-end"
           >
-            <v-pagination
-              v-model='currentPage'
-              :length='pageInfo.totalPages'
-              @input='fetchDataList'
-            ></v-pagination>
-
-          </v-col>
-        </v-row>
-      </v-card-text>
-    </v-card>
-    <v-snackbar
-      v-model='isOutlinedSnackbarVisible'
-      :value='true'
-      :color='isOutlinedSnackbarColor'
+            <VPagination
+              v-model="currentPage"
+              :length="pageInfo.totalPages"
+              @input="fetchDataList"
+            />
+          </VCol>
+        </VRow>
+      </VCardText>
+    </VCard>
+    <VSnackbar
+      v-model="isOutlinedSnackbarVisible"
+      value
+      :color="isOutlinedSnackbarColor"
       bottom
-      rounded='pill'
+      rounded="pill"
       top
     >
       {{ msgSnackbarVisible }}
-    </v-snackbar>
-    <create v-model='isOpenCreateDialog'
-            @update-date='fetchDataList'></create>
-    <update v-model='isOpenUpdateDialog'
-            @update-date='fetchDataList' :$$example-data='itemData'></update>
+    </VSnackbar>
+    <Create
+      @update-date="fetchDataList"
+     :is-open-create-dialog="isOpenCreateDialog"/>
+    <Update
+      :item-data="itemData"
+      @update-date="fetchDataList"
+     :is-open-update-dialog="isOpenUpdateDialog"/>
   </div>
-
 </template>
 
-<script>
+<script setup>
 import {
   mdiPlus,
   mdiPencil,
 } from '@mdi/js'
-import use$example from './use$example'
-import {onMounted} from '@vue/composition-api/dist/vue-composition-api'
-import Create from './Create'
-import Update$example from './Update'
+import useUsers from './useUsers'
+import Update from '@/views/users/Update.vue'
+import Create from '@/views/users/Create.vue'
+import { onMounted } from 'vue'
+import { VDataTable } from 'vuetify/labs/VDataTable'
 
+const {
+  tableColumns,
+  loading,
+  options,
+  pageInfo,
+  currentPage,
+  itemsPerPage,
+  isOutlinedSnackbarVisible,
+  msgSnackbarVisible,
+  isOutlinedSnackbarColor,
+  fetchDataList,
+  dataList,
+  isOpenCreateDialog,
+  isOpenUpdateDialog,
+  editItem,
+  itemData,
+} = useUsers()
 
-export default {
-  name: '$exampleList',
-  components: {
-    Create,
-    Update
-  },
-  setup() {
-    const {
-      tableColumns,
-      loading,
-      options,
-      pageInfo,
-      currentPage,
-      itemsPerPage,
-      isOutlinedSnackbarVisible,
-      msgSnackbarVisible,
-      isOutlinedSnackbarColor,
-      fetchDataList,
-      dataList,
-      isOpenCreateDialog,
-      isOpenUpdateDialog,
-      editItem,
-      itemData
-    } = use$example()
+onMounted(() => {
+  fetchDataList()
+})
 
-    onMounted(() => {
-      fetchDataList()
-    })
-
-    const updateItemsPerPage = (event) => {
-      currentPage.value = 1
-      itemsPerPage.value = parseInt(event)
-      options.value.itemsPerPage = itemsPerPage.value
-      fetchDataList()
-    }
-    const showMessageDialog = () => {
-      msgSnackbarVisible.value = 'Your request will be followed up'
-      isOutlinedSnackbarVisible.value = true
-    }
-
-    return {
-      tableColumns,
-      loading,
-      options,
-      pageInfo,
-      currentPage,
-      itemsPerPage,
-      isOutlinedSnackbarVisible,
-      msgSnackbarVisible,
-      showMessageDialog,
-      updateItemsPerPage,
-      dataList,
-      fetchDataList,
-      icons: {
-        mdiPlus,
-        mdiPencil,
-      },
-      isOutlinedSnackbarColor,
-      isOpenCreateDialog,
-      isOpenUpdateDialog,
-      editItem,
-      itemData
-    }
-  },
+const updateItemsPerPage = event => {
+  currentPage.value = 1
+  itemsPerPage.value = parseInt(event)
+  options.value.itemsPerPage = itemsPerPage.value
+  fetchDataList()
 }
+
 </script>
 
