@@ -1,10 +1,11 @@
 <template>
   <div>
     <VDialog
-      :value="isOpenCreateDialog"
+      v-model="isOpenCreateDialog"
       max-width="900"
       persistent
     >
+      {{isOpenCreateDialog}}
       <VCard height="100%">
         <div class="drawer-header d-flex align-center mb-4">
           <span class="font-weight-semibold text-base text--primary">{{ $t('Create') }}</span>
@@ -75,7 +76,7 @@
 <script setup>
 import { mdiClose, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import useUsers from './useUsers'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { store } from '@/store'
 import * as validation from '@/utils/validation'
 
@@ -83,11 +84,21 @@ import * as validation from '@/utils/validation'
 const props=defineProps({
   isOpenCreateDialog: {
     type: Boolean,
-    required: true,
   },
 })
 
-const emit = defineEmits(['update-date', 'update:is-open-create-dialog'])
+const emit = defineEmits(['update:is-open-create-dialog','update-date'])
+
+const isOpenCreateDialog = computed({
+  get() {
+    console.log(props.isOpenCreateDialog)
+    return props.isOpenCreateDialog;
+  },
+  set(value) {
+    console.log(value)
+    emit('update:is-open-create-dialog', value);
+  },
+});
 
 const {
   isOutlinedSnackbarVisible,
@@ -101,6 +112,7 @@ const {
 } = useUsers()
 
 onMounted(() => {
+  emit('update-date')
 })
 
 const resetData = () => {

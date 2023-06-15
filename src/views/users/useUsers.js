@@ -6,9 +6,9 @@ export default function useUsers() {
   const { t } = useUtils()
 
   const tableColumns = [
-    { text: t('Name'), value: 'name' },
-    { text: t('Email'), value: 'email' },
-    { text: t('Actions'), value: 'actions', align: 'center', sortable: false },
+    { title: t('Name'), key: 'name' },
+    { title: t('Email'), key: 'email' },
+    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])

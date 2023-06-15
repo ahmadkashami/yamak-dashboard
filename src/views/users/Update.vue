@@ -82,7 +82,6 @@ import * as validation from '@/utils/validation'
 const props=defineProps({
   isOpenUpdateDialog: {
     type: Boolean,
-    required: true,
   },
   itemData: {
     required: true,

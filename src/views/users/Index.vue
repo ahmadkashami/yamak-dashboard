@@ -16,7 +16,7 @@
               size="18"
               class="me-1"
             >
-              {{ mdiPlus }}
+               mdi-plus
             </VIcon>
             <span>{{ $t('Create') }}</span>
           </VBtn>
@@ -38,19 +38,19 @@
           <VTooltip
             color="secondary"
             bottom
+            text="Tooltip"
           >
-            <template #activator="{ on, attrs }">
+            <template       v-slot:activator="{ props }" >
               <VBtn
-                v-bind="attrs"
+                v-bind="props"
                 icon
                 small
-                color="secondary"
+                color="primary"
                 class="m-19"
-                v-on="on"
                 @click.stop.prevent="editItem(item)"
               >
-                <VIcon size="21">
-                  {{ mdiPencil }}
+                <VIcon color="red" size="21">
+                  mdi-pencil
                 </VIcon>
               </VBtn>
             </template>
@@ -99,19 +99,15 @@
     </VSnackbar>
     <Create
       @update-date="fetchDataList"
-     :is-open-create-dialog="isOpenCreateDialog"/>
+      v-model:isOpenCreateDialog="isOpenCreateDialog"/>
     <Update
       :item-data="itemData"
       @update-date="fetchDataList"
-     :is-open-update-dialog="isOpenUpdateDialog"/>
+      v-model="isOpenUpdateDialog"/>
   </div>
 </template>
 
 <script setup>
-import {
-  mdiPlus,
-  mdiPencil,
-} from '@mdi/js'
 import useUsers from './useUsers'
 import Update from '@/views/users/Update.vue'
 import Create from '@/views/users/Create.vue'
@@ -146,6 +142,5 @@ const updateItemsPerPage = event => {
   options.value.itemsPerPage = itemsPerPage.value
   fetchDataList()
 }
-
 </script>
 
