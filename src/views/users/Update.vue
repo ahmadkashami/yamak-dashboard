@@ -74,10 +74,10 @@
 
 <script setup>
 import { mdiClose, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
-import { store } from '@/store'
 import useUsers from './useUsers'
 import { onMounted, ref, watch } from 'vue'
 import * as validation from '@/utils/validation'
+import { store } from '@/store'
 
 const props=defineProps({
   isOpenUpdateDialog: {
