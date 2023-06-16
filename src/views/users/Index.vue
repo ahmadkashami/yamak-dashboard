@@ -36,11 +36,11 @@
         </template>
         <template #[`item.actions`]="{item}">
           <VTooltip
-            color="secondary"
+            color="primary"
             bottom
             text="Tooltip"
           >
-            <template       v-slot:activator="{ props }" >
+            <template v-slot:activator="{ props }" >
               <VBtn
                 v-bind="props"
                 icon
@@ -57,35 +57,37 @@
             <span>{{ $t('Edit') }}</span>
           </VTooltip>
         </template>
+
+        <template v-slot:bottom>
+          <VRow class="border-t mt-2">
+            <VCol
+              lg="2"
+              cols="3"
+            >
+              <VSelect
+                v-model="itemsPerPage"
+                :items="[5,10,15,20]"
+                :label="$t('Rows per page')"
+                hide-details
+                @change="updateItemsPerPage"
+                class="ma-2"
+                density="compact"
+              />
+            </VCol>
+            <VCol
+              lg="10"
+              cols="9"
+              class="d-flex justify-end"
+            >
+              <VPagination
+                v-model="currentPage"
+                :length="pageInfo.totalPages"
+                @input="fetchDataList"
+              />
+            </VCol>
+          </VRow>
+        </template>
       </VDataTable>
-      <VDivider />
-      <VCardText class="pt-2">
-        <VRow>
-          <VCol
-            lg="2"
-            cols="3"
-          >
-            <VSelect
-              v-model="itemsPerPage"
-              :items="[5,10,15,20]"
-              :label="$t('Rows per page')"
-              hide-details
-              @change="updateItemsPerPage"
-            />
-          </VCol>
-          <VCol
-            lg="10"
-            cols="9"
-            class="d-flex justify-end"
-          >
-            <VPagination
-              v-model="currentPage"
-              :length="pageInfo.totalPages"
-              @input="fetchDataList"
-            />
-          </VCol>
-        </VRow>
-      </VCardText>
     </VCard>
     <VSnackbar
       v-model="isOutlinedSnackbarVisible"
@@ -112,7 +114,7 @@ import useUsers from './useUsers'
 import Update from '@/views/users/Update.vue'
 import Create from '@/views/users/Create.vue'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/VDataTable'
+import { VDataTable } from 'vuetify/labs/components'
 
 const {
   tableColumns,
