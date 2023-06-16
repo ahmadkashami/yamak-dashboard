@@ -31,31 +31,14 @@
         class="text-no-wrap"
         hide-default-footer
       >
-        <template #[`item.id`]="{item}">
-          #{{ item.id }}
-        </template>
-        <template #[`item.actions`]="{item}">
-          <VTooltip
-            color="primary"
-            bottom
-            text="Tooltip"
+        <template v-slot:item.actions="{ item }">
+          <v-icon
+            size="small"
+            class="me-2"
+            @click="editItem(item.raw)"
           >
-            <template v-slot:activator="{ props }" >
-              <VBtn
-                v-bind="props"
-                icon
-                small
-                color="primary"
-                class="m-19"
-                @click.stop.prevent="editItem(item)"
-              >
-                <VIcon color="red" size="21">
-                  mdi-pencil
-                </VIcon>
-              </VBtn>
-            </template>
-            <span>{{ $t('Edit') }}</span>
-          </VTooltip>
+            mdi-pencil
+          </v-icon>
         </template>
 
         <template v-slot:bottom>
@@ -103,9 +86,9 @@
       @update-date="fetchDataList"
       v-model:isOpenCreateDialog="isOpenCreateDialog"/>
     <Update
-      :item-data="itemData"
+      :itemData="itemData"
       @update-date="fetchDataList"
-      v-model="isOpenUpdateDialog"/>
+      v-model:isOpenUpdateDialog="isOpenUpdateDialog"/>
   </div>
 </template>
 

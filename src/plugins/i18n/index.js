@@ -4,8 +4,8 @@ import { createI18n } from "vue-i18n"
 
 
 export const i18n = createI18n({
-  locale: 'ar', // set locale
-  fallbackLocale: 'ar',
+  locale: 'en', // set locale
+  fallbackLocale: 'en',
   messages: {
     ar: ARABIC_LANGUAGE,
     en: ENGLISH_LANGUAGE,

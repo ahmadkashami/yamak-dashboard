@@ -1,84 +1,85 @@
 <template>
-  <div>
-    <VDialog
-      v-model="isOpenCreateDialog"
-      max-width="900"
-      persistent
-    >
-      {{isOpenCreateDialog}}
-      <VCard height="100%">
-        <div class="drawer-header d-flex align-center mb-4">
-          <span class="font-weight-semibold text-base text--primary">{{ $t('Create') }}</span>
-          <VSpacer />
-          <VBtn
-            icon
-            small
-            @click="$emit('update:is-open-create-dialog',false)"
-          >
-            <VIcon size="22">
-              {{ mdiClose }}
-            </VIcon>
-          </VBtn>
-        </div>
-        <VDivider />
-        <VCardText class="mt-5">
-          <VForm
-            ref="form"
-            v-model="valid"
-            @submit.prevent="onSubmit"
-          >
-            <VRow>
-              <VCol cols="12">
-                <VTextField
-                  v-model="name"
-                  outlined
-                  dense
-                  :label="$t('Name')"
-                  :placeholder="$t('Name')"
-                  :rules="[validation.required]"
-                />
-              </VCol>
-            </VRow>
-            <VBtn
-              color="primary"
-              class="me-3"
-              type="submit"
-              :loading="loading"
-              :disabled="loading"
+      <div>
+        <v-dialog
+          v-model="isOpenCreateDialog"
+          persistent
+          width="1024"
+        >
+          <VCard height="100%">
+            <div class="drawer-header d-flex align-center ma-4">
+              <span class="font-weight-semibold text-base text--primary">{{ $t('Create') }}</span>
+              <VSpacer />
+              <VBtn
+                icon="mdi-close"
+                size="small"
+                @click="$emit('update:is-open-create-dialog',false)"
+              >
+              </VBtn>
+            </div>
+            <VDivider />
+            <VForm
+              ref="form"
+              v-model="valid"
+              @submit.prevent="onSubmit"
             >
-              {{ $t('Create') }}
-            </VBtn>
-            <VBtn
-              color="secondary"
-              outlined
-              type="reset"
-              @click="resetData"
-            >
-              {{ $t('Cancel') }}
-            </VBtn>
-          </VForm>
-        </VCardText>
-      </VCard>
-    </VDialog>
-    <VSnackbar
-      v-model="isOutlinedSnackbarVisible"
-      value
-      :color="isOutlinedSnackbarColor"
-      bottom
-      rounded="pill"
-      top
-    >
-      {{ msgSnackbarVisible }}
-    </VSnackbar>
-  </div>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <VTextField
+                      v-model="name"
+                      outlined
+                      dense
+                      :label="$t('Name')"
+                      :placeholder="$t('Name')"
+                      :rules="[v => !!v || 'Item is required']"
+                    />
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <VBtn
+                color="primary"
+                class="me-3"
+                type="submit"
+                :loading="loading"
+                :disabled="loading"
+                variant="outlined"
+              >
+                {{ $t('Create') }}
+              </VBtn>
+              <VBtn
+                color="secondary"
+                variant="outlined"
+                type="reset"
+                @click="resetData"
+              >
+                {{ $t('Cancel') }}
+              </VBtn>
+            </v-card-actions>
+            </VForm>
+          </VCard>
+        </v-dialog>
+        <VSnackbar
+          v-model="isOutlinedSnackbarVisible"
+          value
+          :color="isOutlinedSnackbarColor"
+          bottom
+          rounded="pill"
+          top
+        >
+          {{ msgSnackbarVisible }}
+        </VSnackbar>
+      </div>
 </template>
 
 <script setup>
-import { mdiClose, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import useUsers from './useUsers'
 import { computed, onMounted, ref } from 'vue'
 import { store } from '@/store'
-import * as validation from '@/utils/validation'
+import { required } from '@/utils/validation'
 
 
 const props=defineProps({
@@ -91,7 +92,6 @@ const emit = defineEmits(['update:is-open-create-dialog','update-date'])
 
 const isOpenCreateDialog = computed({
   get() {
-    console.log(props.isOpenCreateDialog)
     return props.isOpenCreateDialog;
   },
   set(value) {
@@ -124,6 +124,7 @@ const resetData = () => {
 const loading = ref(false)
 
 const onSubmit = () => {
+  console.log(valid.value)
   if (valid.value) {
     loading.value = true
     store.dispatch('create$example', {
