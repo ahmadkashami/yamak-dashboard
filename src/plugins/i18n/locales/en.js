@@ -28,6 +28,7 @@ export const ENGLISH_LANGUAGE= {
     Preview: 'Preview',
     No: 'No',
     Yes: 'نعم',
+    Role: 'Role',
     'This field is required': 'This field is required',
     'The Email field must be a valid email':    'The Email field must be a valid email',
     'Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars':'Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars',
@@ -43,6 +44,7 @@ export const ENGLISH_LANGUAGE= {
     'License Number': ' License Number',
     'Rows per page': 'Rows per page',
     'Start Date': 'Start Date',
-    'End Date': 'End Date'
+    'End Date': 'End Date',
+    'Full Name':'Full Name'
   }
 

@@ -88,7 +88,7 @@ const props=defineProps({
   },
 })
 
-const emit = defineEmits(['update:is-open-create-dialog','update-date'])
+const emit = defineEmits(['update:is-open-create-dialog','update-data'])
 
 const isOpenCreateDialog = computed({
   get() {

@@ -1,14 +1,16 @@
 import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
+import { required } from '@/utils/validation'
 
 export default function useUsers() {
   const { t } = useUtils()
 
   const tableColumns = [
-    { title: t('Name'), key: 'name' },
+    { title: t('Full Name'), key: 'name' },
     { title: t('Email'), key: 'email' },
-    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
+    { title: t('Role'), key: 'role' },
+    // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])
@@ -39,7 +41,12 @@ export default function useUsers() {
     form.value.reset()
   }
 
-  const name = ref(null)
+  const fullName = ref(null)
+  const email = ref(null)
+  const password = ref(null)
+  const role = ref(null)
+
+
 
   const fetchDataList = () => {
     store.dispatch('fetchUsers', {
@@ -66,7 +73,12 @@ export default function useUsers() {
     itemData.value = item
     isOpenUpdateDialog.value = true
   }
+  const emailRules= [
+    v => !!v || 'E-mail is required',
+    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+  ]
 
+  const requiredRules= [v => !!v || 'Item is required']
   return {
     tableColumns,
     loading,
@@ -82,12 +94,17 @@ export default function useUsers() {
     valid,
     form,
     validate,
-    name,
+    email,
+    password,
+    role,
+    fullName,
     isOpenCreateDialog,
     resetForm,
     itemData,
     editItem,
     isOpenUpdateDialog,
     t,
+    emailRules,
+    requiredRules
   }
 }

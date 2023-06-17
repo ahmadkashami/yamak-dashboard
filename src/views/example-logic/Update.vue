@@ -91,7 +91,7 @@ const props=defineProps({
   },
 })
 
-const emit = defineEmits(['update-date', 'update:is-open-update-dialog'])
+const emit = defineEmits(['update-data', 'update:is-open-update-dialog'])
 
 const isOpenUpdateDialog = computed({
   get() {
@@ -135,7 +135,7 @@ const onSubmit = () => {
       },
     }).then(response => {
       if (response) {
-        emit('updateDate')
+        emit('update-data')
         loading.value = false
         msgSnackbarVisible.value = "Updated Successfully"
         isOutlinedSnackbarColor.value = "success"

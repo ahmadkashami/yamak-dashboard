@@ -52,7 +52,7 @@
                 :items="[5,10,15,20]"
                 :label="$t('Rows per page')"
                 hide-details
-                @change="updateItemsPerPage"
+                @update:model-value="updateItemsPerPage"
                 class="ma-2"
                 density="compact"
               />
@@ -65,7 +65,7 @@
               <VPagination
                 v-model="currentPage"
                 :length="pageInfo.totalPages"
-                @input="fetchDataList"
+                @update:model-value="fetchDataList"
               />
             </VCol>
           </VRow>
@@ -83,11 +83,11 @@
       {{ msgSnackbarVisible }}
     </VSnackbar>
     <Create
-      @update-date="fetchDataList"
+      @update-data="fetchDataList"
       v-model:isOpenCreateDialog="isOpenCreateDialog"/>
     <Update
       :itemData="itemData"
-      @update-date="fetchDataList"
+      @update-data="fetchDataList"
       v-model:isOpenUpdateDialog="isOpenUpdateDialog"/>
   </div>
 </template>

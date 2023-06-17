@@ -27,13 +27,40 @@
                 <v-row>
                   <v-col cols="12">
                     <VTextField
-                      v-model="name"
+                      v-model="fullName"
                       outlined
                       dense
-                      :label="$t('Name')"
-                      :placeholder="$t('Name')"
-                      :rules="[v => !!v || 'Item is required']"
+                      :label="$t('Full Name')"
+                      :placeholder="$t('Full Name')"
+                      :rules="requiredRules"
                     />
+                  </v-col>
+                  <v-col cols="12">
+                    <VTextField
+                      v-model="email"
+                      label="Email"
+                      type="email"
+                      :rules='emailRules'
+                    />
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="password"
+                      label="Password"
+                      :type="isPasswordVisible ? 'text' : 'password'"
+                      :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
+                      @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                      :rules='requiredRules'
+                    />
+                  </v-col>
+                  <v-col>
+                    <v-select
+                      v-model="role"
+                      label="Select"
+                      :items="['ADMIN']"
+                      variant="outlined"
+                      :rules="requiredRules"
+                    ></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -88,7 +115,7 @@ const props=defineProps({
   },
 })
 
-const emit = defineEmits(['update:is-open-create-dialog','update-date'])
+const emit = defineEmits(['update:is-open-create-dialog','update-data'])
 
 const isOpenCreateDialog = computed({
   get() {
@@ -107,13 +134,16 @@ const {
   valid,
   form,
   validate,
-  name,
+  fullName,
   resetForm,
+  email,
+  password,
+  role,
+  emailRules,
+  requiredRules
 } = useUsers()
 
-onMounted(() => {
-  emit('update-date')
-})
+
 
 const resetData = () => {
   resetForm()
@@ -122,18 +152,21 @@ const resetData = () => {
 }
 
 const loading = ref(false)
+const isPasswordVisible=ref(false)
 
 const onSubmit = () => {
-  console.log(valid.value)
   if (valid.value) {
     loading.value = true
-    store.dispatch('create$example', {
+    store.dispatch('createUser', {
       queryParams: {
-        name: name.value,
+        fullName: fullName.value,
+        email:email.value,
+        password:password.value,
+        role:role.value
       },
     }).then(response => {
       if (response) {
-        emit('updateDate')
+        emit('update-data')
         loading.value = false
         msgSnackbarVisible.value = 'Added Successfully'
         isOutlinedSnackbarColor.value = 'success'
