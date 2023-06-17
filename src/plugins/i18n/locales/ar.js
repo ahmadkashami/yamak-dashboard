@@ -48,5 +48,9 @@ export const ARABIC_LANGUAGE = {
   'Rows per page': 'عدد الاسطر في الصفحة',
   'Start Date': 'تاريخ البداية ',
   'End Date': 'تاريخ النهاية ',
-  'Full Name':'الاسم الكامل'
+  'Full Name':'الاسم الكامل',
+  'Arabic Name':'الاسم العربي',
+  'English Name':'الاسم الانكيزي',
+  'Phone':'الهاتف',
+  'Description':'الوصف',
 }

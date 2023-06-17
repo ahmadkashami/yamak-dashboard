@@ -3,6 +3,14 @@ const permissions = [
     subject: 'Dashboard',
     action: 'read',
   },
+  {
+    subject: 'Users',
+    action: 'read',
+  },
+  {
+    subject: 'Companies',
+    action: 'read',
+  },
 ]
 
 export default permissions

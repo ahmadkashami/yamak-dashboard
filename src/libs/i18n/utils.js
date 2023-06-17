@@ -1,4 +1,5 @@
 import { getCurrentInstance } from 'vue'
+import { useLocale } from 'vuetify'
 
 
 /**
@@ -12,6 +13,14 @@ export const t = key => {
   const vm = getCurrentInstance().proxy
 
   return vm.$i18n && vm.$t ? vm.$t(key) : key
+}
+
+
+export const  getTranslations=(data)=>
+{
+  const { current } = useLocale()
+  const local = current.value
+ return data[local]
 }
 
 export const _ = null

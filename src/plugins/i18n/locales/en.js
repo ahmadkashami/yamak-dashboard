@@ -45,6 +45,10 @@ export const ENGLISH_LANGUAGE= {
     'Rows per page': 'Rows per page',
     'Start Date': 'Start Date',
     'End Date': 'End Date',
-    'Full Name':'Full Name'
+    'Full Name':'Full Name',
+    'Arabic Name':'Arabic Name',
+    'English Name':'English Name',
+    'Phone':'Phone',
+    'Description':'Description',
   }
 

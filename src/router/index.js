@@ -21,7 +21,17 @@ const router = createRouter({
       name: 'users',
       component: () => import('../views/users/Index.vue'),
       meta: {
-        resource: 'Dashboard',
+        resource: 'Users',
+        action: 'read',
+        layout: 'default',
+      },
+    },
+    {
+      path: '/companies',
+      name: 'companies',
+      component: () => import('../views/companies/Index.vue'),
+      meta: {
+        resource: 'Companies',
         action: 'read',
         layout: 'default',
       },
