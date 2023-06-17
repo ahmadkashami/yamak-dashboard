@@ -42,33 +42,12 @@
         </template>
 
         <template v-slot:bottom>
-          <VRow class="border-t mt-2">
-            <VCol
-              lg="2"
-              cols="3"
-            >
-              <VSelect
-                v-model="itemsPerPage"
-                :items="[5,10,15,20]"
-                :label="$t('Rows per page')"
-                hide-details
-                @update:model-value="updateItemsPerPage"
-                class="ma-2"
-                density="compact"
-              />
-            </VCol>
-            <VCol
-              lg="10"
-              cols="9"
-              class="d-flex justify-end"
-            >
-              <VPagination
-                v-model="currentPage"
-                :length="pageInfo.totalPages"
-                @update:model-value="fetchDataList"
-              />
-            </VCol>
-          </VRow>
+          <pagination
+            :page-info="pageInfo"
+            :current-page="currentPage"
+            @update-current-page="updateCurrentPage"
+            @update-items-per-page="updateItemsPerPage"
+          ></pagination>
         </template>
       </VDataTable>
     </VCard>
@@ -98,6 +77,7 @@ import Update from '@/views/users/Update.vue'
 import Create from '@/views/users/Create.vue'
 import { onMounted } from 'vue'
 import { VDataTable } from 'vuetify/labs/components'
+import Pagination from '@/components/Pagination.vue'
 
 const {
   tableColumns,
@@ -115,18 +95,14 @@ const {
   isOpenUpdateDialog,
   editItem,
   itemData,
+  updateItemsPerPage,
+  updateCurrentPage
 } = useUsers()
 
 onMounted(() => {
   fetchDataList()
 })
 
-const updateItemsPerPage = event => {
-  console.log(event)
-  currentPage.value = 1
-  itemsPerPage.value = parseInt(event)
-  options.value.itemsPerPage = itemsPerPage.value
-  fetchDataList()
-}
+
 </script>
 

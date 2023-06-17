@@ -50,8 +50,9 @@ export default function useUsers() {
 
   const fetchDataList = () => {
     store.dispatch('fetchUsers', {
-      page: currentPage.value ?? 1,
       limit: itemsPerPage.value,
+      page: currentPage.value ? currentPage.value : 1,
+      sort: options.value.sortDesc? "DESC" : "ASC"
     })
       .then(response => {
 
@@ -68,7 +69,15 @@ export default function useUsers() {
   }
 
   const itemData = ref(null)
-
+  const updateItemsPerPage = (value) => {
+    itemsPerPage.value = value;
+    options.value.itemsPerPage = itemsPerPage.value;
+    fetchDataList();
+  }
+  const updateCurrentPage = (value) => {
+    currentPage.value = value.value;
+    fetchDataList();
+  }
   const editItem = item => {
     itemData.value = item
     isOpenUpdateDialog.value = true
@@ -105,6 +114,8 @@ export default function useUsers() {
     isOpenUpdateDialog,
     t,
     emailRules,
-    requiredRules
+    requiredRules,
+    updateItemsPerPage,
+    updateCurrentPage
   }
 }

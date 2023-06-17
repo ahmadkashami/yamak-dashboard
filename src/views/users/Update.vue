@@ -95,7 +95,6 @@ const emit = defineEmits(['update-data', 'update:is-open-update-dialog'])
 
 const isOpenUpdateDialog = computed({
   get() {
-    console.log(props.isOpenUpdateDialog)
     return props.isOpenUpdateDialog;
   },
   set(value) {
