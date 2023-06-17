@@ -7,7 +7,7 @@
     >
       <VCard height="100%">
         <div class="drawer-header d-flex align-center ma-4">
-          <span class="font-weight-semibold text-base text--primary">{{ $t('Update') }}</span>
+          <h2>{{ $t('Update') }}</h2>
           <VSpacer />
           <VBtn
             icon="mdi-close"
