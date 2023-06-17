@@ -9,6 +9,7 @@ import AnalyticsTransactions from '@/views/dashboard/AnalyticsTransactions.vue'
 import AnalyticsUserTable from '@/views/dashboard/AnalyticsUserTable.vue'
 import AnalyticsWeeklyOverview from '@/views/dashboard/AnalyticsWeeklyOverview.vue'
 import CardStatisticsVertical from '@core/components/cards/CardStatisticsVertical.vue'
+import Test from '@/components/Test.vue'
 
 const totalProfit = {
   title: 'Total Profit',
@@ -35,7 +36,8 @@ const newProject = {
       cols="12"
       md="4"
     >
-      <AnalyticsAward />
+      <Test></Test>
+<!--      <AnalyticsAward />-->
     </VCol>
 
     <VCol
