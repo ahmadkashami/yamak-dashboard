@@ -25,7 +25,7 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12">
+                  <v-col cols="12" md="6">
                     <VTextField
                       v-model="companyObject.name.en"
                       outlined
@@ -35,7 +35,7 @@
                       :rules="requiredRules"
                     />
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" md="6">
                     <VTextField
                       v-model="companyObject.name.ar"
                       outlined
@@ -45,7 +45,7 @@
                       :rules="requiredRules"
                     />
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" md="6">
                     <VTextField
                       v-model="companyObject.email"
                       label="Email"
@@ -53,7 +53,7 @@
                       :rules='emailRules'
                     />
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" md="6">
                     <VTextField
                       v-model="companyObject.phone"
                       outlined
@@ -67,20 +67,22 @@
                     <FileUpload :maxSize="1" accept="png" @file-uploaded="uploadedLogo" />
                   </v-col>
                   <v-col cols="12">
-                    <VTextField
+                    <VTextarea
                       v-model="companyObject.address"
                       outlined
                       dense
                       :label="$t('Address')"
                       :placeholder="$t('Address')"
                       :rules="requiredRules"
+                      rows="2"
                     />
                   </v-col>
                   <v-col cols="12">
-                    <VTextField
+                    <VTextarea
                       v-model="companyObject.description"
                       outlined
                       dense
+                      rows="2"
                       :label="$t('Description')"
                       :placeholder="$t('Description')"
                       :rules="requiredRules"

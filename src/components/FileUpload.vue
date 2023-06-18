@@ -162,7 +162,7 @@ export default {
 
 <style scoped>
 .file-upload {
-  height: 320px;
+  height: 250px;
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -170,8 +170,8 @@ export default {
 }
 .file-upload .file-upload__area {
   width: 600px;
-  min-height: 200px;
-  max-height: 320px;
+  min-height: 150px;
+  max-height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,7 +188,7 @@ export default {
 }
 .file-upload .upload-preview .file-image {
   width: 100%;
-  height: 200px;
+  height: 150px;
   object-fit: contain;
 }
 .file-upload .upload-preview .file-extention {
