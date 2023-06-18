@@ -27,7 +27,7 @@
               <v-btn class="mx-1" size="x-small" variant="outlined" @click="resetFileInput">Change file</v-btn>
             </v-sheet>
             <v-sheet>
-              <v-btn class="mx-1"  size="x-small" variant="outlined" @click="sendDataToParent">Accept File</v-btn>
+              <v-btn v-if="!acceptFile" class="mx-1"  size="x-small" variant="outlined" @click="sendDataToParent">Accept File</v-btn>
             </v-sheet>
           </v-sheet>
       </div>
@@ -92,6 +92,7 @@ export default {
             () => {
               // Set file data
               this.file = {
+                file:file,
                 name: fileName,
                 size: fileSize,
                 type: file.type,
@@ -139,6 +140,7 @@ export default {
       this.$nextTick(() => {
         this.uploadReady = true;
         this.file = {
+          file:null,
           name: "",
           size: 0,
           type: "",

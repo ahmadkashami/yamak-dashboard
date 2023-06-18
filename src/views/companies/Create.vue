@@ -165,9 +165,9 @@ const {
 } = useCompanies()
 
 const {uploadFile}=uploadFilesService()
-const uploadedLogo=(file)=>{
-  uploadFile(file).then(response=>{
-    console.log(response)
+const uploadedLogo=(currentFile)=>{
+  uploadFile(currentFile.file).then(response=>{
+    companyObject.value.logo=response.data.data.url
   }).catch(error=>{
     console.log(error)
   })
