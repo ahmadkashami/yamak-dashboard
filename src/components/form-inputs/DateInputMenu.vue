@@ -1,56 +1,56 @@
 <template>
-  <v-row>
-    <v-col cols='12'>
-      <v-menu
-        v-model='modal'
-        :close-on-content-click='false'
-        :nudge-right='40'
-        transition='scale-transition'
+  <VRow>
+    <VCol cols="12">
+      <VMenu
+        v-model="modal"
+        v-model:return-value="initData"
+        :close-on-content-click="false"
+        :nudge-right="40"
+        transition="scale-transition"
         offset-y
-        min-width='auto'
-        :return-value.sync='initData'
+        min-width="auto"
       >
-        <template v-slot:activator='{ on, attrs }'>
-          <v-text-field
-            v-model='computedDateFormatted'
+        <template #activator="{ on, attrs }">
+          <VTextField
+            v-model="computedDateFormatted"
             readonly
-            @click:append='modal=!modal'
-            v-bind='attrs'
-            v-on='on'
-            :label='label'
-            :append-icon='icons.mdiCalendar'
-            readonly
-            :disabled='readonly'
+            v-bind="attrs"
+            :label="label"
+            :append-icon="icons.mdiCalendar"
+            :disabled="readonly"
             outlined
-            hide-details='auto'
+            @click:append='modal=!modal'
+            hide-details="auto"
+            v-on='on'
             dense
-            :rules='rules?rules:[]'
-            :errorMessages='errorMessages'
+            :rules="rules?rules:[]"
+            :error-messages="errorMessages"
             clearable
-          ></v-text-field>
+          />
         </template>
-        <v-date-picker
-          v-model='initData'
-          @input='updateDate'
+        <VDatePicker
+          ref="picker"
+          v-model="initData"
           scrollable
-          color='primary'
-          ref='picker'
-          :allowed-dates='allowedDates'
-          :readonly='readonly'
-          :disabled='readonly'
-          :min='min'
-          :max='max'
-        ></v-date-picker>
-      </v-menu>
-    </v-col>
-    <v-spacer></v-spacer>
-  </v-row>
+          color="primary"
+          :allowed-dates="allowedDates"
+          :readonly="readonly"
+          :disabled="readonly"
+          @input='updateDate'
+          :min="min"
+          :max="max"
+        />
+      </VMenu>
+    </VCol>
+    <VSpacer />
+  </VRow>
 </template>
+
 <script>
 import { mdiCalendar } from '@mdi/js'
-import { computed, ref, watch } from '@vue/composition-api'
 import formatDate from '../../plugins/custom-date'
-import moment from 'moment/moment'
+import moment from 'moment'
+import { ref, watch } from 'vue'
 
 export default {
   props: {
@@ -86,10 +86,11 @@ export default {
     const picker = ref(null)
     const modal = ref(false)
     const initData = ref(props.date)
+
     const updateDate = () => {
       computedDateFormatted.value = initData.value
       modal.value = false
-      context.emit('update-date', initData.value)
+      context.emit('updateDate', initData.value)
     }
 
     watch(() => props.date,
@@ -102,9 +103,10 @@ export default {
       get() {
         return formatDate(props.date)
       },
+
       // setter
       set(newValue) {
-        context.emit('update-date', newValue)
+        context.emit('updateDate', newValue)
       },
     })
 
@@ -114,6 +116,7 @@ export default {
       picker,
       modal,
       initData,
+
       // icons
       icons: {
         mdiCalendar,

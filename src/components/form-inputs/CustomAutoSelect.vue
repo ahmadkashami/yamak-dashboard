@@ -1,77 +1,77 @@
 <template>
   <div>
-    <v-autocomplete
-        :value="modelValue"
-        :label="label"
-        :items="list"
-        item-text="name"
-        item-value="id"
-        outlined
-        dense
-        hide-details="auto"
-        :chips="multiple"
-        @input="$emit('update:model-value',$event)"
-        :multiple="multiple"
-        :search-input.sync="search"
-        :rules="rules"
-        clearable
-        :auto-select-first="multiple"
-        :deletable-chips="multiple"
-        :cache-items="multiple"
-        :disabled="disabled"
-        v-bind="$attrs"
-    >
-    </v-autocomplete>
+    <VAutocomplete
+      :value="modelValue"
+      :label="label"
+      :items="list"
+      item-text="name"
+      v-model:search-input="search"
+      item-value="id"
+      outlined
+      dense
+      hide-details="auto"
+      :chips="multiple"
+      :multiple="multiple"
+      :rules="rules"
+      clearable
+      :auto-select-first="multiple"
+      :deletable-chips="multiple"
+      :cache-items="multiple"
+      :disabled="disabled"
+      @input="$emit('update:model-value',$event)"
+      v-bind="$attrs"
+    />
   </div>
 </template>
 
 <script>
-import store from "@/store";
-import {ref, watch} from "@vue/composition-api";
-import _ from "lodash";
+import _ from "lodash"
+import { store } from '@/store'
+import { ref } from 'vue'
 
 export default {
-  name: "customAutoSelect",
+  name: "CustomAutoSelect",
   model: {
     prop: 'modelValue',
     event: 'update:model-value',
   },
   props: {
     modelValue: {
-      required: true
+      required: true,
     },
     service: {
-      required: true
+      required: true,
     },
     label: {
-      required: true
+      required: true,
     },
     multiple: {
-      required: true
+      required: true,
     },
     queryParams: {
-      required: false
+      required: false,
     },
     rules: {
-      required: false
+      required: false,
     },
     disabled: {
-      required: false
-    }
+      required: false,
+    },
   },
-  setup(props, {emit}) {
+  setup(props, { emit }) {
     const search = ref('')
     const list = ref([])
+
     const fetchItems = () => {
       store.dispatch(props.service, {
         search: search.value,
-        ...props.queryParams
+        ...props.queryParams,
       })
-          .then(response => {
-            list.value = response.data.data.data
-          }).catch(error => {
-        console.error(error)
-      })
+        .then(response => {
+          list.value = response.data.data.data
+        }).catch(error => {
+          console.error(error)
+        })
     }
 
     watch([search], _.debounce(function () {
@@ -79,23 +79,24 @@ export default {
     }, 500))
 
     watch(
-        () => props.queryParams,
-        () => {
-          fetchItems()
-        }
+      () => props.queryParams,
+      () => {
+        fetchItems()
+      },
     )
     watch(
-        () => props.modelValue,
-        () => {
-          emit('update-item')
-        },
+      () => props.modelValue,
+      () => {
+        emit('update-item')
+      },
     )
+
     return {
       search,
       list,
-      fetchItems
+      fetchItems,
     }
-  }
+  },
 }
 </script>
 
