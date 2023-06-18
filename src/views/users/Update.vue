@@ -29,7 +29,7 @@
                   <VTextField
                     v-model="name"
                     outlined
-                    dense
+                    density="compact"
                     :label="$t('Name')"
                     :placeholder="$t('Name')"
                     :rules="[v => !!v || 'Item is required']"

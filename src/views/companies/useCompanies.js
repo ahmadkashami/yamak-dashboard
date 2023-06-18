@@ -41,7 +41,7 @@ export default function useCompanies() {
     form.value.reset()
   }
 
-  const companyObject=ref(
+  const modelObject=ref(
     {
       name:{
         ar:null,
@@ -112,7 +112,7 @@ export default function useCompanies() {
     valid,
     form,
     validate,
-    companyObject,
+    modelObject,
     isOpenCreateDialog,
     resetForm,
     itemData,

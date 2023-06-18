@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import axios from '@axios'
 import userActions from '@/store/userActions'
 import companyActions from '@/store/companyActions'
+import serviceActions from '@/store/serviceActions'
 
 
 export const  store = createStore({
@@ -15,7 +16,8 @@ export const  store = createStore({
   },
   actions: {
     ...userActions,
-    ...companyActions
+    ...companyActions,
+    ...serviceActions
   },
   modules: {},
 })

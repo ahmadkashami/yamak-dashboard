@@ -27,9 +27,9 @@
                 <v-row>
                   <v-col cols="12" md="6">
                     <VTextField
-                      v-model="companyObject.name.en"
+                      v-model="modelObject.name.en"
                       outlined
-                      dense
+                      density="compact"
                       :label="$t('English Name')"
                       :placeholder="$t('English Name')"
                       :rules="requiredRules"
@@ -37,9 +37,9 @@
                   </v-col>
                   <v-col cols="12" md="6">
                     <VTextField
-                      v-model="companyObject.name.ar"
+                      v-model="modelObject.name.ar"
                       outlined
-                      dense
+                      density="compact"
                       :label="$t('Arabic Name')"
                       :placeholder="$t('Arabic Name')"
                       :rules="requiredRules"
@@ -47,17 +47,17 @@
                   </v-col>
                   <v-col cols="12" md="6">
                     <VTextField
-                      v-model="companyObject.email"
-                      label="Email"
+                      v-model="modelObject.email"
+                      :label="$t('Email')"
                       type="email"
                       :rules='emailRules'
                     />
                   </v-col>
                   <v-col cols="12" md="6">
                     <VTextField
-                      v-model="companyObject.phone"
+                      v-model="modelObject.phone"
                       outlined
-                      dense
+                      density="compact"
                       :label="$t('Phone')"
                       :placeholder="$t('Phone')"
                       :rules="requiredRules"
@@ -67,10 +67,19 @@
                     <FileUpload :maxSize="1" accept="png" @file-uploaded="uploadedLogo" />
                   </v-col>
                   <v-col cols="12">
+                      <v-switch
+                        v-model="modelObject.status"
+                        hide-details
+                        true-value="active"
+                        false-value="inactive"
+                        :label="`${$t('Status')}: ${$t(modelObject.status)}`"
+                      ></v-switch>
+                  </v-col>
+                  <v-col cols="12">
                     <VTextarea
-                      v-model="companyObject.address"
+                      v-model="modelObject.address"
                       outlined
-                      dense
+                      density="compact"
                       :label="$t('Address')"
                       :placeholder="$t('Address')"
                       :rules="requiredRules"
@@ -79,9 +88,9 @@
                   </v-col>
                   <v-col cols="12">
                     <VTextarea
-                      v-model="companyObject.description"
+                      v-model="modelObject.description"
                       outlined
-                      dense
+                      density="compact"
                       rows="2"
                       :label="$t('Description')"
                       :placeholder="$t('Description')"
@@ -161,7 +170,7 @@ const {
   form,
   validate,
   resetForm,
-  companyObject,
+  modelObject,
   emailRules,
   requiredRules
 } = useCompanies()
@@ -169,7 +178,7 @@ const {
 const {uploadFile}=uploadFilesService()
 const uploadedLogo=(currentFile)=>{
   uploadFile(currentFile.file).then(response=>{
-    companyObject.value.logo=response.data.data.url
+    modelObject.value.logo=response.data.data.url
   }).catch(error=>{
     console.log(error)
   })
@@ -183,14 +192,13 @@ const resetData = () => {
 }
 
 const loading = ref(false)
-const isPasswordVisible=ref(false)
 
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
     store.dispatch('createCompany', {
       queryParams: {
-        ...companyObject.value
+        ...modelObject.value
       },
     }).then(response => {
       if (response) {

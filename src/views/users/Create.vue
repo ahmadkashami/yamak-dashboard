@@ -29,7 +29,7 @@
                     <VTextField
                       v-model="fullName"
                       outlined
-                      dense
+                      density="compact"
                       :label="$t('Full Name')"
                       :placeholder="$t('Full Name')"
                       :rules="requiredRules"

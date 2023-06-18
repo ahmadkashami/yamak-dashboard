@@ -29,6 +29,8 @@ export const ARABIC_LANGUAGE = {
   No: 'لا',
   Yes: 'نعم',
   Role: 'الدور',
+  active:'مفعل',
+  inactive:'غير مفعل',
   'This field is required': 'هذه الخانة مطلوبه',
   'The Email field must be a valid email': 'يجب أن يكون حقل البريد الإلكتروني بريدًا إلكترونيًا صالحًا',
   'Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars': 'يجب أن يحتوي الحقل على الأقل على أحرف كبيرة وصغيرة وحرف خاص ورقم لا يقل عن 8 أحرف',

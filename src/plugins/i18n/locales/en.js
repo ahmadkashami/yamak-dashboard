@@ -50,5 +50,7 @@ export const ENGLISH_LANGUAGE= {
     'English Name':'English Name',
     'Phone':'Phone',
     'Description':'Description',
+    active:'Active',
+    inactive:'Inactive',
   }
 

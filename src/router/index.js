@@ -36,6 +36,16 @@ const router = createRouter({
         layout: 'default',
       },
     },
+    {
+      path: '/services',
+      name: 'services',
+      component: () => import('../views/services/Index.vue'),
+      meta: {
+        resource: 'Services',
+        action: 'read',
+        layout: 'default',
+      },
+    },
 
     {
       path: '/account-settings',
