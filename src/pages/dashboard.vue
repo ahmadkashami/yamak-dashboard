@@ -36,8 +36,7 @@ const newProject = {
       cols="12"
       md="4"
     >
-      <Test></Test>
-<!--      <AnalyticsAward />-->
+      <AnalyticsAward />
     </VCol>
 
     <VCol

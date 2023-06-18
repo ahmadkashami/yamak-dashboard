@@ -24,9 +24,6 @@ export default {
   },
   methods: {
     getUploadedData(file) {
-      console.log(file)
-      this.fileSelected = true;
-      this.showFileSelect = false;
       this.file = file;
     },
   },

@@ -6,7 +6,7 @@ export default function uploadFilesService() {
 
     formData.append('file', file)
 
-    return axios.post(`files`, formData, {
+    return axios.post(`files-upload`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       } })

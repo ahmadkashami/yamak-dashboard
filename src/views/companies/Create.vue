@@ -64,6 +64,9 @@
                     />
                   </v-col>
                   <v-col cols="12">
+                    <FileUpload :maxSize="1" accept="png" @file-uploaded="uploadedLogo" />
+                  </v-col>
+                  <v-col cols="12">
                     <VTextField
                       v-model="companyObject.address"
                       outlined
@@ -125,9 +128,10 @@
 
 <script setup>
 import useCompanies from './useCompanies'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { store } from '@/store'
-import { required } from '@/utils/validation'
+import FileUpload from '@/components/FileUpload.vue'
+import uploadFilesService from '@/plugins/uploadFilesService'
 
 
 const props=defineProps({
@@ -160,6 +164,14 @@ const {
   requiredRules
 } = useCompanies()
 
+const {uploadFile}=uploadFilesService()
+const uploadedLogo=(file)=>{
+  uploadFile(file).then(response=>{
+    console.log(response)
+  }).catch(error=>{
+    console.log(error)
+  })
+}
 
 
 const resetData = () => {

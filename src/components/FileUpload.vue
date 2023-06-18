@@ -21,12 +21,15 @@
         <span class="file-name">
           {{ file.name }}{{ file.isImage ? `.${file.fileExtention}` : "" }}
         </span>
-        <div class="">
-          <v-btn @click="resetFileInput">Change file</v-btn>
-        </div>
-        <div class="" style="margin-top: 10px" v-if="!acceptFile">
-          <v-btn @click="sendDataToParent">Select File</v-btn>
-        </div>
+        <v-divider class="my-2"></v-divider>
+          <v-sheet class="d-flex justify-center">
+            <v-sheet>
+              <v-btn class="mx-1" size="x-small" variant="outlined" @click="resetFileInput">Change file</v-btn>
+            </v-sheet>
+            <v-sheet>
+              <v-btn class="mx-1"  size="x-small" variant="outlined" @click="sendDataToParent">Accept File</v-btn>
+            </v-sheet>
+          </v-sheet>
       </div>
     </div>
   </div>
@@ -38,7 +41,7 @@ export default {
   props: {
     maxSize: {
       type: Number,
-      default: 5,
+      default: 1,
       required: true,
     },
     accept: {
@@ -157,7 +160,7 @@ export default {
 
 <style scoped>
 .file-upload {
-  height: 100vh;
+  height: 320px;
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -166,11 +169,11 @@ export default {
 .file-upload .file-upload__area {
   width: 600px;
   min-height: 200px;
+  max-height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px dashed #ccc;
-  margin-top: 40px;
   padding: 20px;
 }
 .file-upload .file-upload__error {
@@ -183,7 +186,7 @@ export default {
 }
 .file-upload .upload-preview .file-image {
   width: 100%;
-  height: 300px;
+  height: 200px;
   object-fit: contain;
 }
 .file-upload .upload-preview .file-extention {
