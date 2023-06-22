@@ -7,7 +7,7 @@
           :label="$t('Rows per page')"
           hide-details
           @update:model-value="$emit('update-items-per-page',itemsPerPage)"
-          class="ma-2"
+          class="ma-2 item-per-page"
           density="compact"
         ></v-select>
       </v-col>
@@ -45,3 +45,8 @@ const props=defineProps({
 
 </script>
 
+<style>
+.item-per-page {
+  max-width: 130px;
+}
+</style>

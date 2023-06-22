@@ -3,6 +3,7 @@ import axios from '@axios'
 import userActions from '@/store/userActions'
 import companyActions from '@/store/companyActions'
 import serviceActions from '@/store/serviceActions'
+import branchActions from '@/store/branchActions'
 
 
 export const  store = createStore({
@@ -17,7 +18,8 @@ export const  store = createStore({
   actions: {
     ...userActions,
     ...companyActions,
-    ...serviceActions
+    ...serviceActions,
+    ...branchActions
   },
   modules: {},
 })
