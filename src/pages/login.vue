@@ -139,7 +139,11 @@ const handleFormSubmit = () => {
   axios.post('auth/login', { email: email.value, password: password.value })
     .then(response => {
       localStorage.setItem('accessToken', response.data.data.accessToken)
+      localStorage.setItem('userData', JSON.stringify(response.data.data))
+      const userAbility = permissions
 
+      vm.$ability.update(userAbility)
+      localStorage.setItem('userAbility', JSON.stringify(userAbility))
       return response
     })
     .then(() => {

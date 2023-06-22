@@ -51,6 +51,7 @@
                       :label="$t('Email')"
                       type="email"
                       :rules='emailRules'
+                      density="compact"
                     />
                   </v-col>
                   <v-col cols="12" md="6">

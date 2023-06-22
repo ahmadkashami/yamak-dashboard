@@ -23,8 +23,8 @@ const app = createApp(App)
 
 
 // Use plugins
-app.use(store)
 app.use(i18n)
+app.use(store)
 app.use(vuetify)
 app.use(createPinia())
 app.use(router)

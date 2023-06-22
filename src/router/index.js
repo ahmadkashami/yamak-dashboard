@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { canNavigate } from '@/plugins/acl/routeProtection'
+import { companyRouters } from '@/router/companyRouters'
 
 
 const router = createRouter({
@@ -26,16 +27,8 @@ const router = createRouter({
         layout: 'default',
       },
     },
-    {
-      path: '/companies',
-      name: 'companies',
-      component: () => import('../views/companies/Index.vue'),
-      meta: {
-        resource: 'Companies',
-        action: 'read',
-        layout: 'default',
-      },
-    },
+    ...companyRouters
+ ,
     {
       path: '/services',
       name: 'services',
@@ -46,7 +39,6 @@ const router = createRouter({
         layout: 'default',
       },
     },
-
     {
       path: '/account-settings',
       name: 'account-settings',

@@ -38,28 +38,53 @@
                   <v-col cols="12">
                     <VTextField
                       v-model="email"
-                      label="Email"
+                      :label="$t('Email')"
                       type="email"
                       :rules='emailRules'
+                      density="compact"
                     />
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" md="6">
                     <v-text-field
                       v-model="password"
-                      label="Password"
+                      :label="$t('Password')"
                       :type="isPasswordVisible ? 'text' : 'password'"
                       :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
                       @click:append-inner="isPasswordVisible = !isPasswordVisible"
                       :rules='requiredRules'
+                      density="compact"
                     />
                   </v-col>
-                  <v-col>
+                  <v-col  cols="12"  md="6">
                     <v-select
-                      v-model="role"
-                      label="Select"
-                      :items="['ADMIN']"
+                       v-model="role"
+                       :label="$t('Role')"
+                       :items="roleList"
+                       item-title="label"
+                       item-value="value"
+                       variant="outlined"
+                       :rules="requiredRules"
+                       density="compact"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12"  md="6">
+                    <CustomAutoSelect
+                      :label="$t('Company')"
+                      v-model='companyId'
+                      service='fetchCompanies'
+                      :multiple='false'
+                    ></CustomAutoSelect>
+                  </v-col>
+                  <v-col  cols="12"  md="6">
+                    <v-select
+                      v-model="type"
+                      :label="$t('Type')"
+                      :items="userType"
+                      item-title="label"
+                      item-value="value"
                       variant="outlined"
                       :rules="requiredRules"
+                      density="compact"
                     ></v-select>
                   </v-col>
                 </v-row>
@@ -104,9 +129,10 @@
 
 <script setup>
 import useUsers from './useUsers'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { store } from '@/store'
-import { required } from '@/utils/validation'
+import constSystem from '@/utils/constSystem'
+import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 
 
 const props=defineProps({
@@ -139,11 +165,13 @@ const {
   email,
   password,
   role,
+  companyId,
+  type,
   emailRules,
   requiredRules
 } = useUsers()
 
-
+const{roleList,userType}=constSystem()
 
 const resetData = () => {
   resetForm()
@@ -162,7 +190,9 @@ const onSubmit = () => {
         fullName: fullName.value,
         email:email.value,
         password:password.value,
-        role:role.value
+        role:role.value,
+        companyId:companyId.value,
+        type:type.value,
       },
     }).then(response => {
       if (response) {

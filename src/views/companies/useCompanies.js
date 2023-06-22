@@ -10,7 +10,7 @@ export default function useCompanies() {
     { title: t('Email'), key: 'email' },
     { title: t('Phone'), key: 'phone' },
     { title: t('Status'), key: 'status' },
-    // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
+    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])

@@ -40,6 +40,12 @@
             mdi-pencil
           </v-icon>
         </template>
+        <template v-slot:item.type="{ item }">
+            <v-chip>{{item.raw.type}}</v-chip>
+        </template>
+        <template v-slot:item.role="{ item }">
+            <v-chip>{{item.raw.role}}</v-chip>
+        </template>
 
         <template v-slot:bottom>
           <pagination
@@ -78,6 +84,7 @@ import Create from '@/views/users/Create.vue'
 import { onMounted } from 'vue'
 import { VDataTable } from 'vuetify/labs/components'
 import Pagination from '@/components/Pagination.vue'
+import StatusChip from '@/components/StatusChip.vue'
 
 const {
   tableColumns,

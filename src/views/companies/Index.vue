@@ -32,21 +32,27 @@
         hide-default-footer
       >
         <template v-slot:item.name="{ item }">
-          <span>{{getTranslations(item.raw.name)}}</span>
+          <span>{{getTranslations(item.raw.name,current.value)}}</span>
         </template>
         <template v-slot:item.status="{ item }">
          <StatusChip :status="item.raw.status"/>
         </template>
 
+
         <template v-slot:item.actions="{ item }">
-          <v-icon
-            size="small"
-            class="me-2"
-            @click="editItem(item.raw)"
+          <v-btn
+            @click="$router.push({name:'company-view',params:{id:item.raw._id}})"
+            variant="text"
+            icon
           >
-            mdi-pencil
-          </v-icon>
+            <v-icon size="small">mdi-eye</v-icon>
+            <v-tooltip
+              activator="parent"
+              location="top"
+            >View</v-tooltip>
+          </v-btn>
         </template>
+
 
         <template v-slot:bottom>
           <pagination
@@ -87,6 +93,7 @@ import Update from '@/views/companies/Update.vue'
 import Create from '@/views/companies/Create.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'
+import { useLocale } from 'vuetify'
 
 const {
   tableColumns,
@@ -106,7 +113,7 @@ const {
   updateItemsPerPage,
   updateCurrentPage
 } = useCompanies()
-
+const { current } = useLocale()
 onMounted(() => {
   fetchDataList()
 })

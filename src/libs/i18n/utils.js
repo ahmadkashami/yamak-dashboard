@@ -1,5 +1,4 @@
 import { getCurrentInstance } from 'vue'
-import { useLocale } from 'vuetify'
 
 
 /**
@@ -16,10 +15,10 @@ export const t = key => {
 }
 
 
-export const  getTranslations=(data)=>
+export const  getTranslations=(data,local)=>
 {
-  const { current } = useLocale()
-  const local = current.value
+
+  if(data.length===0)return data
  return data[local]
 }
 

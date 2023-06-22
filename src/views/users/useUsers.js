@@ -10,6 +10,7 @@ export default function useUsers() {
     { title: t('Full Name'), key: 'name' },
     { title: t('Email'), key: 'email' },
     { title: t('Role'), key: 'role' },
+    { title: t('Type'), key: 'type' },
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
@@ -45,6 +46,9 @@ export default function useUsers() {
   const email = ref(null)
   const password = ref(null)
   const role = ref(null)
+  const type = ref(null)
+  const companyId = ref(null)
+
 
 
 
@@ -116,6 +120,8 @@ export default function useUsers() {
     emailRules,
     requiredRules,
     updateItemsPerPage,
-    updateCurrentPage
+    updateCurrentPage,
+    companyId,
+    type,
   }
 }
