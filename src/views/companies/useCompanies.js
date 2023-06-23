@@ -97,6 +97,9 @@ export default function useCompanies() {
   ]
 
   const requiredRules= [v => !!v || 'Item is required']
+  const phoneRules = [
+    (value, phone, { label, country, example }) => !!value || `The Phone field is required.`,
+  ];
   return {
     tableColumns,
     loading,
@@ -122,6 +125,7 @@ export default function useCompanies() {
     emailRules,
     requiredRules,
     updateItemsPerPage,
-    updateCurrentPage
+    updateCurrentPage,
+    phoneRules
   }
 }
