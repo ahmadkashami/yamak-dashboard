@@ -17,7 +17,6 @@ export const t = key => {
 
 export const  getTranslations=(data,local)=>
 {
-
   if(data.length===0)return data
  return data[local]
 }

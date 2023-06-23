@@ -32,7 +32,7 @@
         hide-default-footer
       >
         <template v-slot:item.name="{ item }">
-          <span>{{getTranslations(item.raw.name,current.value)}}</span>
+          <span>{{getTranslations(item.raw.name,lang)}}</span>
         </template>
         <template v-slot:item.status="{ item }">
          <StatusChip :status="item.raw.status"/>
@@ -94,7 +94,8 @@ import Create from '@/views/companies/Create.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'
 import { useLocale } from 'vuetify'
-
+const { current } = useLocale()
+const lang=current.value
 const {
   tableColumns,
   loading,
@@ -113,7 +114,6 @@ const {
   updateItemsPerPage,
   updateCurrentPage
 } = useCompanies()
-const { current } = useLocale()
 onMounted(() => {
   fetchDataList()
 })
