@@ -8,6 +8,7 @@ export default function useServices() {
   const tableColumns = [
     { title: t('Name'), key: 'name' },
     { title: t('Status'), key: 'status' },
+
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
@@ -41,13 +42,13 @@ export default function useServices() {
 
   const modelObject=ref(
     {
-      name:{
-        ar:null,
-        en:null,
+      name: {
+        ar: null,
+        en: null,
       },
-      logo:"logo",
-      status:"active",
-    }
+      logo: "logo",
+      status: "active",
+    },
   )
 
 
@@ -55,7 +56,7 @@ export default function useServices() {
     store.dispatch('fetchServices', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
-      sort: options.value.sortDesc? "DESC" : "ASC"
+      sort: options.value.sortDesc? "DESC" : "ASC",
     })
       .then(response => {
 
@@ -72,15 +73,18 @@ export default function useServices() {
   }
 
   const itemData = ref(null)
-  const updateItemsPerPage = (value) => {
-    itemsPerPage.value = value;
-    options.value.itemsPerPage = itemsPerPage.value;
-    fetchDataList();
+
+  const updateItemsPerPage = value => {
+    itemsPerPage.value = value
+    options.value.itemsPerPage = itemsPerPage.value
+    fetchDataList()
   }
-  const updateCurrentPage = (value) => {
-    currentPage.value = value.value;
-    fetchDataList();
+
+  const updateCurrentPage = value => {
+    currentPage.value = value.value
+    fetchDataList()
   }
+
   const editItem = item => {
     itemData.value = item
     isOpenUpdateDialog.value = true
@@ -109,6 +113,6 @@ export default function useServices() {
     isOpenUpdateDialog,
     t,
     updateItemsPerPage,
-    updateCurrentPage
+    updateCurrentPage,
   }
 }

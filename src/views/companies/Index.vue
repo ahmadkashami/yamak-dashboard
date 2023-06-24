@@ -16,7 +16,7 @@
               size="18"
               class="me-1"
             >
-               mdi-plus
+              mdi-plus
             </VIcon>
             <span>{{ $t('Create') }}</span>
           </VBtn>
@@ -31,36 +31,40 @@
         class="text-no-wrap"
         hide-default-footer
       >
-        <template v-slot:item.name="{ item }">
-          <span>{{getTranslations(item.raw.name,lang)}}</span>
+        <template #item.name="{ item }">
+          <span>{{ getTranslations(item.raw.name,lang) }}</span>
         </template>
-        <template v-slot:item.status="{ item }">
-         <StatusChip :status="item.raw.status"/>
+        <template #item.status="{ item }">
+          <StatusChip :status="item.raw.status" />
         </template>
 
 
-        <template v-slot:item.actions="{ item }">
-          <v-btn
-            @click="$router.push({name:'company-view',params:{id:item.raw._id}})"
+        <template #item.actions="{ item }">
+          <VBtn
             variant="text"
             icon
+            @click="$router.push({name:'company-view',params:{id:item.raw._id}})"
           >
-            <v-icon size="small">mdi-eye</v-icon>
-            <v-tooltip
+            <VIcon size="small">
+              mdi-eye
+            </VIcon>
+            <VTooltip
               activator="parent"
               location="top"
-            >View</v-tooltip>
-          </v-btn>
+            >
+              View
+            </VTooltip>
+          </VBtn>
         </template>
 
 
-        <template v-slot:bottom>
-          <pagination
+        <template #bottom>
+          <Pagination
             :page-info="pageInfo"
             :current-page="currentPage"
             @update-current-page="updateCurrentPage"
             @update-items-per-page="updateItemsPerPage"
-          ></pagination>
+          />
         </template>
       </VDataTable>
     </VCard>
@@ -75,12 +79,14 @@
       {{ msgSnackbarVisible }}
     </VSnackbar>
     <Create
+      v-model:isOpenCreateDialog="isOpenCreateDialog"
       @update-data="fetchDataList"
-      v-model:isOpenCreateDialog="isOpenCreateDialog"/>
+    />
     <Update
-      :itemData="itemData"
+      v-model:isOpenUpdateDialog="isOpenUpdateDialog"
+      :item-data="itemData"
       @update-data="fetchDataList"
-      v-model:isOpenUpdateDialog="isOpenUpdateDialog"/>
+    />
   </div>
 </template>
 
@@ -94,8 +100,10 @@ import Create from '@/views/companies/Create.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'
 import { useLocale } from 'vuetify'
+
 const { current } = useLocale()
 const lang=current.value
+
 const {
   tableColumns,
   loading,
@@ -112,12 +120,11 @@ const {
   editItem,
   itemData,
   updateItemsPerPage,
-  updateCurrentPage
+  updateCurrentPage,
 } = useCompanies()
+
 onMounted(() => {
   fetchDataList()
 })
-
-
 </script>
 

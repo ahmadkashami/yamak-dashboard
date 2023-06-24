@@ -9,6 +9,7 @@ export default function useBranches() {
     { title: t('Name'), key: 'name' },
     { title: t('Phone'), key: 'phone' },
     { title: t('Status'), key: 'status' },
+
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
@@ -42,24 +43,24 @@ export default function useBranches() {
 
   const modelObject=ref(
     {
-      name:null,
-      phone:null,
-      companyId:null,
-      logo:null,
-      address:{
-        block:"2",
-        state:"Mubarak al kabeer",
-        city:"AlQossor",
-        street:"18",
-        zipCode:"27004"
+      name: null,
+      phone: null,
+      companyId: null,
+      logo: null,
+      address: {
+        block: "2",
+        state: "Mubarak al kabeer",
+        city: "AlQossor",
+        street: "18",
+        zipCode: "27004",
       },
-      status:'active',
-      services:[],
+      status: 'active',
+      services: [],
       geoLocation: {
         latitude: 0,
-        longitude: 0
-      }
-    }
+        longitude: 0,
+      },
+    },
   )
 
 
@@ -67,7 +68,7 @@ export default function useBranches() {
     store.dispatch('fetchBranches', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
-      sort: options.value.sortDesc? "DESC" : "ASC"
+      sort: options.value.sortDesc? "DESC" : "ASC",
     })
       .then(response => {
 
@@ -84,15 +85,18 @@ export default function useBranches() {
   }
 
   const itemData = ref(null)
-  const updateItemsPerPage = (value) => {
-    itemsPerPage.value = value;
-    options.value.itemsPerPage = itemsPerPage.value;
-    fetchDataList();
+
+  const updateItemsPerPage = value => {
+    itemsPerPage.value = value
+    options.value.itemsPerPage = itemsPerPage.value
+    fetchDataList()
   }
-  const updateCurrentPage = (value) => {
-    currentPage.value = value.value;
-    fetchDataList();
+
+  const updateCurrentPage = value => {
+    currentPage.value = value.value
+    fetchDataList()
   }
+
   const editItem = item => {
     itemData.value = item
     isOpenUpdateDialog.value = true
@@ -123,6 +127,6 @@ export default function useBranches() {
     isOpenUpdateDialog,
     t,
     updateItemsPerPage,
-    updateCurrentPage
+    updateCurrentPage,
   }
 }

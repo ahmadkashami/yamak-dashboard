@@ -43,17 +43,17 @@ export default function useCompanies() {
 
   const modelObject=ref(
     {
-      name:{
-        ar:null,
-        en:null,
+      name: {
+        ar: null,
+        en: null,
       },
-      phone:null,
-      address:null,
-      description:null,
-      logo:"logo",
-      status:"active",
-      email:null,
-    }
+      phone: "",
+      address: null,
+      description: null,
+      logo: "logo",
+      status: "active",
+      email: null,
+    },
   )
 
 
@@ -61,7 +61,7 @@ export default function useCompanies() {
     store.dispatch('fetchCompanies', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
-      sort: options.value.sortDesc? "DESC" : "ASC"
+      sort: options.value.sortDesc? "DESC" : "ASC",
     })
       .then(response => {
 
@@ -78,15 +78,18 @@ export default function useCompanies() {
   }
 
   const itemData = ref(null)
-  const updateItemsPerPage = (value) => {
-    itemsPerPage.value = value;
-    options.value.itemsPerPage = itemsPerPage.value;
-    fetchDataList();
+
+  const updateItemsPerPage = value => {
+    itemsPerPage.value = value
+    options.value.itemsPerPage = itemsPerPage.value
+    fetchDataList()
   }
-  const updateCurrentPage = (value) => {
-    currentPage.value = value.value;
-    fetchDataList();
+
+  const updateCurrentPage = value => {
+    currentPage.value = value.value
+    fetchDataList()
   }
+
   const editItem = item => {
     itemData.value = item
     isOpenUpdateDialog.value = true

@@ -16,7 +16,7 @@
               size="18"
               class="me-1"
             >
-               mdi-plus
+              mdi-plus
             </VIcon>
             <span>{{ $t('Create') }}</span>
           </VBtn>
@@ -31,26 +31,26 @@
         class="text-no-wrap"
         hide-default-footer
       >
-        <template v-slot:item.status="{ item }">
-          <StatusChip :status="item.raw.status"/>
+        <template #item.status="{ item }">
+          <StatusChip :status="item.raw.status" />
         </template>
-        <template v-slot:item.actions="{ item }">
-          <v-icon
+        <template #item.actions="{ item }">
+          <VIcon
             size="small"
             class="me-2"
             @click="editItem(item.raw)"
           >
             mdi-pencil
-          </v-icon>
+          </VIcon>
         </template>
 
-        <template v-slot:bottom>
-          <pagination
+        <template #bottom>
+          <Pagination
             :page-info="pageInfo"
             :current-page="currentPage"
             @update-current-page="updateCurrentPage"
             @update-items-per-page="updateItemsPerPage"
-          ></pagination>
+          />
         </template>
       </VDataTable>
     </VCard>
@@ -65,12 +65,14 @@
       {{ msgSnackbarVisible }}
     </VSnackbar>
     <Create
+      v-model:isOpenCreateDialog="isOpenCreateDialog"
       @update-data="fetchDataList"
-      v-model:isOpenCreateDialog="isOpenCreateDialog"/>
+    />
     <Update
-      :itemData="itemData"
+      v-model:isOpenUpdateDialog="isOpenUpdateDialog"
+      :item-data="itemData"
       @update-data="fetchDataList"
-      v-model:isOpenUpdateDialog="isOpenUpdateDialog"/>
+    />
   </div>
 </template>
 
@@ -100,13 +102,11 @@ const {
   editItem,
   itemData,
   updateItemsPerPage,
-  updateCurrentPage
+  updateCurrentPage,
 } = useBranches()
 
 onMounted(() => {
   fetchDataList()
 })
-
-
 </script>
 

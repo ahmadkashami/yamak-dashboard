@@ -1,16 +1,16 @@
 <template>
-  <v-chip
+  <VChip
     small
     :color="color?color:statusColor[status]"
   >
     <template v-if="typeof status=='boolean'">
-      <span  v-if="status===true">   {{$t('Done')}}</span>
-      <span  v-else> {{$t('Not yet')}}</span>
+      <span v-if="status===true">   {{ $t('Done') }}</span>
+      <span v-else> {{ $t('Not yet') }}</span>
     </template>
     <template v-else>
-      <span >{{ status }}</span>
+      <span>{{ status }}</span>
     </template>
-  </v-chip>
+  </VChip>
 </template>
 
 <script>
@@ -18,11 +18,11 @@ export default {
   name: "StatusChip",
   props: {
     status: {
-      required: true
+      required: true,
     },
     color: {
-      required: false
-    }
+      required: false,
+    },
   },
   setup() {
     const statusColor = {
@@ -41,7 +41,7 @@ export default {
     return {
       statusColor,
     }
-  }
+  },
 }
 </script>
 

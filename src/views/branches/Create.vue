@@ -1,120 +1,132 @@
 <template>
-      <div>
-        <v-dialog
-          v-model="isOpenCreateDialog"
-          persistent
-          width="1024"
+  <div>
+    <VDialog
+      v-model="isOpenCreateDialog"
+      persistent
+      width="1024"
+    >
+      <VCard height="100%">
+        <div class="drawer-header d-flex align-center ma-4">
+          <h2>{{ $t('Create') }}</h2>
+          <VSpacer />
+          <VBtn
+            icon="mdi-close"
+            size="small"
+            @click="$emit('update:is-open-create-dialog',false)"
+          />
+        </div>
+        <VDivider />
+        <VForm
+          ref="form"
+          v-model="valid"
+          @submit.prevent="onSubmit"
         >
-          <VCard height="100%">
-            <div class="drawer-header d-flex align-center ma-4">
-              <h2>{{ $t('Create') }}</h2>
-              <VSpacer />
-              <VBtn
-                icon="mdi-close"
-                size="small"
-                @click="$emit('update:is-open-create-dialog',false)"
-              >
-              </VBtn>
-            </div>
-            <VDivider />
-            <VForm
-              ref="form"
-              v-model="valid"
-              @submit.prevent="onSubmit"
-            >
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" md="6">
-                    <VTextField
-                      v-model="modelObject.name"
-                      outlined
-                      density="compact"
-                      :label="$t('Name')"
-                      :placeholder="$t('Name')"
-                      :rules="requiredRules"
-                    />
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-phone-input
-                      v-model="modelObject.phone"
-                      :label="$t('Phone')"
-                      :placeholder="$t('Phone')"
-                      density="compact"
-                      :rules="phoneRules"
-                    />
-                  </v-col>
-                  <v-col cols="12"  md="6">
-                    <CustomAutoSelect
-                      :label="$t('Services')"
-                      v-model='modelObject.services'
-                      service='fetchServices'
-                      :multiple='true'
-                      :rules="[(v) =>  v.length>0 || 'Item is required in select']"
-                    ></CustomAutoSelect>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-switch
-                      v-model="modelObject.status"
-                      hide-details
-                      true-value="active"
-                      false-value="inactive"
-                      :label="`${$t('Status')}: ${$t(modelObject.status)}`"
-                    ></v-switch>
-                  </v-col>
-                  <v-col cols="12">
-                    <FileUpload :maxSize="1" accept="png" @file-uploaded="uploadedLogo" />
-                  </v-col>
+          <VCardText>
+            <VContainer>
+              <VRow>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.name"
+                    outlined
+                    density="compact"
+                    :label="$t('Name')"
+                    :placeholder="$t('Name')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VPhoneInput
+                    v-model="modelObject.phone"
+                    :label="$t('Phone')"
+                    :placeholder="$t('Phone')"
+                    density="compact"
+                    :rules="phoneRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.services"
+                    :label="$t('Services')"
+                    service="fetchServices"
+                    :multiple="true"
+                    :rules="[(v) => v.length>0 || 'Item is required in select']"
+                  />
+                </VCol>
+                <VCol cols="12">
+                  <VSwitch
+                    v-model="modelObject.status"
+                    hide-details
+                    true-value="active"
+                    false-value="inactive"
+                    :label="`${$t('Status')}: ${$t(modelObject.status)}`"
+                  />
+                </VCol>
+                <VCol cols="12">
+                  <FileUpload
+                    :max-size="1"
+                    accept="png"
+                    @file-uploaded="uploadedLogo"
+                  />
+                </VCol>
 
-                  <v-col cols="12">
-<!--                    <VTextarea-->
-<!--                      v-model="modelObject.address"-->
-<!--                      outlined-->
-<!--                      density="compact"-->
-<!--                      :label="$t('Address')"-->
-<!--                      :placeholder="$t('Address')"-->
-<!--                      :rules="requiredRules"-->
-<!--                      rows="2"-->
-<!--                    />-->
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <VBtn
-                color="primary"
-                class="me-3"
-                type="submit"
-                :loading="loading"
-                :disabled="loading"
-                variant="outlined"
-              >
-                {{ $t('Create') }}
-              </VBtn>
-              <VBtn
-                color="secondary"
-                variant="outlined"
-                type="reset"
-                @click="resetData"
-              >
-                {{ $t('Cancel') }}
-              </VBtn>
-            </v-card-actions>
-            </VForm>
-          </VCard>
-        </v-dialog>
-        <VSnackbar
-          v-model="isOutlinedSnackbarVisible"
-          value
-          :color="isOutlinedSnackbarColor"
-          bottom
-          rounded="pill"
-          top
-        >
-          {{ msgSnackbarVisible }}
-        </VSnackbar>
-      </div>
+                <VCol cols="12">
+                  <!--                    <VTextarea -->
+                  <!--                      v-model="modelObject.address" -->
+                  <!--                      outlined -->
+                  <!--                      density="compact" -->
+                  <!--                      :label="$t('Address')" -->
+                  <!--                      :placeholder="$t('Address')" -->
+                  <!--                      :rules="requiredRules" -->
+                  <!--                      rows="2" -->
+                  <!--                    /> -->
+                </VCol>
+              </VRow>
+            </VContainer>
+          </VCardText>
+          <VCardActions>
+            <VSpacer />
+            <VBtn
+              color="primary"
+              class="me-3"
+              type="submit"
+              :loading="loading"
+              :disabled="loading"
+              variant="outlined"
+            >
+              {{ $t('Create') }}
+            </VBtn>
+            <VBtn
+              color="secondary"
+              variant="outlined"
+              type="reset"
+              @click="resetData"
+            >
+              {{ $t('Cancel') }}
+            </VBtn>
+          </VCardActions>
+        </VForm>
+      </VCard>
+    </VDialog>
+    <VSnackbar
+      v-model="isOutlinedSnackbarVisible"
+      value
+      :color="isOutlinedSnackbarColor"
+      bottom
+      rounded="pill"
+      top
+    >
+      {{ msgSnackbarVisible }}
+    </VSnackbar>
+  </div>
 </template>
 
 <script setup>
@@ -135,16 +147,16 @@ const props=defineProps({
   },
 })
 
-const emit = defineEmits(['update:is-open-create-dialog','update-data'])
+const emit = defineEmits(['update:is-open-create-dialog', 'update-data'])
 
 const isOpenCreateDialog = computed({
   get() {
-    return props.isOpenCreateDialog;
+    return props.isOpenCreateDialog
   },
   set(value) {
-    emit('update:is-open-create-dialog', value);
+    emit('update:is-open-create-dialog', value)
   },
-});
+})
 
 const {
   isOutlinedSnackbarVisible,
@@ -160,11 +172,12 @@ const {
 const {
   requiredRules,
   phoneRules,
-  requiredMultiple
+  requiredMultiple,
 }=useValidation()
 
-const {uploadFile}=uploadFilesService()
-const uploadedLogo=(currentFile)=>{
+const { uploadFile }=uploadFilesService()
+
+const uploadedLogo=currentFile=>{
   uploadFile(currentFile.file).then(response=>{
     modelObject.value.logo=response.data.data.url
   }).catch(error=>{
@@ -181,6 +194,7 @@ const resetData = () => {
 
 const loading = ref(false)
 const route = useRoute()
+
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
@@ -208,5 +222,4 @@ const onSubmit = () => {
     validate()
   }
 }
-
 </script>

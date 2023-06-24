@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog
+    <VDialog
       v-model="isOpenUpdateDialog"
       persistent
       width="1024"
@@ -13,8 +13,7 @@
             icon="mdi-close"
             size="small"
             @click="$emit('update:is-open-update-dialog',false)"
-          >
-          </VBtn>
+          />
         </div>
         <VDivider />
         <VForm
@@ -22,10 +21,10 @@
           v-model="valid"
           @submit.prevent="onSubmit"
         >
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12">
+          <VCardText>
+            <VContainer>
+              <VRow>
+                <VCol cols="12">
                   <VTextField
                     v-model="name"
                     outlined
@@ -34,12 +33,12 @@
                     :placeholder="$t('Name')"
                     :rules="[v => !!v || 'Item is required']"
                   />
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
+                </VCol>
+              </VRow>
+            </VContainer>
+          </VCardText>
+          <VCardActions>
+            <VSpacer />
             <VBtn
               color="primary"
               class="me-3"
@@ -58,10 +57,10 @@
             >
               {{ $t('Cancel') }}
             </VBtn>
-          </v-card-actions>
+          </VCardActions>
         </VForm>
       </VCard>
-    </v-dialog>
+    </VDialog>
     <VSnackbar
       v-model="isOutlinedSnackbarVisible"
       value
@@ -96,12 +95,12 @@ const emit = defineEmits(['update-data', 'update:is-open-update-dialog'])
 
 const isOpenUpdateDialog = computed({
   get() {
-    return props.isOpenUpdateDialog;
+    return props.isOpenUpdateDialog
   },
   set(value) {
-    emit('update:is-open-update-dialog', value);
+    emit('update:is-open-update-dialog', value)
   },
-});
+})
 
 const {
   isOutlinedSnackbarVisible,
@@ -117,7 +116,7 @@ const {
 const {
   requiredRules,
   phoneRules,
-  emailRules
+  emailRules,
 }=useValidation()
 
 onMounted(() => {
@@ -165,5 +164,4 @@ watch(
     name.value = props.itemData?.name
   },
 )
-
 </script>

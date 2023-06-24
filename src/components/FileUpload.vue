@@ -2,34 +2,65 @@
   <div class="file-upload">
     <div class="file-upload__area">
       <div v-if="!file.isUploaded">
-        <input type="file" name="" id="" @change="handleFileChange($event)" />
+        <input
+          id=""
+          type="file"
+          name=""
+          @change="handleFileChange($event)"
+        >
         <div v-if="errors.length > 0">
           <div
-            class="file-upload__error"
             v-for="(error, index) in errors"
             :key="index"
+            class="file-upload__error"
           >
             <span>{{ error }}</span>
           </div>
         </div>
       </div>
-      <div v-if="file.isUploaded" class="upload-preview">
-        <img :src="file.url" v-if="file.isImage" class="file-image" alt="" />
-        <div v-if="!file.isImage" class="file-extention">
+      <div
+        v-if="file.isUploaded"
+        class="upload-preview"
+      >
+        <img
+          v-if="file.isImage"
+          :src="file.url"
+          class="file-image"
+          alt=""
+        >
+        <div
+          v-if="!file.isImage"
+          class="file-extention"
+        >
           {{ file.fileExtention }}
         </div>
         <span class="file-name">
           {{ file.name }}{{ file.isImage ? `.${file.fileExtention}` : "" }}
         </span>
-        <v-divider class="my-2"></v-divider>
-          <v-sheet class="d-flex justify-center">
-            <v-sheet>
-              <v-btn class="mx-1" size="x-small" variant="outlined" @click="resetFileInput">Change file</v-btn>
-            </v-sheet>
-            <v-sheet>
-              <v-btn v-if="!acceptFile" class="mx-1"  size="x-small" variant="outlined" @click="sendDataToParent">Accept File</v-btn>
-            </v-sheet>
-          </v-sheet>
+        <VDivider class="my-2" />
+        <VSheet class="d-flex justify-center">
+          <VSheet>
+            <VBtn
+              class="mx-1"
+              size="x-small"
+              variant="outlined"
+              @click="resetFileInput"
+            >
+              Change file
+            </VBtn>
+          </VSheet>
+          <VSheet>
+            <VBtn
+              v-if="!acceptFile"
+              class="mx-1"
+              size="x-small"
+              variant="outlined"
+              @click="sendDataToParent"
+            >
+              Accept File
+            </VBtn>
+          </VSheet>
+        </VSheet>
       </div>
     </div>
   </div>
@@ -64,35 +95,43 @@ export default {
         isImage: false,
         isUploaded: false,
       },
-    };
+    }
   },
   methods: {
     handleFileChange(e) {
-      this.errors = [];
+      this.errors = []
+
       // Check if file is selected
       if (e.target.files && e.target.files[0]) {
         // Check if file is valid
         if (this.isFileValid(e.target.files[0])) {
           // Get uploaded file
           const file = e.target.files[0],
+
             // Get file size
             fileSize = Math.round((file.size / 1024 / 1024) * 100) / 100,
+
             // Get file extention
             fileExtention = file.name.split(".").pop(),
+
             // Get file name
             fileName = file.name.split(".").shift(),
+
             // Check if file is an image
-            isImage = ["jpg", "jpeg", "png", "gif"].includes(fileExtention);
+            isImage = ["jpg", "jpeg", "png", "gif"].includes(fileExtention)
+
+
           // Print to console
-          console.log(fileSize, fileExtention, fileName, isImage);
+          console.log(fileSize, fileExtention, fileName, isImage)
+
           // Load the FileReader API
-          let reader = new FileReader();
+          let reader = new FileReader()
           reader.addEventListener(
             "load",
             () => {
               // Set file data
               this.file = {
-                file:file,
+                file: file,
                 name: fileName,
                 size: fileSize,
                 type: file.type,
@@ -100,49 +139,50 @@ export default {
                 isImage: isImage,
                 url: reader.result,
                 isUploaded: true,
-              };
+              }
               if(this.file.isUploaded) {
                 this.sendDataToParent()
               }
             },
-          );
+          )
+
           // Read uploaded file
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(file)
         } else {
-          console.log("Invalid file");
+          console.log("Invalid file")
         }
       }
     },
     isFileSizeValid(fileSize) {
       if (fileSize <= this.maxSize) {
-        console.log("File size is valid");
+        console.log("File size is valid")
       } else {
-        this.errors.push(`File size should be less than ${this.maxSize} MB`);
+        this.errors.push(`File size should be less than ${this.maxSize} MB`)
       }
     },
     isFileTypeValid(fileExtention) {
       if (this.accept.split(",").includes(fileExtention)) {
-        console.log("File type is valid");
+        console.log("File type is valid")
       } else {
-        this.errors.push(`File type should be ${this.accept}`);
+        this.errors.push(`File type should be ${this.accept}`)
       }
     },
     isFileValid(file) {
-      this.isFileSizeValid(Math.round((file.size / 1024 / 1024) * 100) / 100);
-      this.isFileTypeValid(file.name.split(".").pop());
+      this.isFileSizeValid(Math.round((file.size / 1024 / 1024) * 100) / 100)
+      this.isFileTypeValid(file.name.split(".").pop())
       if (this.errors.length === 0) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
     resetFileInput() {
-      this.uploadReady = false;
+      this.uploadReady = false
       this.acceptFile=false
       this.$nextTick(() => {
-        this.uploadReady = true;
+        this.uploadReady = true
         this.file = {
-          file:null,
+          file: null,
           name: "",
           size: 0,
           type: "",
@@ -151,15 +191,15 @@ export default {
           url: "",
           isImage: false,
           isUploaded: false,
-        };
-      });
+        }
+      })
     },
     sendDataToParent() {
       this.acceptFile=true
-      this.$emit("file-uploaded", this.file);
+      this.$emit("fileUploaded", this.file)
     },
   },
-};
+}
 </script>
 
 <style scoped>

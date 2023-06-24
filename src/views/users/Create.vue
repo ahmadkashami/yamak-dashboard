@@ -1,6 +1,6 @@
 <template>
       <div>
-        <v-dialog
+        <VDialog
           v-model="isOpenCreateDialog"
           persistent
           width="1024"
@@ -113,7 +113,7 @@
             </v-card-actions>
             </VForm>
           </VCard>
-        </v-dialog>
+        </VDialog>
         <VSnackbar
           v-model="isOutlinedSnackbarVisible"
           value
