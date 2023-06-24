@@ -184,7 +184,7 @@ const route = useRoute()
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
-    store.dispatch('createService', {
+    store.dispatch('createBranch', {
       queryParams: {
         ...modelObject.value,
         companyId: route.params.id,
