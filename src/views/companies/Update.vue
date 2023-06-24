@@ -81,6 +81,7 @@ import useCompanies from './useCompanies'
 import { computed, onMounted, ref, watch } from 'vue'
 import * as validation from '@/utils/validation'
 import { store } from '@/store'
+import useValidation from '@/utils/validation'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -112,6 +113,12 @@ const {
   name,
   resetForm,
 } = useCompanies()
+
+const {
+  requiredRules,
+  phoneRules,
+  emailRules
+}=useValidation()
 
 onMounted(() => {
 })

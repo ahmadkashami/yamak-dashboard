@@ -85,12 +85,7 @@ export default function useServices() {
     itemData.value = item
     isOpenUpdateDialog.value = true
   }
-  const emailRules= [
-    v => !!v || 'E-mail is required',
-    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-  ]
 
-  const requiredRules= [v => !!v || 'Item is required']
   return {
     tableColumns,
     loading,
@@ -113,8 +108,6 @@ export default function useServices() {
     editItem,
     isOpenUpdateDialog,
     t,
-    emailRules,
-    requiredRules,
     updateItemsPerPage,
     updateCurrentPage
   }

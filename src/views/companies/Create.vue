@@ -55,14 +55,6 @@
                     />
                   </v-col>
                   <v-col cols="12" md="6">
-<!--                    <VTextField-->
-<!--                      v-model="modelObject.phone"-->
-<!--                      outlined-->
-<!--                      density="compact"-->
-<!--                      :label="$t('Phone')"-->
-<!--                      :placeholder="$t('Phone')"-->
-<!--                      :rules="requiredRules"-->
-<!--                    />-->
                     <v-phone-input
                       v-model="modelObject.phone"
                       :label="$t('Phone')"
@@ -70,7 +62,6 @@
                       density="compact"
                       :rules="phoneRules"
                     />
-
                   </v-col>
                   <v-col cols="12">
                     <FileUpload :maxSize="1" accept="png" @file-uploaded="uploadedLogo" />
@@ -153,6 +144,7 @@ import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import uploadFilesService from '@/plugins/uploadFilesService'
 import { VPhoneInput } from 'v-phone-input'
+import useValidation from '@/utils/validation'
 
 
 const props=defineProps({
@@ -181,10 +173,13 @@ const {
   validate,
   resetForm,
   modelObject,
-  emailRules,
-  requiredRules,
-  phoneRules
 } = useCompanies()
+
+const {
+  requiredRules,
+  phoneRules,
+  emailRules
+}=useValidation()
 
 const {uploadFile}=uploadFilesService()
 const uploadedLogo=(currentFile)=>{

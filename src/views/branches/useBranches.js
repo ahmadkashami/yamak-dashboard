@@ -46,12 +46,18 @@ export default function useBranches() {
       phone:null,
       companyId:null,
       logo:null,
-      address:null,
+      address:{
+        block:"2",
+        state:"Mubarak al kabeer",
+        city:"AlQossor",
+        street:"18",
+        zipCode:"27004"
+      },
       status:'active',
       services:[],
       geoLocation: {
-        latitude: null,
-        longitude: null
+        latitude: 0,
+        longitude: 0
       }
     }
   )
@@ -91,12 +97,9 @@ export default function useBranches() {
     itemData.value = item
     isOpenUpdateDialog.value = true
   }
-  const emailRules= [
-    v => !!v || 'E-mail is required',
-    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-  ]
 
-  const requiredRules= [v => !!v || 'Item is required']
+
+
   return {
     tableColumns,
     loading,
@@ -119,8 +122,6 @@ export default function useBranches() {
     editItem,
     isOpenUpdateDialog,
     t,
-    emailRules,
-    requiredRules,
     updateItemsPerPage,
     updateCurrentPage
   }

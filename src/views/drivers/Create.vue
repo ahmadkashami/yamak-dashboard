@@ -103,6 +103,7 @@ import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import uploadFilesService from '@/plugins/uploadFilesService'
+import useValidation from '@/utils/validation'
 
 
 const props=defineProps({
@@ -131,9 +132,13 @@ const {
   validate,
   resetForm,
   modelObject,
-  emailRules,
-  requiredRules
 } = useServices()
+
+const {
+  requiredRules,
+  phoneRules,
+  emailRules
+}=useValidation()
 
 const {uploadFile}=uploadFilesService()
 const uploadedLogo=(currentFile)=>{

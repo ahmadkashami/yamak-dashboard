@@ -91,15 +91,7 @@ export default function useCompanies() {
     itemData.value = item
     isOpenUpdateDialog.value = true
   }
-  const emailRules= [
-    v => !!v || 'E-mail is required',
-    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-  ]
 
-  const requiredRules= [v => !!v || 'Item is required']
-  const phoneRules = [
-    (value, phone, { label, country, example }) => !!value || `The Phone field is required.`,
-  ];
   return {
     tableColumns,
     loading,
@@ -122,10 +114,7 @@ export default function useCompanies() {
     editItem,
     isOpenUpdateDialog,
     t,
-    emailRules,
-    requiredRules,
     updateItemsPerPage,
     updateCurrentPage,
-    phoneRules
   }
 }

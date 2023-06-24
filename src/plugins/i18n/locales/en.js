@@ -31,6 +31,8 @@ export const ENGLISH_LANGUAGE= {
     Yes: 'نعم',
     Role: 'Role',
     Agency:'Agency',
+    Branches:'Branches',
+    Services:'Services',
     'This field is required': 'This field is required',
     'The Email field must be a valid email':    'The Email field must be a valid email',
     'Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars':'Field must contain at least one uppercase, lowercase, special character and digit with min 8 chars',

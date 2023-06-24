@@ -1,7 +1,6 @@
 import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
-import { required } from '@/utils/validation'
 
 export default function useUsers() {
   const { t } = useUtils()
@@ -86,12 +85,8 @@ export default function useUsers() {
     itemData.value = item
     isOpenUpdateDialog.value = true
   }
-  const emailRules= [
-    v => !!v || 'E-mail is required',
-    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-  ]
 
-  const requiredRules= [v => !!v || 'Item is required']
+
   return {
     tableColumns,
     loading,
@@ -117,8 +112,6 @@ export default function useUsers() {
     editItem,
     isOpenUpdateDialog,
     t,
-    emailRules,
-    requiredRules,
     updateItemsPerPage,
     updateCurrentPage,
     companyId,

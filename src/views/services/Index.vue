@@ -3,7 +3,7 @@
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
         <div class="d-flex align-center  pb-5">
-          <h2>{{ $t('Companies') }}</h2>
+          <h2>{{ $t('Services') }}</h2>
         </div>
         <VSpacer />
         <div class="d-flex align-center pb-5">
@@ -32,7 +32,7 @@
         hide-default-footer
       >
         <template v-slot:item.name="{ item }">
-          <span>{{getTranslations(item.raw.name)}}</span>
+          <span>{{getTranslations(item.raw.name,lang)}}</span>
         </template>
         <template v-slot:item.status="{ item }">
          <StatusChip :status="item.raw.status"/>
@@ -87,6 +87,7 @@ import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/services/Update.vue'
 import Create from '@/views/services/Create.vue'
+import { useLocale } from 'vuetify'
 
 const {
   tableColumns,
@@ -110,7 +111,8 @@ const {
 onMounted(() => {
   fetchDataList()
 })
-
+const { current } = useLocale()
+const lang=current.value
 
 </script>
 

@@ -32,6 +32,8 @@ export const ARABIC_LANGUAGE = {
   Role: 'الدور',
   active:'مفعل',
   inactive:'غير مفعل',
+  Branches:' الفروع',
+  Services:' الخدمات',
   Agency:'Agency',
   'This field is required': 'هذه الخانة مطلوبه',
   'The Email field must be a valid email': 'يجب أن يكون حقل البريد الإلكتروني بريدًا إلكترونيًا صالحًا',

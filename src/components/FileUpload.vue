@@ -101,8 +101,10 @@ export default {
                 url: reader.result,
                 isUploaded: true,
               };
+              if(this.file.isUploaded) {
+                this.sendDataToParent()
+              }
             },
-            false
           );
           // Read uploaded file
           reader.readAsDataURL(file);

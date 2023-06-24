@@ -36,13 +36,12 @@
                     />
                   </v-col>
                   <v-col cols="12" md="6">
-                    <VTextField
+                    <v-phone-input
                       v-model="modelObject.phone"
-                      outlined
-                      density="compact"
                       :label="$t('Phone')"
                       :placeholder="$t('Phone')"
-                      :rules="requiredRules"
+                      density="compact"
+                      :rules="phoneRules"
                     />
                   </v-col>
                   <v-col cols="12"  md="6">
@@ -51,10 +50,8 @@
                       v-model='modelObject.services'
                       service='fetchServices'
                       :multiple='true'
+                      :rules="[(v) =>  v.length>0 || 'Item is required in select']"
                     ></CustomAutoSelect>
-                  </v-col>
-                  <v-col cols="12">
-                    <FileUpload :maxSize="1" accept="png" @file-uploaded="uploadedLogo" />
                   </v-col>
                   <v-col cols="12">
                     <v-switch
@@ -66,15 +63,19 @@
                     ></v-switch>
                   </v-col>
                   <v-col cols="12">
-                    <VTextarea
-                      v-model="modelObject.address"
-                      outlined
-                      density="compact"
-                      :label="$t('Address')"
-                      :placeholder="$t('Address')"
-                      :rules="requiredRules"
-                      rows="2"
-                    />
+                    <FileUpload :maxSize="1" accept="png" @file-uploaded="uploadedLogo" />
+                  </v-col>
+
+                  <v-col cols="12">
+<!--                    <VTextarea-->
+<!--                      v-model="modelObject.address"-->
+<!--                      outlined-->
+<!--                      density="compact"-->
+<!--                      :label="$t('Address')"-->
+<!--                      :placeholder="$t('Address')"-->
+<!--                      :rules="requiredRules"-->
+<!--                      rows="2"-->
+<!--                    />-->
                   </v-col>
                 </v-row>
               </v-container>
@@ -124,6 +125,8 @@ import FileUpload from '@/components/FileUpload.vue'
 import uploadFilesService from '@/plugins/uploadFilesService'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 import { useRoute } from 'vue-router'
+import { VPhoneInput } from 'v-phone-input'
+import useValidation from '@/utils/validation'
 
 
 const props=defineProps({
@@ -152,9 +155,13 @@ const {
   validate,
   resetForm,
   modelObject,
-  emailRules,
-  requiredRules
 } = useBranches()
+
+const {
+  requiredRules,
+  phoneRules,
+  requiredMultiple
+}=useValidation()
 
 const {uploadFile}=uploadFilesService()
 const uploadedLogo=(currentFile)=>{

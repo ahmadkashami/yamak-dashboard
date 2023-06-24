@@ -21,7 +21,7 @@
 
 <script setup>
 import { store } from '@/store'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch,onMounted } from 'vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import { useLocale } from 'vuetify'
 const emit=defineEmits(['update:modelValue'])
@@ -57,7 +57,6 @@ const modelValue = computed({
     return props.modelValue;
   },
   set(value) {
-    console.log(value)
     emit('update:modelValue', value);
   },
 });
@@ -87,6 +86,9 @@ const fetchItems = () => {
         fetchItems()
       },
     )
+onMounted(()=>{
+  fetchItems()
+})
 </script>
 
 <style scoped>

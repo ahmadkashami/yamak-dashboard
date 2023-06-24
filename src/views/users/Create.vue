@@ -133,6 +133,7 @@ import { computed, ref } from 'vue'
 import { store } from '@/store'
 import constSystem from '@/utils/constSystem'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
+import useValidation from '@/utils/validation'
 
 
 const props=defineProps({
@@ -167,9 +168,13 @@ const {
   role,
   companyId,
   type,
-  emailRules,
-  requiredRules
 } = useUsers()
+
+const {
+  requiredRules,
+  phoneRules,
+  emailRules
+}=useValidation()
 
 const{roleList,userType}=constSystem()
 

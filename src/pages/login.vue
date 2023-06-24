@@ -125,12 +125,8 @@ const loginForm = ref(null)
 const errorMessages = ref([])
 const isOutlinedSnackbarVisible = ref(false)
 
-const emailRules= [
-  v => !!v || 'E-mail is required',
-  v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-]
 
-const requiredRules= [v => !!v || 'Item is required']
+
 
 const handleFormSubmit = () => {
   const isFormValid = loginForm.value.validate()
