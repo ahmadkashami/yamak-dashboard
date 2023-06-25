@@ -3,25 +3,20 @@
     <VCol cols="12">
       <VMenu
         v-model="modal"
-        v-model:return-value="initData"
         :close-on-content-click="false"
-        :nudge-right="40"
-        transition="scale-transition"
-        offset-y
         min-width="auto"
       >
-        <template #activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <VTextField
             v-model="computedDateFormatted"
             readonly
-            v-bind="attrs"
+            v-bind="props"
             :label="label"
             :append-icon="icons.mdiCalendar"
             :disabled="readonly"
             outlined
             @click:append='modal=!modal'
             hide-details="auto"
-            v-on='on'
             :rules="rules?rules:[]"
             :error-messages="errorMessages"
             clearable
@@ -51,6 +46,7 @@
 import { mdiCalendar } from '@mdi/js'
 import formatDate from '../../plugins/custom-date'
 import { ref, watch } from 'vue'
+import {VDatePicker} from 'vuetify/labs/components'
 
 export default {
   props: {

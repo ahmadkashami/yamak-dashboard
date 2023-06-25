@@ -38,7 +38,7 @@ export const ENGLISH_LANGUAGE= {
     City:' City',
     Block:' Block',
     Street:' Street',
-    'License Expired At':' License Expired At',
+    'License Expired At':' License Expired',
     'Zip Code':'Zip Code',
     'This field is required': 'This field is required',
     'The Email field must be a valid email':    'The Email field must be a valid email',
