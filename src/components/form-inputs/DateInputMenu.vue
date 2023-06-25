@@ -22,10 +22,11 @@
             @click:append='modal=!modal'
             hide-details="auto"
             v-on='on'
-            dense
             :rules="rules?rules:[]"
             :error-messages="errorMessages"
             clearable
+            density="compact"
+
           />
         </template>
         <VDatePicker
@@ -49,7 +50,6 @@
 <script>
 import { mdiCalendar } from '@mdi/js'
 import formatDate from '../../plugins/custom-date'
-import moment from 'moment'
 import { ref, watch } from 'vue'
 
 export default {

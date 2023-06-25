@@ -40,6 +40,7 @@ export const ARABIC_LANGUAGE = {
   Block:' القطعة',
   Street:' الشارع',
   'Zip Code':' رمز البريد',
+  'License Expired At':'تاريخ الرخصة',
   Agency:'Agency',
   'This field is required': 'هذه الخانة مطلوبه',
   'The Email field must be a valid email': 'يجب أن يكون حقل البريد الإلكتروني بريدًا إلكترونيًا صالحًا',

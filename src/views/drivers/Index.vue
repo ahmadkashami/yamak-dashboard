@@ -31,9 +31,6 @@
         class="text-no-wrap"
         hide-default-footer
       >
-        <template #item.name="{ item }">
-          <span>{{ getTranslations(item.raw.name) }}</span>
-        </template>
         <template #item.status="{ item }">
           <StatusChip :status="item.raw.status" />
         </template>
@@ -81,14 +78,14 @@
 </template>
 
 <script setup>
-import useServices from './useServices'
+import useDriver from './useDriver'
 import { onMounted } from 'vue'
 import { VDataTable } from 'vuetify/labs/components'
 import Pagination from '@/components/Pagination.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'
-import Update from '@/views/services/Update.vue'
-import Create from '@/views/services/Create.vue'
+import Update from '@/views/drivers/Update.vue'
+import Create from '@/views/drivers/Create.vue'
 
 const {
   tableColumns,
@@ -107,7 +104,7 @@ const {
   itemData,
   updateItemsPerPage,
   updateCurrentPage,
-} = useServices()
+} = useDriver()
 
 onMounted(() => {
   fetchDataList()

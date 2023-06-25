@@ -24,46 +24,70 @@
           <VCardText>
             <VContainer>
               <VRow>
+                <v-col cols="12" md="6">
+                  <VTextField
+                    v-model="modelObject.name"
+                    outlined
+                    density="compact"
+                    :label="$t('Name')"
+                    :placeholder="$t('Name')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <VTextField
+                    v-model="modelObject.email"
+                    :label="$t('Email')"
+                    type="email"
+                    :rules='emailRules'
+                    density="compact"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    v-model="modelObject.password"
+                    :label="$t('Password')"
+                    :type="isPasswordVisible ? 'text' : 'password'"
+                    :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
+                    @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                    :rules='requiredRules'
+                    density="compact"
+                  />
+                </v-col>
                 <VCol
                   cols="12"
                   md="6"
                 >
-                  <VTextField
-                    v-model="modelObject.name.en"
-                    outlined
+                  <VPhoneInput
+                    v-model="modelObject.phoneNum"
+                    :label="$t('Phone')"
+                    :placeholder="$t('Phone')"
                     density="compact"
-                    :label="$t('English Name')"
-                    :placeholder="$t('English Name')"
-                    :rules="requiredRules"
+                    :rules="phoneRules"
                   />
                 </VCol>
-                <VCol
-                  cols="12"
-                  md="6"
-                >
-                  <VTextField
-                    v-model="modelObject.name.ar"
-                    outlined
-                    density="compact"
-                    :label="$t('Arabic Name')"
-                    :placeholder="$t('Arabic Name')"
-                    :rules="requiredRules"
-                  />
-                </VCol>
-                <VCol cols="12">
-                  <FileUpload
-                    :max-size="1"
-                    accept="png"
-                    @file-uploaded="uploadedLogo"
-                  />
-                </VCol>
-                <VCol cols="12">
+                <VCol cols="12" md="6">
                   <VSwitch
                     v-model="modelObject.status"
                     hide-details
                     true-value="active"
                     false-value="inactive"
                     :label="`${$t('Status')}: ${$t(modelObject.status)}`"
+                  />
+                </VCol>
+                <VCol cols="12" md="6">
+                <date-input-menu
+                  :date='modelObject.licenseExpiredAt'
+                  :label="$t('License Expired At')"
+                  @update-date='updatePockedDate'
+                  :rules="requiredRules"
+                ></date-input-menu>
+                </VCol>
+                <VCol cols="12">
+                  <FileUpload
+                    :max-size="1"
+                    accept="png"
+                    @file-uploaded="uploadedPhoto"
                   />
                 </VCol>
               </VRow>
@@ -107,12 +131,15 @@
 </template>
 
 <script setup>
-import useServices from './useServices'
+import useDriver from './useDriver'
 import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import uploadFilesService from '@/plugins/uploadFilesService'
 import useValidation from '@/utils/validation'
+import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
+import { VPhoneInput } from 'v-phone-input'
+import DateInputMenu from '@/components/form-inputs/DateInputMenu.vue'
 
 
 const props=defineProps({
@@ -141,7 +168,7 @@ const {
   validate,
   resetForm,
   modelObject,
-} = useServices()
+} = useDriver()
 
 const {
   requiredRules,
@@ -151,14 +178,17 @@ const {
 
 const { uploadFile }=uploadFilesService()
 
-const uploadedLogo=currentFile=>{
+const uploadedPhoto=currentFile=>{
   uploadFile(currentFile.file).then(response=>{
-    modelObject.value.logo=response.data.data.url
+    modelObject.value.photo=response.data.data.url
   }).catch(error=>{
     console.log(error)
   })
 }
 
+const updatePockedDate = val => {
+  modelObject.value.licenseExpiredAt = val
+}
 
 const resetData = () => {
   resetForm()
@@ -167,6 +197,7 @@ const resetData = () => {
 }
 
 const loading = ref(false)
+const isPasswordVisible = ref(false)
 
 const onSubmit = () => {
   if (valid.value) {

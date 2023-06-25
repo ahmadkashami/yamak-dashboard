@@ -2,11 +2,13 @@ import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
 
-export default function useServices() {
+export default function useDriver() {
   const { t } = useUtils()
 
   const tableColumns = [
     { title: t('Name'), key: 'name' },
+    { title: t('Phone'), key: 'phoneNum' },
+    { title: t('License Expired At'), key: 'licenseExpiredAt' },
     { title: t('Status'), key: 'status' },
 
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
@@ -42,18 +44,19 @@ export default function useServices() {
 
   const modelObject=ref(
     {
-      name: {
-        ar: null,
-        en: null,
-      },
-      logo: "logo",
-      status: "active",
-    },
+      name:null,
+      status:"active",
+      photo:null,
+      licenseExpiredAt:"2024-06-01",
+      email:null,
+      phoneNum:null,
+      password:null
+    }
   )
 
 
   const fetchDataList = () => {
-    store.dispatch('fetchServices', {
+    store.dispatch('fetchDrivers', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",

@@ -61,7 +61,7 @@
                     :rules="[(v) => v.length>0 || 'Item is required in select']"
                   />
                 </VCol>
-                <VCol cols="12">
+                <VCol cols="12" md="6">
                   <VSwitch
                     v-model="modelObject.status"
                     hide-details
