@@ -80,11 +80,14 @@ const fetchItems = () => {
     watch([search],()=>{
       fetchItems()
     })
+
     watch(
       () => props.queryParams,
-      () => {
-        fetchItems()
-      },
+      (newVal, oldVal) => {
+        if (JSON.stringify(oldVal) !== JSON.stringify(newVal)) {
+          fetchItems()
+        }
+      }
     )
 onMounted(()=>{
   fetchItems()

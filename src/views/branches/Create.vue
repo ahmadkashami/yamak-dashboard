@@ -78,16 +78,81 @@
                   />
                 </VCol>
 
-                <VCol cols="12">
-                  <!--                    <VTextarea -->
-                  <!--                      v-model="modelObject.address" -->
-                  <!--                      outlined -->
-                  <!--                      density="compact" -->
-                  <!--                      :label="$t('Address')" -->
-                  <!--                      :placeholder="$t('Address')" -->
-                  <!--                      :rules="requiredRules" -->
-                  <!--                      rows="2" -->
-                  <!--                    /> -->
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.address.countryId"
+                    :label="$t('Country')"
+                    service="fetchCountries"
+                    :multiple="false"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                  v-if="modelObject.address.countryId"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.address.stateId"
+                    :label="$t('State')"
+                    service="fetchStatesByCountry"
+                    :query-params="{countryId:modelObject.address.countryId}"
+                    :multiple="false"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                  v-if="modelObject.address.stateId"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.address.cityId"
+                    :label="$t('City')"
+                    service="fetchCitiesByState"
+                    :multiple="false"
+                    :query-params="{stateId:modelObject.address.stateId}"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.address.block"
+                    outlined
+                    density="compact"
+                    :label="$t('Block')"
+                    :placeholder="$t('Block')"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.address.street"
+                    outlined
+                    density="compact"
+                    :label="$t('Street')"
+                    :placeholder="$t('Street')"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.address.zipCode"
+                    outlined
+                    density="compact"
+                    :label="$t('Zip Code')"
+                    :placeholder="$t('Zip Code')"
+                  />
                 </VCol>
               </VRow>
             </VContainer>
@@ -172,7 +237,6 @@ const {
 const {
   requiredRules,
   phoneRules,
-  requiredMultiple,
 }=useValidation()
 
 const { uploadFile }=uploadFilesService()
@@ -196,6 +260,7 @@ const loading = ref(false)
 const route = useRoute()
 
 const onSubmit = () => {
+  console.log('hmad',valid.value)
   if (valid.value) {
     loading.value = true
     store.dispatch('createBranch', {

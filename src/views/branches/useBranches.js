@@ -48,11 +48,12 @@ export default function useBranches() {
       companyId: null,
       logo: null,
       address: {
-        block: "2",
-        state: "Mubarak al kabeer",
-        city: "AlQossor",
-        street: "18",
-        zipCode: "27004",
+        block: null,
+        stateId: null,
+        cityId: null,
+        countryId:null,
+        street: null,
+        zipCode: null
       },
       status: 'active',
       services: [],
