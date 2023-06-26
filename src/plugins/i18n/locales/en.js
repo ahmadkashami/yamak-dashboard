@@ -38,6 +38,8 @@ export const ENGLISH_LANGUAGE= {
     City:' City',
     Block:' Block',
     Street:' Street',
+    Drivers:' Drivers',
+    Branch:' Branch',
     'License Expired At':' License Expired',
     'Zip Code':'Zip Code',
     'This field is required': 'This field is required',

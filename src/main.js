@@ -16,8 +16,8 @@ import { abilitiesPlugin } from '@casl/vue'
 import 'flag-icons/css/flag-icons.min.css'
 import 'v-phone-input/dist/v-phone-input.css'
 import { createVPhoneInput } from 'v-phone-input'
-
-
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 loadFonts()
 
@@ -31,6 +31,8 @@ const vPhoneInput = createVPhoneInput({
 })
 
 app.use(vPhoneInput)
+
+app.component('VueDatePicker', VueDatePicker);
 
 // Use plugins
 app.use(i18n)

@@ -9,7 +9,7 @@
         <template v-slot:activator="{ props }">
           <VTextField
             v-model="computedDateFormatted"
-            readonly
+            readonly="true"
             v-bind="props"
             :label="label"
             :append-icon="icons.mdiCalendar"
@@ -19,9 +19,8 @@
             hide-details="auto"
             :rules="rules?rules:[]"
             :error-messages="errorMessages"
-            clearable
+            clearable="true"
             density="compact"
-
           />
         </template>
         <VDatePicker

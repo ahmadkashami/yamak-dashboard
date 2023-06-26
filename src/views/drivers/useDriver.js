@@ -1,6 +1,7 @@
 import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
+import { useRoute } from 'vue-router'
 
 export default function useDriver() {
   const { t } = useUtils()
@@ -41,7 +42,7 @@ export default function useDriver() {
   const resetForm = () => {
     form.value.reset()
   }
-
+  const route = useRoute()
   const modelObject=ref(
     {
       name:null,
@@ -50,7 +51,9 @@ export default function useDriver() {
       licenseExpiredAt:"2024-06-01",
       email:null,
       phoneNum:null,
-      password:null
+      password:null,
+      branchId:null,
+      companyId:route.params.id,
     }
   )
 
@@ -117,5 +120,6 @@ export default function useDriver() {
     t,
     updateItemsPerPage,
     updateCurrentPage,
+    route
   }
 }

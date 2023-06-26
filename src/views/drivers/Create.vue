@@ -4,6 +4,7 @@
       v-model="isOpenCreateDialog"
       persistent
       width="1024"
+      height="auto"
     >
       <VCard height="100%">
         <div class="drawer-header d-flex align-center ma-4">
@@ -63,7 +64,21 @@
                     :label="$t('Phone')"
                     :placeholder="$t('Phone')"
                     density="compact"
+                    class="phone-input"
                     :rules="phoneRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.branchId"
+                    :label="$t('Branch')"
+                    service="fetchBranchByCompany"
+                    :multiple="false"
+                    :query-params="{companyId:route.params.id}"
+                    :rules="requiredRules"
                   />
                 </VCol>
                 <VCol cols="12" md="6">
@@ -76,12 +91,8 @@
                   />
                 </VCol>
                 <VCol cols="12" md="6">
-                <date-input-menu
-                  :date='modelObject.licenseExpiredAt'
-                  :label="$t('License Expired At')"
-                  @update-date='updatePockedDate'
-                  :rules="requiredRules"
-                ></date-input-menu>
+                  <h6>License Expired</h6>
+                  <VueDatePicker v-model="modelObject.licenseExpiredAt" :format="format"></VueDatePicker>
                 </VCol>
                 <VCol cols="12">
                   <FileUpload
@@ -137,9 +148,8 @@ import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import uploadFilesService from '@/plugins/uploadFilesService'
 import useValidation from '@/utils/validation'
-import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 import { VPhoneInput } from 'v-phone-input'
-import DateInputMenu from '@/components/form-inputs/DateInputMenu.vue'
+import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 
 
 const props=defineProps({
@@ -168,6 +178,7 @@ const {
   validate,
   resetForm,
   modelObject,
+  route
 } = useDriver()
 
 const {
@@ -199,10 +210,17 @@ const resetData = () => {
 const loading = ref(false)
 const isPasswordVisible = ref(false)
 
+const format = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${year}-${month}-${day}`;
+}
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
-    store.dispatch('createService', {
+    store.dispatch('createDriver', {
       queryParams: {
         ...modelObject.value,
       },

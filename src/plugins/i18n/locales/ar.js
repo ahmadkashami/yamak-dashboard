@@ -39,6 +39,8 @@ export const ARABIC_LANGUAGE = {
   City:' المدينة',
   Block:' القطعة',
   Street:' الشارع',
+  Drivers:' السائقين',
+  Branch:' الفرع',
   'Zip Code':' رمز البريد',
   'License Expired At':'تاريخ الرخصة',
   Agency:'Agency',
