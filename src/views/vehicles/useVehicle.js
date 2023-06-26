@@ -1,12 +1,14 @@
 import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
+import { useRoute } from 'vue-router'
 
-export default function useServices() {
+export default function useVehicle() {
   const { t } = useUtils()
 
   const tableColumns = [
-    { title: t('Name'), key: 'name' },
+    { title: t('Branch'), key: 'branchId' },
+    { title: t('Created At'), key: 'createdAt' },
     { title: t('Status'), key: 'status' },
 
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
@@ -39,21 +41,26 @@ export default function useServices() {
   const resetForm = () => {
     form.value.reset()
   }
-
+  const route = useRoute()
   const modelObject=ref(
     {
-      name: {
-        ar: null,
-        en: null,
-      },
-      logo: "logo",
-      status: "active",
-    },
+      drivers:[],
+      services:[],
+      branchId:null,
+      companyId:route.params.id,
+      status:"active",
+      currentDriver:null,
+      workStatus:"online",
+      geoLocation: {
+        latitude: 123.123123,
+        longitude: 123.123123
+      }
+    }
   )
 
 
   const fetchDataList = () => {
-    store.dispatch('fetchServices', {
+    store.dispatch('fetchVehicles', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",
@@ -90,7 +97,6 @@ export default function useServices() {
     isOpenUpdateDialog.value = true
   }
 
-
   return {
     tableColumns,
     loading,
@@ -115,5 +121,6 @@ export default function useServices() {
     t,
     updateItemsPerPage,
     updateCurrentPage,
+    route
   }
 }

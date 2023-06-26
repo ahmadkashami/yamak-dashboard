@@ -35,13 +35,13 @@
 
       <!-- vehicles -->
       <VWindowItem value="vehicles">
-        <AccountSettingsNotification />
+        <Vehicles/>
       </VWindowItem>
 
-      <!-- users -->
-      <VWindowItem value="users">
-        <AccountSettingsNotification />
-      </VWindowItem>
+<!--      &lt;!&ndash; users &ndash;&gt;-->
+<!--      <VWindowItem value="users">-->
+<!--        <AccountSettingsNotification />-->
+<!--      </VWindowItem>-->
     </VWindow>
   </div>
 </template>
@@ -51,6 +51,7 @@ import AccountSettingsNotification from '@/views/pages/account-settings/AccountS
 import { ref } from 'vue'
 import Branches  from '@/views/branches/Index.vue'
 import Drivers from '@/views/drivers/Index.vue'
+import Vehicles from '@/views/vehicles/Index.vue'
 
 
 
@@ -73,11 +74,11 @@ const tabs = [
     title: 'Vehicles',
     icon: 'mdi-rv-truck',
     tab: 'vehicles',
-  },
-  {
-    title: 'Users',
-    icon: 'mdi-account-multiple-outline',
-    tab: 'users',
-  },
+  }
+  // {
+  //   title: 'Users',
+  //   icon: 'mdi-account-multiple-outline',
+  //   tab: 'users',
+  // },
 ]
 </script>

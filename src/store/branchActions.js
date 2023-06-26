@@ -29,4 +29,19 @@ export default {
         .catch(error => reject(error))
     })
   },
+
+  fetchServicesByBranch({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`branches/${queryParams.branchId}/services`)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+  fetchDriversByBranch({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`branches/${queryParams.branchId}/drivers`)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }

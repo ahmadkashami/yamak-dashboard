@@ -4,6 +4,7 @@
       v-model="isOpenCreateDialog"
       persistent
       width="1024"
+      height="auto"
     >
       <VCard height="100%">
         <div class="drawer-header d-flex align-center ma-4">
@@ -28,42 +29,59 @@
                   cols="12"
                   md="6"
                 >
-                  <VTextField
-                    v-model="modelObject.name.en"
-                    outlined
-                    density="compact"
-                    :label="$t('English Name')"
-                    :placeholder="$t('English Name')"
-                    :rules="requiredRules"
+                    <CustomAutoSelect
+                      v-model="modelObject.branchId"
+                      :label="$t('Branch')"
+                      service="fetchBranchByCompany"
+                      :multiple="false"
+                      :query-params="{companyId:route.params.id}"
+                      :rules="requiredRules"
+                    />
+                  </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                  v-if="modelObject.branchId"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.services"
+                    :label="$t('Services')"
+                    service="fetchServicesByBranch"
+                    :query-params="{branchId:modelObject.branchId}"
+                    :multiple="true"
+                    :rules="[(v) => v.length>0 || 'Item is required in select']"
                   />
                 </VCol>
                 <VCol
                   cols="12"
                   md="6"
+                  v-if="modelObject.branchId"
                 >
-                  <VTextField
-                    v-model="modelObject.name.ar"
-                    outlined
-                    density="compact"
-                    :label="$t('Arabic Name')"
-                    :placeholder="$t('Arabic Name')"
-                    :rules="requiredRules"
+                  <CustomAutoSelect
+                    v-model="modelObject.services"
+                    :label="$t('Drivers')"
+                    service="fetchDriversByBranch"
+                    :query-params="{branchId:modelObject.branchId}"
+                    :multiple="true"
+                    :rules="[(v) => v.length>0 || 'Item is required in select']"
                   />
                 </VCol>
-                <VCol cols="12">
-                  <FileUpload
-                    :max-size="1"
-                    accept="png"
-                    @file-uploaded="uploadedLogo"
-                  />
-                </VCol>
-                <VCol cols="12">
+                <VCol cols="12" md="6">
                   <VSwitch
                     v-model="modelObject.status"
                     hide-details
                     true-value="active"
                     false-value="inactive"
                     :label="`${$t('Status')}: ${$t(modelObject.status)}`"
+                  />
+                </VCol>
+                <VCol cols="12" md="6">
+                  <VSwitch
+                    v-model="modelObject.workStatus"
+                    hide-details
+                    true-value="online"
+                    false-value="offline"
+                    :label="`${$t('Work Status')}: ${$t(modelObject.workStatus)}`"
                   />
                 </VCol>
               </VRow>
@@ -107,11 +125,14 @@
 </template>
 
 <script setup>
-import useServices from './useServices'
+import useVehicle from './useVehicle'
 import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import uploadFilesService from '@/plugins/uploadFilesService'
+import useValidation from '@/utils/validation'
+import { VPhoneInput } from 'v-phone-input'
+import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 
 
 const props=defineProps({
@@ -140,20 +161,28 @@ const {
   validate,
   resetForm,
   modelObject,
-  emailRules,
+  route
+} = useVehicle()
+
+const {
   requiredRules,
-} = useServices()
+  phoneRules,
+  emailRules,
+}=useValidation()
 
 const { uploadFile }=uploadFilesService()
 
-const uploadedLogo=currentFile=>{
+const uploadedPhoto=currentFile=>{
   uploadFile(currentFile.file).then(response=>{
-    modelObject.value.logo=response.data.data.url
+    modelObject.value.photo=response.data.data.url
   }).catch(error=>{
     console.log(error)
   })
 }
 
+const updatePockedDate = val => {
+  modelObject.value.licenseExpiredAt = val
+}
 
 const resetData = () => {
   resetForm()
@@ -162,11 +191,19 @@ const resetData = () => {
 }
 
 const loading = ref(false)
+const isPasswordVisible = ref(false)
 
+const format = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${year}-${month}-${day}`;
+}
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
-    store.dispatch('createService', {
+    store.dispatch('createDriver', {
       queryParams: {
         ...modelObject.value,
       },
