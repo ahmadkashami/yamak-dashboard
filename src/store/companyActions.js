@@ -22,4 +22,11 @@ export default {
         .catch(error => reject(error))
     })
   },
+  fetchDriversByCompany({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`companies/${queryParams.companyId}/drivers`)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }
