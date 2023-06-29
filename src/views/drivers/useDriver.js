@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 
 export default function useDriver() {
   const { t } = useUtils()
-
+  const route = useRoute()
   const tableColumns = [
     { title: t('Name'), key: 'name' },
     { title: t('Phone'), key: 'phoneNum' },
@@ -42,7 +42,6 @@ export default function useDriver() {
   const resetForm = () => {
     form.value.reset()
   }
-  const route = useRoute()
   const modelObject=ref(
     {
       name:null,
@@ -59,16 +58,16 @@ export default function useDriver() {
 
 
   const fetchDataList = () => {
-    store.dispatch('fetchDrivers', {
+    store.dispatch('fetchDriversByCompany', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",
+      companyId:route.params.id
     })
       .then(response => {
-
         dataList.value = response.data.data.list
         pageInfo.value = {
-          totalPages: response.data.data.metadata.lastPage,
+          totalPages: response.data.data.metadata?.lastPage,
         }
         loading.value = false
       }).catch(error => {

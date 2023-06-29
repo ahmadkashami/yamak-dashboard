@@ -8,7 +8,7 @@
     >
       <VCard height="100%">
         <div class="drawer-header d-flex align-center ma-4">
-          <h2>{{ $t('Create') }}</h2>
+          <h2>{{ $t('Vehicle') }}</h2>
           <VSpacer />
           <VBtn
             icon="mdi-close"
@@ -58,7 +58,7 @@
                   v-if="modelObject.branchId"
                 >
                   <CustomAutoSelect
-                    v-model="modelObject.services"
+                    v-model="modelObject.drivers"
                     :label="$t('Drivers')"
                     service="fetchDriversByBranch"
                     :query-params="{branchId:modelObject.branchId}"
@@ -203,7 +203,7 @@ const format = (date) => {
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
-    store.dispatch('createDriver', {
+    store.dispatch('createVehicle', {
       queryParams: {
         ...modelObject.value,
       },

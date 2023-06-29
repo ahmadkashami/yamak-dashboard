@@ -1,9 +1,12 @@
 import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
+import { useRoute } from 'vue-router'
 
 export default function useBranches() {
   const { t } = useUtils()
+  const route = useRoute()
+
 
   const tableColumns = [
     { title: t('Name'), key: 'name' },
@@ -23,7 +26,6 @@ export default function useBranches() {
   const isOutlinedSnackbarVisible = ref(false)
   const msgSnackbarVisible = ref('')
   const isOutlinedSnackbarColor = ref('')
-
   const options = ref({
     sortBy: ['id'],
     sortDesc: [true],
@@ -66,19 +68,21 @@ export default function useBranches() {
 
 
   const fetchDataList = () => {
-    store.dispatch('fetchBranches', {
+    store.dispatch('fetchBranchByCompany', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",
+      companyId:route.params.id
     })
       .then(response => {
 
         dataList.value = response.data.data.list
         pageInfo.value = {
-          totalPages: response.data.data.metadata.lastPage,
+          totalPages: response.data.data.metadata?.lastPage,
         }
         loading.value = false
       }).catch(error => {
+        console.log(error)
         isOutlinedSnackbarVisible.value = true
         msgSnackbarVisible.value = error.response.data.message
         isOutlinedSnackbarColor.value = 'error'
@@ -129,5 +133,6 @@ export default function useBranches() {
     t,
     updateItemsPerPage,
     updateCurrentPage,
+    route
   }
 }

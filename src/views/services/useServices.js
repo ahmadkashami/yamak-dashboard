@@ -62,7 +62,7 @@ export default function useServices() {
 
         dataList.value = response.data.data.list
         pageInfo.value = {
-          totalPages: response.data.data.metadata.lastPage,
+          totalPages: response.data.data.metadata?.lastPage,
         }
         loading.value = false
       }).catch(error => {

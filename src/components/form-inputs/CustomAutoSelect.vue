@@ -64,7 +64,7 @@ const { current } = useLocale()
 const fetchItems = () => {
       loading.value=true
       store.dispatch(props.service, {
-        search: search.value,
+        query: search.value,
         ...props.queryParams,
       })
         .then(response => {

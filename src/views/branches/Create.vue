@@ -232,6 +232,7 @@ const {
   validate,
   resetForm,
   modelObject,
+  route
 } = useBranches()
 
 const {
@@ -257,7 +258,7 @@ const resetData = () => {
 }
 
 const loading = ref(false)
-const route = useRoute()
+
 
 const onSubmit = () => {
   console.log('hmad',valid.value)

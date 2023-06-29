@@ -29,4 +29,18 @@ export default {
         .catch(error => reject(error))
     })
   },
+  fetchBranchByCompany({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`companies/${queryParams.companyId}/branches`)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+  fetchVehiclesByCompany({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`companies/${queryParams.companyId}/vehicles`)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }

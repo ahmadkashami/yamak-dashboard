@@ -17,8 +17,10 @@ export const t = key => {
 
 export const  getTranslations=(data,local)=>
 {
-  if(data.length===0)return data
- return data[local]
+  if(data[local]!==undefined) {
+    return data[local]
+  }
+ return data
 }
 
 export const _ = null

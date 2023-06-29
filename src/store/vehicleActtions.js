@@ -21,12 +21,5 @@ export default {
         .then(response => resolve(response))
         .catch(error => reject(error))
     })
-  },
-  fetchVehiclesByCompany({ state }, queryParams) {
-    return new Promise((resolve, reject) => {
-      axios.get(`companies/${queryParams.companyId}/vehicles`)
-        .then(response => resolve(response))
-        .catch(error => reject(error))
-    })
-  },
+  }
 }
