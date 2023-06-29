@@ -8,7 +8,7 @@
           :disabled="item.disabled"
           class="pl-0"
         >
-          <span class="text-uppercase">  {{ item.text }}</span>
+          <span class="text-uppercase text-subtitle-2 font-weight-bold">  {{ item.text }}</span>
         </v-breadcrumbs-item>
       </template>
     </v-breadcrumbs>
