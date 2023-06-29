@@ -1,5 +1,6 @@
 <template>
   <div>
+    <BreadcrumbsComponent :items="itemsBreadcrumbs" :title="$t('Companies')"></BreadcrumbsComponent>
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
         <div class="d-flex align-center  pb-5">
@@ -100,9 +101,22 @@ import Create from '@/views/companies/Create.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'
 import { useLocale } from 'vuetify'
+import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
 
 const { current } = useLocale()
 const lang=current.value
+const itemsBreadcrumbs = [
+  {
+    text: 'Dashboard',
+    disabled:false,
+    href: '/',
+  },
+  {
+    text: 'companies',
+    disabled: true,
+    href: '/companies',
+  }
+]
 
 const {
   tableColumns,

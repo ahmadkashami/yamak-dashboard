@@ -1,5 +1,6 @@
 <template>
   <div>
+    <BreadcrumbsComponent :items="itemsBreadcrumbs" :title="$t('Companies')"></BreadcrumbsComponent>
     <VTabs
       v-model="activeTab"
       show-arrows
@@ -58,6 +59,24 @@ import Vehicles from '@/views/vehicles/Index.vue'
 const route = useRoute()
 const activeTab = ref(route.params.tab)
 
+import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+const itemsBreadcrumbs = [
+  {
+    text: 'Dashboard',
+    disabled:false,
+    href: '/',
+  },
+  {
+    text: 'Companies',
+    disabled: false,
+    href: '/companies',
+  } ,
+  {
+    text: 'View',
+    disabled: true,
+    href: '/',
+  }
+]
 // tabs
 const tabs = [
   {
