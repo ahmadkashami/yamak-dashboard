@@ -10,8 +10,13 @@ const permissions = [
   {
     subject: 'Companies',
     action: 'read',
-  },{
+  },
+  {
     subject: 'Services',
+    action: 'read',
+  },
+  {
+    subject: 'AppUsers',
     action: 'read',
   },
 ]

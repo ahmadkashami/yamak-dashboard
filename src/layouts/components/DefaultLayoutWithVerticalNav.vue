@@ -102,6 +102,14 @@ const upgradeBanner = computed(() => {
           to: '/services',
         }"
       />
+      <VerticalNavLink
+        v-if="canViewVerticalNavMenuLink({action:'read',subject:'AppUsers'})"
+        :item="{
+          title: 'App Users',
+          icon: 'mdi-home-outline',
+          to: '/app-users',
+        }"
+      />
 <!--      <VerticalNavLink-->
 <!--        :item="{-->
 <!--          title: 'Account Settings',-->

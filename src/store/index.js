@@ -7,6 +7,7 @@ import branchActions from '@/store/branchActions'
 import generalActions from '@/store/generalActions'
 import driverActions from '@/store/driverActions'
 import vehicleActtions from '@/store/vehicleActtions'
+import appUsersActions from '@/store/appUsersActions'
 
 
 export const  store = createStore({
@@ -25,7 +26,8 @@ export const  store = createStore({
     ...branchActions,
     ...generalActions,
     ...driverActions,
-    ...vehicleActtions
+    ...vehicleActtions,
+    ...appUsersActions
   },
   modules: {},
 })

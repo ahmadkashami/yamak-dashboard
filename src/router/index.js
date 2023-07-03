@@ -27,8 +27,18 @@ const router = createRouter({
         layout: 'default',
       },
     },
+    {
+      path: '/app-users',
+      name: 'app-users',
+      component: () => import('../views/app-users/Index.vue'),
+      meta: {
+        resource: 'AppUsers',
+        action: 'read',
+        layout: 'default',
+      },
+    },
     ...companyRouters
- ,
+    ,
     {
       path: '/services',
       name: 'services',
@@ -125,7 +135,7 @@ const router = createRouter({
         resource: 'Public',
         layout: 'blank',
       },
-    }
+    },
 
   ],
 })
