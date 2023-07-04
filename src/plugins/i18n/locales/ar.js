@@ -71,4 +71,5 @@ export const ARABIC_LANGUAGE = {
   'English Name':'الاسم الانكيزي',
   'Phone':'الهاتف',
   'Description':'الوصف',
+  'App Users':'مستخديمو التطبيق'
 }

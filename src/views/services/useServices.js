@@ -1,10 +1,12 @@
 import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
+import { useLocale } from 'vuetify'
 
 export default function useServices() {
   const { t } = useUtils()
-
+  const { current } = useLocale()
+  const lang=current.value
   const tableColumns = [
     { title: t('Name'), key: 'name' },
     { title: t('Status'), key: 'status' },
@@ -114,5 +116,6 @@ export default function useServices() {
     t,
     updateItemsPerPage,
     updateCurrentPage,
+    lang
   }
 }

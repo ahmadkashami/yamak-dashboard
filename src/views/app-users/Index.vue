@@ -1,5 +1,7 @@
 <template>
   <div>
+    <BreadcrumbsComponent :items="itemsBreadcrumbs" :title="$t('App Users')"></BreadcrumbsComponent>
+
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
         <div class="d-flex align-center  pb-5">
@@ -63,7 +65,19 @@ import { onMounted } from 'vue'
 import { VDataTable } from 'vuetify/labs/components'
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
-
+import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+const itemsBreadcrumbs = [
+  {
+    text: 'Dashboard',
+    disabled:false,
+    href: '/',
+  },
+  {
+    text: 'App Users',
+    disabled: true,
+    href: '/app-users',
+  }
+]
 const {
   tableColumns,
   loading,

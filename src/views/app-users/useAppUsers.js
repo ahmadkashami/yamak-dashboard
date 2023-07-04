@@ -10,7 +10,7 @@ export default function useAppUsers() {
   const tableColumns = [
     { title: t('Name'), key: 'name' },
     { title: t('Phone'), key: 'phoneNum' },
-    { title: t('License Expired At'), key: 'licenseExpiredAt' },
+    { title: t('License Expired'), key: 'licenseExpiredAt' },
     { title: t('Status'), key: 'status' },
   ]
 

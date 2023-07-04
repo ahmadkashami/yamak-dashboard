@@ -90,7 +90,6 @@ import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/services/Update.vue'
 import Create from '@/views/services/Create.vue'
-import { useLocale } from 'vuetify'
 import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
 const itemsBreadcrumbs = [
   {
@@ -121,13 +120,12 @@ const {
   itemData,
   updateItemsPerPage,
   updateCurrentPage,
+  lang
 } = useServices()
 
 onMounted(() => {
   fetchDataList()
 })
 
-const { current } = useLocale()
-const lang=current.value
 </script>
 

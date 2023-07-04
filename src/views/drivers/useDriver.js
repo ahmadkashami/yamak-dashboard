@@ -2,12 +2,16 @@ import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
 import { useRoute } from 'vue-router'
+import { useLocale } from 'vuetify'
 
 export default function useDriver() {
   const { t } = useUtils()
+  const { current } = useLocale()
+  const lang=current.value
   const route = useRoute()
   const tableColumns = [
     { title: t('Name'), key: 'name' },
+    { title: t('Branch'), key: 'branch' },
     { title: t('Phone'), key: 'phoneNum' },
     { title: t('License Expired At'), key: 'licenseExpiredAt' },
     { title: t('Status'), key: 'status' },
@@ -95,6 +99,7 @@ export default function useDriver() {
     isOpenUpdateDialog.value = true
   }
 
+
   return {
     tableColumns,
     loading,
@@ -119,6 +124,7 @@ export default function useDriver() {
     t,
     updateItemsPerPage,
     updateCurrentPage,
-    route
+    route,
+    lang
   }
 }

@@ -2,13 +2,15 @@ import { useUtils } from '@/libs/i18n'
 import { ref } from 'vue'
 import { store } from '@/store'
 import { useRoute } from 'vue-router'
+import { useLocale } from 'vuetify'
 
 export default function useVehicle() {
   const { t } = useUtils()
   const route = useRoute()
-
+  const { current } = useLocale()
+  const lang=current.value
   const tableColumns = [
-    { title: t('Branch'), key: 'branchId' },
+    { title: t('Branch'), key: 'branch' },
     { title: t('Created At'), key: 'createdAt' },
     { title: t('Status'), key: 'status' },
 
@@ -122,6 +124,7 @@ export default function useVehicle() {
     t,
     updateItemsPerPage,
     updateCurrentPage,
-    route
+    route,
+    lang
   }
 }
