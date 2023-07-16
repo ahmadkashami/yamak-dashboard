@@ -12,6 +12,7 @@ export default function useDriver() {
   const tableColumns = [
     { title: t('Name'), key: 'name' },
     { title: t('Branch'), key: 'branch' },
+    { title: t('Email'), key: 'email' },
     { title: t('Phone'), key: 'phoneNum' },
     { title: t('License Expired At'), key: 'licenseExpiredAt' },
     { title: t('Status'), key: 'status' },
