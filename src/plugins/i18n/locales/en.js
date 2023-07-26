@@ -69,5 +69,10 @@ export const ENGLISH_LANGUAGE= {
     'Description':'Description',
     active:'Active',
     inactive:'Inactive',
+    'Title':'Title',
+    'Link':'Link',
+    'Expired At':'Expired At',
+    'Started At':'Start At',
+    'Ads':'Ads',
   }
 

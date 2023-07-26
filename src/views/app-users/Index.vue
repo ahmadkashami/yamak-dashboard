@@ -9,19 +9,6 @@
         </div>
         <VSpacer />
         <div class="d-flex align-center pb-5">
-          <VBtn
-            color="primary"
-            class="me-3"
-            @click="isOpenCreateDialog=!isOpenCreateDialog"
-          >
-            <VIcon
-              size="18"
-              class="me-1"
-            >
-              mdi-plus
-            </VIcon>
-            <span>{{ $t('Create') }}</span>
-          </VBtn>
         </div>
       </VCardText>
       <!-- table -->

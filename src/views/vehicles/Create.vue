@@ -180,9 +180,7 @@ const uploadedPhoto=currentFile=>{
   })
 }
 
-const updatePockedDate = val => {
-  modelObject.value.licenseExpiredAt = val
-}
+
 
 const resetData = () => {
   resetForm()

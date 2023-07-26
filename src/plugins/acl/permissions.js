@@ -19,6 +19,10 @@ const permissions = [
     subject: 'AppUsers',
     action: 'read',
   },
+  {
+    subject: 'Ads',
+    action: 'read',
+  },
 ]
 
 export default permissions

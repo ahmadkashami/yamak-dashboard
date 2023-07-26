@@ -71,5 +71,10 @@ export const ARABIC_LANGUAGE = {
   'English Name':'الاسم الانكيزي',
   'Phone':'الهاتف',
   'Description':'الوصف',
-  'App Users':'مستخديمو التطبيق'
+  'App Users':'مستخديمو التطبيق',
+  'Title':'عنوان',
+  'Link':'رابط',
+  'Expired At':'ينتهي في',
+  'Started At':'يبدآ من',
+  'Ads':'يبدآ من',
 }

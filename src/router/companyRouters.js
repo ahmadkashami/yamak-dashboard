@@ -18,5 +18,15 @@ export  const companyRouters= [
       action: 'read',
       layout: 'default',
     },
+  },
+  {
+    path: '/ads',
+    name: 'ads',
+    component: () => import('../views/advertisements/Index.vue'),
+    meta: {
+      resource: 'Ads',
+      action: 'read',
+      layout: 'default',
+    },
   }
 ]
