@@ -60,7 +60,7 @@
                   <CustomAutoSelect
                     v-model="modelObject.drivers"
                     :label="$t('Drivers')"
-                    service="fetchDriversByBranch"
+                    service="fetchFreeDriversByBranch"
                     :query-params="{branchId:modelObject.branchId}"
                     :multiple="true"
                     :rules="[(v) => v.length>0 || 'Item is required in select']"

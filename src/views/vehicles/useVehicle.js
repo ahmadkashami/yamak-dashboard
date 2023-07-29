@@ -54,8 +54,8 @@ export default function useVehicle() {
       currentDriver:null,
       workStatus:"online",
       geoLocation: {
-        latitude: 123.123123,
-        longitude: 123.123123
+        latitude: 29.380627,
+        longitude: 47.992982
       }
     }
   )

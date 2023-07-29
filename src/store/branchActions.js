@@ -36,4 +36,11 @@ export default {
         .catch(error => reject(error))
     })
   },
+  fetchFreeDriversByBranch({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`branches/${queryParams.branchId}/free-drivers`)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }
