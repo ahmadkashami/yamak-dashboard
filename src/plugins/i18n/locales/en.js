@@ -11,7 +11,7 @@ export const ENGLISH_LANGUAGE= {
     Name: 'Name ',
     Actions: 'Actions',
     Create: 'Create',
-    Update: 'Create',
+    Update: 'Update',
     Edit: 'Edit',
     Cancel: 'Cancel',
     Save: 'Save',

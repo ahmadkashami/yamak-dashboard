@@ -70,7 +70,7 @@
                   md="6"
                 >
                   <VPhoneInput
-                    v-model="modelObject.contactUs.phoneNum"
+                    v-model="modelObject.contactUs.phone"
                     :label="$t('Phone')"
                     :placeholder="$t('Phone')"
                     density="compact"
@@ -147,6 +147,7 @@ import * as validation from '@/utils/validation'
 import { store } from '@/store'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 import { VPhoneInput } from 'v-phone-input'
+import useValidation from '@/utils/validation'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -180,6 +181,12 @@ const {
   modelObject
 } = useWebsite()
 
+const {
+  requiredRules,
+  phoneRules,
+  emailRules,
+  domainValidator,
+} = useValidation()
 onMounted(() => {
 })
 
@@ -195,9 +202,9 @@ const onSubmit = () => {
   if (valid.value) {
     loading.value = true
     store.dispatch('updateWebsite', {
-      id: props.itemData.id,
+      id: props.itemData._id,
       queryParams: {
-        name: name.value,
+        ...modelObject.value
       },
     }).then(response => {
       if (response) {

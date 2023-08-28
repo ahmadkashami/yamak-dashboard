@@ -14,7 +14,7 @@ export default function useWebsite() {
     { title: t('Domain'), key: 'domainUrl' },
     { title: t('Status'), key: 'status' },
     { title: t('Created At'), key: 'createdAt' },
-    // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
+    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])

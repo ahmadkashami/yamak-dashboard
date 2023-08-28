@@ -71,7 +71,7 @@
                   md="6"
                 >
                   <VPhoneInput
-                    v-model="modelObject.contactUs.phoneNum"
+                    v-model="modelObject.contactUs.phone"
                     :label="$t('Phone')"
                     :placeholder="$t('Phone')"
                     density="compact"
