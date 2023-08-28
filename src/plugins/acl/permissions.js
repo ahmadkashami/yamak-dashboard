@@ -23,6 +23,10 @@ const permissions = [
     subject: 'Ads',
     action: 'read',
   },
+  {
+    subject: 'Websites',
+    action: 'read',
+  },
 ]
 
 export default permissions

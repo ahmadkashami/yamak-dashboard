@@ -88,7 +88,7 @@ import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/drivers/Update.vue'
 import Create from '@/views/drivers/Create.vue'
-import { getTranslations } from '../../libs/i18n/utils'
+import { getTranslations } from '@/libs/i18n/utils'
 
 const {
   tableColumns,

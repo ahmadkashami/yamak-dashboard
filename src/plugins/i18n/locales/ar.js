@@ -77,4 +77,8 @@ export const ARABIC_LANGUAGE = {
   'Expired At':'ينتهي في',
   'Started At':'يبدآ من',
   'Ads':'يبدآ من',
+  'Websites':'المواقع الالكترونية',
+  'Domain':'الدومين',
+  'About Us':'من نحن'
+
 }

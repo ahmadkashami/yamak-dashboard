@@ -74,5 +74,8 @@ export const ENGLISH_LANGUAGE= {
     'Expired At':'Expired At',
     'Started At':'Start At',
     'Ads':'Ads',
+    'Websites':'Websites',
+    'Domain':'Domain',
+    'About Us':'About Us'
   }
 

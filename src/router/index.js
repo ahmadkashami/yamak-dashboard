@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { canNavigate } from '@/plugins/acl/routeProtection'
 import { companyRouters } from '@/router/companyRouters'
+import { websiteRouters } from '@/router/websiteRouters'
 
 
 const router = createRouter({
@@ -37,7 +38,8 @@ const router = createRouter({
         layout: 'default',
       },
     },
-    ...companyRouters
+    ...companyRouters,
+    ...websiteRouters
     ,
     {
       path: '/services',

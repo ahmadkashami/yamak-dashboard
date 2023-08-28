@@ -118,6 +118,11 @@ export default function useValidation() {
     v => !!v || 'E-mail is required',
     v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
   ]
+  const domainValidator= [
+    v => !!v || 'Domain is required',
+    v => /.+\..+/.test(v) || 'Domain must be valid',
+  ]
+
 
 
   const requiredRules= [v => !!v || 'Item is required']
@@ -141,7 +146,8 @@ export default function useValidation() {
     integerPositive,
     emailRules,
     requiredRules,
-    phoneRules
+    phoneRules,
+    domainValidator
   }
 }
 
