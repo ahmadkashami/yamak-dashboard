@@ -279,7 +279,7 @@ const onSubmit = () => {
         resetData()
       }
     }).catch(error => {
-      msgSnackbarVisible.value = error.response.data.error
+      msgSnackbarVisible.value = error.message
       isOutlinedSnackbarVisible.value = true
       isOutlinedSnackbarColor.value = 'error'
       loading.value = false

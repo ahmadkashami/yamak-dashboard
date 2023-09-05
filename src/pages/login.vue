@@ -116,6 +116,7 @@ import { getCurrentInstance, ref } from 'vue'
 import permissions from '@/plugins/acl/permissions'
 import router from '@/router'
 import axios from '@/plugins/axios'
+import useValidation from '@/utils/validation'
 
 const isPasswordVisible = ref(false)
 const vm = getCurrentInstance().proxy
@@ -124,7 +125,10 @@ const password = ref('123456')
 const loginForm = ref(null)
 const errorMessages = ref([])
 const isOutlinedSnackbarVisible = ref(false)
-
+const {
+  requiredRules,
+  emailRules,
+} = useValidation()
 
 
 

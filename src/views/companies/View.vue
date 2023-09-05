@@ -94,10 +94,5 @@ const tabs = [
     icon: 'mdi-rv-truck',
     tab: 'vehicles',
   }
-  // {
-  //   title: 'Users',
-  //   icon: 'mdi-account-multiple-outline',
-  //   tab: 'users',
-  // },
 ]
 </script>

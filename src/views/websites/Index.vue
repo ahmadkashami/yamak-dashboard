@@ -65,7 +65,7 @@
           <VBtn
             variant="text"
             icon
-            @click="$router.push({name:'website-view',params:{id:item.raw._id}})"
+            @click="$router.push({name:'website-view',params:{websiteId:item.raw._id,companyId:item.raw.companyId,}})"
           >
             <VIcon size="small">
               mdi-eye

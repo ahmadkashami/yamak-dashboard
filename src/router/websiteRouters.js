@@ -10,7 +10,7 @@ export const websiteRouters = [
     },
   },
   {
-    path: '/websites/:id',
+    path: '/websites/:websiteId/:companyId',
     name: 'website-view',
     component: () => import('../views/websites/View.vue'),
     meta: {

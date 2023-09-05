@@ -26,12 +26,12 @@
     >
       <!-- features -->
       <VWindowItem value="features">
-     1
+        <Features />
       </VWindowItem>
 
       <!-- sliders -->
       <VWindowItem value="sliders">
-       2
+        <Sliders/>
       </VWindowItem>
 
 
@@ -41,29 +41,31 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
-
+import Features from '@/views/features/Index.vue'
+import Sliders from '@/views/sliders/Index.vue'
 
 
 const route = useRoute()
 const activeTab = ref(route.params.tab)
 
 import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+
 const itemsBreadcrumbs = [
   {
     text: 'Dashboard',
-    disabled:false,
+    disabled: false,
     href: '/',
   },
   {
     text: 'Websites',
     disabled: false,
     href: '/websites',
-  } ,
+  },
   {
     text: 'View',
     disabled: true,
     href: '/',
-  }
+  },
 ]
 // tabs
 const tabs = [
@@ -76,6 +78,6 @@ const tabs = [
     title: 'Sliders',
     icon: 'mdi-view-carousel-outline',
     tab: 'sliders',
-  }
+  },
 ]
 </script>
