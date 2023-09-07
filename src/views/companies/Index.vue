@@ -56,6 +56,24 @@
               View
             </VTooltip>
           </VBtn>
+          <VBtn
+            variant="text"
+            icon
+            @click="editItem(item.raw)"
+            color="secondary"
+          >
+            <VIcon size="small">
+              mdi-pencil
+            </VIcon>
+            <VTooltip
+              activator="parent"
+              location="top"
+            >
+              Edit
+            </VTooltip>
+          </VBtn>
+
+
         </template>
 
 

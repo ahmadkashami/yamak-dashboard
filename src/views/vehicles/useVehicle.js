@@ -13,7 +13,6 @@ export default function useVehicle() {
     { title: t('Branch'), key: 'branch' },
     { title: t('Created At'), key: 'createdAt' },
     { title: t('Status'), key: 'status' },
-
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
@@ -95,7 +94,7 @@ export default function useVehicle() {
     fetchDataList()
   }
 
-  const editItem = item => {
+  const editItem = (item) => {
     itemData.value = item
     isOpenUpdateDialog.value = true
   }

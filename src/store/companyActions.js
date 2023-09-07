@@ -17,7 +17,7 @@ export default {
   },
   updateCompany({ state }, { id, queryParams }) {
     return new Promise((resolve, reject) => {
-      axios.put(`companies/${id}`, queryParams)
+      axios.patch(`companies/${id}`, queryParams)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })

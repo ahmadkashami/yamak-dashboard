@@ -39,13 +39,22 @@
         </template>
 
         <template #item.actions="{ item }">
-          <VIcon
-            size="small"
-            class="me-2"
+          <VBtn
+            variant="text"
+            icon
             @click="editItem(item.raw)"
+            color="secondary"
           >
-            mdi-pencil
-          </VIcon>
+            <VIcon size="small">
+              mdi-pencil
+            </VIcon>
+            <VTooltip
+              activator="parent"
+              location="top"
+            >
+              Edit
+            </VTooltip>
+          </VBtn>
         </template>
 
         <template #bottom>

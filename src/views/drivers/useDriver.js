@@ -16,7 +16,6 @@ export default function useDriver() {
     { title: t('Phone'), key: 'phoneNum' },
     { title: t('License Expired At'), key: 'licenseExpiredAt' },
     { title: t('Status'), key: 'status' },
-
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 

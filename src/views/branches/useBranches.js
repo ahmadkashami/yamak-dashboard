@@ -12,8 +12,7 @@ export default function useBranches() {
     { title: t('Name'), key: 'name' },
     { title: t('Phone'), key: 'phone' },
     { title: t('Status'), key: 'status' },
-
-    // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
+    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])

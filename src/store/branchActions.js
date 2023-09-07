@@ -17,7 +17,7 @@ export default {
   },
   updateBranch({ state }, { id, queryParams }) {
     return new Promise((resolve, reject) => {
-      axios.put(`branches/${id}`, queryParams)
+      axios.patch(`branches/${id}`, queryParams)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })

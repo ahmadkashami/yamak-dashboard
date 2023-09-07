@@ -24,14 +24,63 @@
           <VCardText>
             <VContainer>
               <VRow>
-                <VCol cols="12">
-                  <VTextField
-                    v-model="name"
-                    outlined
-                    density="compact"
-                    :label="$t('Name')"
-                    :placeholder="$t('Name')"
-                    :rules="[v => !!v || 'Item is required']"
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.branchId"
+                    :label="$t('Branch')"
+                    service="fetchBranchByCompany"
+                    :multiple="false"
+                    :query-params="{companyId:route.params.id}"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                  v-if="modelObject.branchId"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.services"
+                    :label="$t('Services')"
+                    service="fetchServicesByBranch"
+                    :query-params="{branchId:modelObject.branchId}"
+                    :multiple="true"
+                    :rules="[(v) => v.length>0 || 'Item is required in select']"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                  v-if="modelObject.branchId"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.drivers"
+                    :label="$t('Drivers')"
+                    service="fetchFreeDriversByBranch"
+                    :query-params="{branchId:modelObject.branchId}"
+                    :multiple="true"
+                    :rules="[(v) => v.length>0 || 'Item is required in select']"
+                  />
+                </VCol>
+                <VCol cols="12" md="6">
+                  <VSwitch
+                    v-model="modelObject.status"
+                    hide-details
+                    true-value="active"
+                    false-value="inactive"
+                    :label="`${$t('Status')}: ${$t(modelObject.status)}`"
+                  />
+                </VCol>
+                <VCol cols="12" md="6">
+                  <VSwitch
+                    v-model="modelObject.workStatus"
+                    hide-details
+                    true-value="online"
+                    false-value="offline"
+                    :label="`${$t('Work Status')}: ${$t(modelObject.workStatus)}`"
                   />
                 </VCol>
               </VRow>
@@ -75,11 +124,11 @@
 </template>
 
 <script setup>
-import { mdiClose, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import useVehicle from './useVehicle'
 import { computed, onMounted, ref, watch } from 'vue'
-import * as validation from '@/utils/validation'
 import { store } from '@/store'
+import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
+import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -110,10 +159,11 @@ const {
   validate,
   name,
   resetForm,
+  modelObject,
+  route
 } = useVehicle()
 
-onMounted(() => {
-})
+
 
 const resetData = () => {
   resetForm()
@@ -122,14 +172,23 @@ const resetData = () => {
 }
 
 const loading = ref(false)
+const { uploadFile }=uploadFilesService()
 
+const uploadedPhoto=currentFile=>{
+  uploadFile(currentFile.file).then(response=>{
+    modelObject.value.photo=response.data.data.url
+  }).catch(error=>{
+    console.log(error)
+  })
+}
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
-    store.dispatch('updateService', {
+    store.dispatch('updateVehicle', {
       id: props.itemData.id,
       queryParams: {
-        name: name.value,
+        ...modelObject.value
+
       },
     }).then(response => {
       if (response) {
@@ -154,7 +213,7 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    name.value = props.itemData?.name
+    modelObject.value = props.itemData
   },
 )
 </script>
