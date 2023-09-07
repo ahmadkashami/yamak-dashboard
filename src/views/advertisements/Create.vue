@@ -42,7 +42,6 @@
                     density="compact"
                     :label="$t('Link')"
                     :placeholder="$t('Link')"
-                    :rules="urlValidator"
                   />
                 </v-col>
                 <VCol cols="12" md="6">
@@ -151,7 +150,6 @@ const {
 
 const {
   requiredRules,
-  urlValidator
 }=useValidation()
 
 const { uploadFile }=uploadFilesService()

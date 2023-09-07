@@ -24,14 +24,47 @@
           <VCardText>
             <VContainer>
               <VRow>
-                <VCol cols="12">
+                <v-col cols="12" md="6">
                   <VTextField
-                    v-model="name"
+                    v-model="modelObject.title"
                     outlined
                     density="compact"
-                    :label="$t('Name')"
-                    :placeholder="$t('Name')"
-                    :rules="[v => !!v || 'Item is required']"
+                    :label="$t('Title')"
+                    :placeholder="$t('Title')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <VTextField
+                    v-model="modelObject.link"
+                    outlined
+                    density="compact"
+                    :label="$t('Link')"
+                    :placeholder="$t('Link')"
+                  />
+                </v-col>
+                <VCol cols="12" md="6">
+                  <h6>{{ $t('Started At') }}</h6>
+                  <VueDatePicker v-model="modelObject.startedAt" :format="format"></VueDatePicker>
+                </VCol>
+                <VCol cols="12" md="6">
+                  <h6>{{ $t('Expired At') }}</h6>
+                  <VueDatePicker v-model="modelObject.expiredAt" :format="format"></VueDatePicker>
+                </VCol>
+                <VCol cols="12" md="6">
+                  <VSwitch
+                    v-model="modelObject.status"
+                    hide-details
+                    true-value="active"
+                    false-value="inactive"
+                    :label="`${$t('Status')}: ${$t(modelObject.status)}`"
+                  />
+                </VCol>
+                <VCol cols="12">
+                  <FileUpload
+                    :max-size="1"
+                    accept="png"
+                    @file-uploaded="uploadedPhoto"
                   />
                 </VCol>
               </VRow>
@@ -75,13 +108,14 @@
 </template>
 
 <script setup>
-import { mdiClose, mdiEyeOffOutline, mdiEyeOutline } from '@mdi/js'
 import useAds from './useAds'
 import { computed, onMounted, ref, watch } from 'vue'
-import * as validation from '@/utils/validation'
 import { store } from '@/store'
+import FileUpload from '@/components/FileUpload.vue'
+import useValidation from '@/utils/validation'
+import uploadFilesService from '@/plugins/uploadFilesService'
 
-const props=defineProps({
+const props = defineProps({
   isOpenUpdateDialog: {
     type: Boolean,
   },
@@ -110,10 +144,9 @@ const {
   validate,
   name,
   resetForm,
+  modelObject,
 } = useAds()
 
-onMounted(() => {
-})
 
 const resetData = () => {
   resetForm()
@@ -123,20 +156,42 @@ const resetData = () => {
 
 const loading = ref(false)
 
+const {
+  requiredRules,
+  urlValidator
+} = useValidation()
+
+const { uploadFile } = uploadFilesService()
+
+const uploadedPhoto = currentFile => {
+  uploadFile(currentFile.file).then(response => {
+    modelObject.value.photo = response.data.data.url
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+const format = (date) => {
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+
+  return `${year}-${month}-${day}`
+}
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
     store.dispatch('updateAds', {
-      id: props.itemData.id,
+      id: props.itemData._id,
       queryParams: {
-        name: name.value,
+        ...modelObject.value,
       },
     }).then(response => {
       if (response) {
         emit('update-data')
         loading.value = false
-        msgSnackbarVisible.value = "Updated Successfully"
-        isOutlinedSnackbarColor.value = "success"
+        msgSnackbarVisible.value = 'Updated Successfully'
+        isOutlinedSnackbarColor.value = 'success'
         isOutlinedSnackbarVisible.value = true
         resetData()
       }
@@ -154,7 +209,7 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    name.value = props.itemData?.name
+    modelObject.value = props.itemData
   },
 )
 </script>

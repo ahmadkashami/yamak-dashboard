@@ -14,8 +14,7 @@ export default function useAds() {
     { title: t('Started At'), key: 'startedAt' },
     { title: t('Expired At'), key: 'expiredAt' },
     { title: t('Status'), key: 'status' },
-
-    // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
+    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])
