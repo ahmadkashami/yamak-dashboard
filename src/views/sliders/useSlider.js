@@ -60,7 +60,8 @@ export default function useSlider() {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc ? 'DESC' : 'ASC',
-      companyId: route.params.id,
+      websiteId: route.params.websiteId,
+      companyId: route.params.companyId,
     })
       .then(response => {
         dataList.value = response.data.data.list
