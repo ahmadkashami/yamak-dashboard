@@ -57,7 +57,7 @@
                 <VCol cols="12">
                   <FileUpload
                     :max-size="1"
-                    accept="png"
+                    accept="png,jpeg"
                     @file-uploaded="uploadedPhoto"
                     label="Icon"
                   />
