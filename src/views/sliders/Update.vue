@@ -56,7 +56,7 @@
                 <VCol cols="12">
                   <FileUpload
                     :max-size="1"
-                    accept="png"
+                    accept="png,jpeg"
                     @file-uploaded="uploadedPhoto"
                     label="Image"
                   />
@@ -107,6 +107,7 @@ import { computed, ref, watch } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import useValidation from '@/utils/validation'
+import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -154,6 +155,8 @@ const resetData = () => {
 }
 
 const loading = ref(false)
+const { uploadFile }=uploadFilesService()
+
 const uploadedPhoto=currentFile=>{
   uploadFile(currentFile.file).then(response=>{
     modelObject.value.imageUrl=response.data.data.url
