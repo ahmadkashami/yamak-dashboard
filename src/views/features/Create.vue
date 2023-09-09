@@ -59,6 +59,7 @@
                     :max-size="1"
                     accept="png"
                     @file-uploaded="uploadedPhoto"
+                    label="Icon"
                   />
                 </VCol>
               </VRow>

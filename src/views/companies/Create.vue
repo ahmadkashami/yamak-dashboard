@@ -79,6 +79,7 @@
                     :max-size="1"
                     accept="png"
                     @file-uploaded="uploadedLogo"
+                    label="Logo"
                   />
                 </VCol>
                 <VCol cols="12">

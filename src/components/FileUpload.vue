@@ -1,5 +1,8 @@
 <template>
-  <div class="file-upload">
+  <div class="file-upload flex">
+    <div>
+      <label class="mx-4 v-field__input">{{label}}:</label>
+    </div>
     <div class="file-upload__area">
       <div v-if="!file.isUploaded">
         <input
@@ -79,6 +82,10 @@ export default {
       type: String,
       default: "image/*",
     },
+    label:{
+      type:String,
+      required: true,
+    }
   },
   data() {
     return {
