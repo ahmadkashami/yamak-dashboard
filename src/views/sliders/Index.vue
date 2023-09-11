@@ -30,11 +30,17 @@
         class="text-no-wrap"
         hide-default-footer
       >
+        <template #item.title="{ item }">
+          {{ getTranslations(item.raw.title, lang) }}
+        </template>
+        <template #item.subTitle="{ item }">
+          {{ getTranslations(item.raw.subTitle, lang) }}
+        </template>
         <template #item.status="{ item }">
           <StatusChip :status="item.raw.status" />
         </template>
         <template #item.branch="{ item }">
-          <span>{{getTranslations(item.raw.branch.name,lang)}}</span>
+          <span>{{ getTranslations(item.raw.branch.name, lang) }}</span>
         </template>
 
         <template #item.actions="{ item }">
@@ -106,7 +112,7 @@ const {
   itemData,
   updateItemsPerPage,
   updateCurrentPage,
-  lang
+  lang,
 } = useSlider()
 
 onMounted(() => {

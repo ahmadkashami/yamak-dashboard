@@ -46,8 +46,8 @@ export default function useFeature() {
     {
       websiteId: route.params.websiteId,
       icon: null,
-      title: null,
-      description: null,
+      title: {ar:null,en:null},
+      description: {ar:null,en:null},
       status: 'active',
       companyId: route.params.companyId,
     },

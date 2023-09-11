@@ -26,21 +26,41 @@
               <VRow>
                 <v-col cols="12" md="12">
                   <VTextField
-                    v-model="modelObject.title"
+                    v-model="modelObject.title.ar"
                     outlined
                     density="compact"
-                    :label="$t('Title')"
-                    :placeholder="$t('Title')"
+                    :label="$t('Title Arabic')"
+                    :placeholder="$t('Title Arabic')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextField
+                    v-model="modelObject.title.en"
+                    outlined
+                    density="compact"
+                    :label="$t('Title English')"
+                    :placeholder="$t('Title English')"
                     :rules="requiredRules"
                   />
                 </v-col>
                 <v-col cols="12" md="12">
                   <VTextarea
-                    v-model="modelObject.description"
+                    v-model="modelObject.description.ar"
                     outlined
                     density="compact"
-                    :label="$t('Description')"
-                    :placeholder="$t('Description')"
+                    :label="$t('Description Arabic')"
+                    :placeholder="$t('Description Arabic')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextarea
+                    v-model="modelObject.description.en"
+                    outlined
+                    density="compact"
+                    :label="$t('Description English')"
+                    :placeholder="$t('Description English')"
                     :rules="requiredRules"
                   />
                 </v-col>

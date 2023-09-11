@@ -47,8 +47,8 @@ export default function useSlider() {
     {
       websiteId: route.params.websiteId,
       imageUrl: null,
-      title: null,
-      subTitle: null,
+      title: { ar: null, en: null },
+      subTitle: { ar: null, en: null },
       status: 'active',
       companyId: route.params.companyId,
     },

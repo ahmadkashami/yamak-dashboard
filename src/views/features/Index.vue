@@ -30,6 +30,9 @@
         class="text-no-wrap"
         hide-default-footer
       >
+        <template #item.title="{ item }">
+          {{ getTranslations(item.raw.title, lang) }}
+        </template>
         <template #item.status="{ item }">
           <StatusChip :status="item.raw.status" />
         </template>

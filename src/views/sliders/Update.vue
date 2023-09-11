@@ -26,21 +26,41 @@
               <VRow>
                 <v-col cols="12" md="12">
                   <VTextField
-                    v-model="modelObject.title"
+                    v-model="modelObject.title.ar"
                     outlined
                     density="compact"
-                    :label="$t('Title')"
-                    :placeholder="$t('Title')"
+                    :label="$t('Title Arabic')"
+                    :placeholder="$t('Title Arabic')"
                     :rules="requiredRules"
                   />
                 </v-col>
                 <v-col cols="12" md="12">
                   <VTextField
-                    v-model="modelObject.subTitle"
+                    v-model="modelObject.title.en"
                     outlined
                     density="compact"
-                    :label="$t('Sub Title')"
-                    :placeholder="$t('Sub Title')"
+                    :label="$t('Title English')"
+                    :placeholder="$t('Title English')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextField
+                    v-model="modelObject.subTitle.ar"
+                    outlined
+                    density="compact"
+                    :label="$t('Sub Title Arabic')"
+                    :placeholder="$t('Sub Title Arabic')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextField
+                    v-model="modelObject.subTitle.en"
+                    outlined
+                    density="compact"
+                    :label="$t('Sub Title English')"
+                    :placeholder="$t('Sub Title English')"
                     :rules="requiredRules"
                   />
                 </v-col>
