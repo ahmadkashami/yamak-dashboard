@@ -32,32 +32,11 @@ const upgradeBanner = computed(() => {
           <VIcon icon="mdi-menu" />
         </IconBtn>
 
-        <!-- 👉 Search -->
-        <div
-          class="d-flex align-center cursor-pointer"
-          style="user-select: none;"
-        >
-          <!-- 👉 Search Trigger button -->
-          <IconBtn>
-            <VIcon icon="mdi-magnify" />
-          </IconBtn>
 
-          <span class="d-none d-md-flex align-center text-disabled">
-            <span class="me-3">Search</span>
-            <span class="meta-key">&#8984;K</span>
-          </span>
-        </div>
 
         <VSpacer />
 
-        <IconBtn
-          class="me-2"
-          href="https://github.com/themeselection/materio-vuetify-vuejs-admin-template-free"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <VIcon icon="mdi-github" />
-        </IconBtn>
+
 
         <IconBtn class="me-2">
           <VIcon icon="mdi-bell-outline" />
@@ -82,7 +61,7 @@ const upgradeBanner = computed(() => {
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'Users'})"
         :item="{
           title: 'Users',
-          icon: 'mdi-home-outline',
+          icon: 'mdi-account-group',
           to: '/users',
         }"
       />
@@ -90,7 +69,7 @@ const upgradeBanner = computed(() => {
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'Companies'})"
         :item="{
           title: 'Companies',
-          icon: 'mdi-home-outline',
+          icon: 'mdi-office-building',
           to: '/companies',
         }"
       />
@@ -98,7 +77,7 @@ const upgradeBanner = computed(() => {
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'Services'})"
         :item="{
           title: 'Services',
-          icon: 'mdi-home-outline',
+          icon: 'mdi-toolbox-outline',
           to: '/services',
         }"
       />
@@ -106,7 +85,7 @@ const upgradeBanner = computed(() => {
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'AppUsers'})"
         :item="{
           title: 'App Users',
-          icon: 'mdi-home-outline',
+          icon: 'mdi-account-multiple-check-outline',
           to: '/app-users',
         }"
       />
@@ -114,7 +93,7 @@ const upgradeBanner = computed(() => {
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'Ads'})"
         :item="{
           title: 'Ads',
-          icon: 'mdi-home-outline',
+          icon: 'mdi-google-ads',
           to: '/ads',
         }"
       />
@@ -122,7 +101,7 @@ const upgradeBanner = computed(() => {
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'Websites'})"
         :item="{
           title: 'Websites',
-          icon: 'mdi-home-outline',
+          icon: 'mdi-web',
           to: '/websites',
         }"
       />
