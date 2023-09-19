@@ -1,4 +1,5 @@
-import { getCurrentInstance } from '@vue/composition-api'
+import { getCurrentInstance } from 'vue'
+
 
 /**
  * Returns translated string if i18n package is available to Vue
@@ -11,6 +12,15 @@ export const t = key => {
   const vm = getCurrentInstance().proxy
 
   return vm.$i18n && vm.$t ? vm.$t(key) : key
+}
+
+
+export const  getTranslations=(data,local)=>
+{
+  if(data[local]!==undefined) {
+    return data[local]
+  }
+ return data
 }
 
 export const _ = null

@@ -1,0 +1,216 @@
+<template>
+  <div>
+    <VDialog
+      v-model="isOpenCreateDialog"
+      persistent
+      width="1024"
+      height="auto"
+    >
+      <VCard height="100%">
+        <div class="drawer-header d-flex align-center ma-4">
+          <h2>{{ $t('Create') }}</h2>
+          <VSpacer />
+          <VBtn
+            icon="mdi-close"
+            size="small"
+            @click="$emit('update:is-open-create-dialog',false)"
+          />
+        </div>
+        <VDivider />
+        <VForm
+          ref="form"
+          v-model="valid"
+          @submit.prevent="onSubmit"
+        >
+          <VCardText>
+            <VContainer>
+              <VRow>
+                <v-col cols="12" md="12">
+                  <VTextField
+                    v-model="modelObject.title.ar"
+                    outlined
+                    density="compact"
+                    :label="$t('Title Arabic')"
+                    :placeholder="$t('Title Arabic')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextField
+                    v-model="modelObject.title.en"
+                    outlined
+                    density="compact"
+                    :label="$t('Title English')"
+                    :placeholder="$t('Title English')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextField
+                    v-model="modelObject.subTitle.ar"
+                    outlined
+                    density="compact"
+                    :label="$t('Sub Title Arabic')"
+                    :placeholder="$t('Sub Title Arabic')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextField
+                    v-model="modelObject.subTitle.en"
+                    outlined
+                    density="compact"
+                    :label="$t('Sub Title English')"
+                    :placeholder="$t('Sub Title English')"
+                    :rules="requiredRules"
+                  />
+                </v-col>
+                <VCol cols="12" md="6">
+                  <VSwitch
+                    v-model="modelObject.status"
+                    hide-details
+                    true-value="active"
+                    false-value="inactive"
+                    :label="`${$t('Status')}: ${$t(modelObject.status)}`"
+                  />
+                </VCol>
+                <VCol cols="12">
+                  <FileUpload
+                    :max-size="1"
+                    accept="png,jpeg"
+                    @file-uploaded="uploadedPhoto"
+                    label="Image"
+                  />
+                </VCol>
+              </VRow>
+            </VContainer>
+          </VCardText>
+          <VCardActions>
+            <VSpacer />
+            <VBtn
+              color="primary"
+              class="me-3"
+              type="submit"
+              :loading="loading"
+              :disabled="loading"
+              variant="outlined"
+            >
+              {{ $t('Create') }}
+            </VBtn>
+            <VBtn
+              color="secondary"
+              variant="outlined"
+              type="reset"
+              @click="resetData"
+            >
+              {{ $t('Cancel') }}
+            </VBtn>
+          </VCardActions>
+        </VForm>
+      </VCard>
+    </VDialog>
+    <VSnackbar
+      v-model="isOutlinedSnackbarVisible"
+      value
+      :color="isOutlinedSnackbarColor"
+      bottom
+      rounded="pill"
+      top
+    >
+      {{ msgSnackbarVisible }}
+    </VSnackbar>
+  </div>
+</template>
+
+<script setup>
+import useSlider from './useSlider'
+import { computed, ref } from 'vue'
+import { store } from '@/store'
+import FileUpload from '@/components/FileUpload.vue'
+import uploadFilesService from '@/plugins/uploadFilesService'
+import useValidation from '@/utils/validation'
+import { VPhoneInput } from 'v-phone-input'
+import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
+
+
+const props=defineProps({
+  isOpenCreateDialog: {
+    type: Boolean,
+  },
+})
+
+const emit = defineEmits(['update:is-open-create-dialog', 'update-data'])
+
+const isOpenCreateDialog = computed({
+  get() {
+    return props.isOpenCreateDialog
+  },
+  set(value) {
+    emit('update:is-open-create-dialog', value)
+  },
+})
+
+const {
+  isOutlinedSnackbarVisible,
+  msgSnackbarVisible,
+  isOutlinedSnackbarColor,
+  valid,
+  form,
+  validate,
+  resetForm,
+  modelObject,
+  route
+} = useSlider()
+
+const {
+  requiredRules,
+  phoneRules,
+  emailRules,
+}=useValidation()
+
+const { uploadFile }=uploadFilesService()
+
+const uploadedPhoto=currentFile=>{
+  uploadFile(currentFile.file).then(response=>{
+    modelObject.value.imageUrl=response.data.data.url
+  }).catch(error=>{
+    console.log(error)
+  })
+}
+
+
+const resetData = () => {
+  resetForm()
+  emit('update:is-open-create-dialog', false)
+  loading.value = false
+}
+
+const loading = ref(false)
+const isPasswordVisible = ref(false)
+const onSubmit = () => {
+  if (valid.value) {
+    loading.value = true
+    store.dispatch('createWebsiteSlider', {
+      queryParams: {
+        ...modelObject.value,
+      },
+    }).then(response => {
+      if (response) {
+        emit('update-data')
+        loading.value = false
+        msgSnackbarVisible.value = 'Added Successfully'
+        isOutlinedSnackbarColor.value = 'success'
+        isOutlinedSnackbarVisible.value = true
+        resetData()
+      }
+    }).catch(error => {
+      msgSnackbarVisible.value = error.message
+      isOutlinedSnackbarVisible.value = true
+      isOutlinedSnackbarColor.value = 'error'
+      loading.value = false
+    })
+  } else {
+    validate()
+  }
+}
+</script>

@@ -1,0 +1,263 @@
+<template>
+  <div class="file-upload flex">
+    <div>
+      <label class="mx-4 v-field__input">{{label}}:</label>
+    </div>
+    <div class="file-upload__area">
+      <div v-if="!file.isUploaded">
+        <input
+          id=""
+          type="file"
+          name=""
+          @change="handleFileChange($event)"
+        >
+        <div v-if="errors.length > 0">
+          <div
+            v-for="(error, index) in errors"
+            :key="index"
+            class="file-upload__error"
+          >
+            <span>{{ error }}</span>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="file.isUploaded"
+        class="upload-preview"
+      >
+        <img
+          v-if="file.isImage"
+          :src="file.url"
+          class="file-image"
+          alt=""
+        >
+        <div
+          v-if="!file.isImage"
+          class="file-extention"
+        >
+          {{ file.fileExtention }}
+        </div>
+        <span class="file-name">
+          {{ file.name }}{{ file.isImage ? `.${file.fileExtention}` : "" }}
+        </span>
+        <VDivider class="my-2" />
+        <VSheet class="d-flex justify-center">
+          <VSheet>
+            <VBtn
+              class="mx-1"
+              size="x-small"
+              variant="outlined"
+              @click="resetFileInput"
+            >
+              Change file
+            </VBtn>
+          </VSheet>
+          <VSheet>
+            <VBtn
+              v-if="!acceptFile"
+              class="mx-1"
+              size="x-small"
+              variant="outlined"
+              @click="sendDataToParent"
+            >
+              Accept File
+            </VBtn>
+          </VSheet>
+        </VSheet>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "FileUpload",
+  props: {
+    maxSize: {
+      type: Number,
+      default: 1,
+      required: true,
+    },
+    accept: {
+      type: String,
+      default: "image/*",
+    },
+    label:{
+      type:String,
+      required: true,
+    }
+  },
+  data() {
+    return {
+      errors: [],
+      isLoading: false,
+      uploadReady: true,
+      acceptFile: false,
+      file: {
+        name: "",
+        size: 0,
+        type: "",
+        fileExtention: "",
+        url: "",
+        isImage: false,
+        isUploaded: false,
+      },
+    }
+  },
+  methods: {
+    handleFileChange(e) {
+      this.errors = []
+
+      // Check if file is selected
+      if (e.target.files && e.target.files[0]) {
+        // Check if file is valid
+        if (this.isFileValid(e.target.files[0])) {
+          // Get uploaded file
+          const file = e.target.files[0],
+
+            // Get file size
+            fileSize = Math.round((file.size / 1024 / 1024) * 100) / 100,
+
+            // Get file extention
+            fileExtention = file.name.split(".").pop(),
+
+            // Get file name
+            fileName = file.name.split(".").shift(),
+
+            // Check if file is an image
+            isImage = ["jpg", "jpeg", "png", "gif"].includes(fileExtention)
+
+
+          // Print to console
+          console.log(fileSize, fileExtention, fileName, isImage)
+
+          // Load the FileReader API
+          let reader = new FileReader()
+          reader.addEventListener(
+            "load",
+            () => {
+              // Set file data
+              this.file = {
+                file: file,
+                name: fileName,
+                size: fileSize,
+                type: file.type,
+                fileExtention: fileExtention,
+                isImage: isImage,
+                url: reader.result,
+                isUploaded: true,
+              }
+              if(this.file.isUploaded) {
+                this.sendDataToParent()
+              }
+            },
+          )
+
+          // Read uploaded file
+          reader.readAsDataURL(file)
+        } else {
+          console.log("Invalid file")
+        }
+      }
+    },
+    isFileSizeValid(fileSize) {
+      if (fileSize <= this.maxSize) {
+        console.log("File size is valid")
+      } else {
+        this.errors.push(`File size should be less than ${this.maxSize} MB`)
+      }
+    },
+    isFileTypeValid(fileExtention) {
+      if (this.accept.split(",").includes(fileExtention)) {
+        console.log("File type is valid")
+      } else {
+        this.errors.push(`File type should be ${this.accept}`)
+      }
+    },
+    isFileValid(file) {
+      this.isFileSizeValid(Math.round((file.size / 1024 / 1024) * 100) / 100)
+      this.isFileTypeValid(file.name.split(".").pop())
+      if (this.errors.length === 0) {
+        return true
+      } else {
+        return false
+      }
+    },
+    resetFileInput() {
+      this.uploadReady = false
+      this.acceptFile=false
+      this.$nextTick(() => {
+        this.uploadReady = true
+        this.file = {
+          file: null,
+          name: "",
+          size: 0,
+          type: "",
+          data: "",
+          fileExtention: "",
+          url: "",
+          isImage: false,
+          isUploaded: false,
+        }
+      })
+    },
+    sendDataToParent() {
+      this.acceptFile=true
+      this.$emit("fileUploaded", this.file)
+    },
+  },
+}
+</script>
+
+<style scoped>
+.file-upload {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.file-upload .file-upload__area {
+  width: 600px;
+  min-height: 150px;
+  max-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  padding: 20px;
+}
+.file-upload .file-upload__error {
+  margin-top: 10px;
+  color: #f00;
+  font-size: 12px;
+}
+.file-upload .upload-preview {
+  text-align: center;
+}
+.file-upload .upload-preview .file-image {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+.file-upload .upload-preview .file-extention {
+  height: 100px;
+  width: 100px;
+  border-radius: 8px;
+  background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em auto;
+  font-size: 1.2em;
+  padding: 1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.file-upload .upload-preview .file-name {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #000;
+  opacity: 0.5;
+}
+</style>

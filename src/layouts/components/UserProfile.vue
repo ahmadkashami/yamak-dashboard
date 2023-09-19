@@ -1,5 +1,19 @@
 <script setup>
 import avatar1 from '@images/avatars/avatar-1.png'
+import router from '@/router'
+import { initialAbility } from '@/plugins/acl/config'
+import { getCurrentInstance } from 'vue'
+
+const vm = getCurrentInstance().proxy
+
+const logoutUser = () => {
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('userData')
+  localStorage.removeItem('userAbility')
+  localStorage.removeItem('role')
+  vm.$ability.update(initialAbility)
+  router.push({ name: 'login' })
+}
 </script>
 
 <template>
@@ -110,7 +124,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
+          <VListItem   @click="logoutUser">
             <template #prepend>
               <VIcon
                 class="me-2"
