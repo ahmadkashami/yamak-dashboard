@@ -49,8 +49,17 @@
                 </v-col>
                 <v-col cols="12" md="12">
                   <VTextarea
-                    v-model="modelObject.aboutUs"
-                    :label="$t('About Us')"
+                    v-model="modelObject.aboutUs.ar"
+                    :label="$t('About Us Arabic')"
+                    type="email"
+                    :rules="requiredRules"
+                    density="compact"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextarea
+                    v-model="modelObject.aboutUs.en"
+                    :label="$t('About Us English')"
                     type="email"
                     :rules="requiredRules"
                     density="compact"
@@ -84,8 +93,20 @@
                   md="12"
                 >
                   <VTextarea
-                    v-model="modelObject.contactUs.address"
-                    :label="$t('Address')"
+                    v-model="modelObject.contactUs.address.ar"
+                    :label="$t('Address Arabic')"
+                    type="email"
+                    :rules="requiredRules"
+                    density="compact"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="12"
+                >
+                  <VTextarea
+                    v-model="modelObject.contactUs.address.en"
+                    :label="$t('Address English')"
                     type="email"
                     :rules="requiredRules"
                     density="compact"

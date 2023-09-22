@@ -7,7 +7,7 @@ import { useLocale } from 'vuetify'
 export default function useWebsite() {
   const { t } = useUtils()
   const { current } = useLocale()
-  const lang=current.value
+  const lang = current.value
   const route = useRoute()
   const tableColumns = [
     { title: t('Company'), key: 'company' },
@@ -44,18 +44,18 @@ export default function useWebsite() {
   const resetForm = () => {
     form.value.reset()
   }
-  const modelObject=ref(
+  const modelObject = ref(
     {
-      domainUrl:null,
-      status:"active",
-      aboutUs:null,
-      companyId:route.params.id,
-      contactUs:{
-        address:null,
-        phone:null,
-        email:null
+      domainUrl: null,
+      status: 'active',
+      aboutUs: { ar: null, en: null },
+      companyId: route.params.id,
+      contactUs: {
+        address: { ar: null, en: null },
+        phone: null,
+        email: null,
       },
-    }
+    },
   )
 
 
@@ -63,8 +63,8 @@ export default function useWebsite() {
     store.dispatch('fetchWebsites', {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
-      sort: options.value.sortDesc? "DESC" : "ASC",
-      companyId:route.params.id
+      sort: options.value.sortDesc ? 'DESC' : 'ASC',
+      companyId: route.params.id,
     })
       .then(response => {
         dataList.value = response.data.data.list
@@ -73,10 +73,10 @@ export default function useWebsite() {
         }
         loading.value = false
       }).catch(error => {
-        isOutlinedSnackbarVisible.value = true
-        msgSnackbarVisible.value = error.response.data.message
-        isOutlinedSnackbarColor.value = 'error'
-      })
+      isOutlinedSnackbarVisible.value = true
+      msgSnackbarVisible.value = error.response.data.message
+      isOutlinedSnackbarColor.value = 'error'
+    })
   }
 
   const itemData = ref(null)
@@ -123,6 +123,6 @@ export default function useWebsite() {
     updateItemsPerPage,
     updateCurrentPage,
     route,
-    lang
+    lang,
   }
 }
