@@ -38,6 +38,9 @@
         <template #item.status="{ item }">
           <StatusChip :status="item.raw.status" />
         </template>
+        <template #item.logo="{ item }">
+          <v-img :src="item.raw.logo" height="75"  class="pa-2"></v-img>
+        </template>
 
         <template #item.actions="{ item }">
           <VIcon
