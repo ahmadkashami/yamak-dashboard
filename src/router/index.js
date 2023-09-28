@@ -7,7 +7,7 @@ import { websiteRouters } from '@/router/websiteRouters'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', redirect: '/dashboard' },
+    { path: '/', redirect: '/login' },
     {
       path: '/dashboard',
       name: 'dashboard',
