@@ -71,7 +71,7 @@ export default {
   //*********************************************************************
   getWebsiteTheme({ state }, queryParams) {
     return new Promise((resolve, reject) => {
-      axios.get(`website-themes`, { params: queryParams })
+      axios.get(`website-themes/websites/${queryParams.websiteId}`)
         .then(response => resolve(response))
         .catch(error => reject(error))
     })

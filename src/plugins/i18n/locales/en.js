@@ -82,6 +82,9 @@ export const ENGLISH_LANGUAGE= {
     'Ads':'Ads',
     'Websites':'Websites',
     'Domain':'Domain',
-    'About Us':'About Us'
+    'About Us':'About Us',
+    'Primary Color':'Primary Color',
+    'Secondary Color':'Secondary Color',
+    'Secondary Background Color':'Secondary Background Color',
   }
 

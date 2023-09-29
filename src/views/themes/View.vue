@@ -1,7 +1,7 @@
 <template>
   <div>
     <VCard id="$$example-list">
-      <VCardText class="d-flex align-center flex-wrap pb-0">
+      <VCardText class="d-flex align-center flex-wrap pb-0 mb-3">
         <div class="d-flex align-center  ">
         </div>
         <VSpacer />
@@ -21,7 +21,29 @@
           </VBtn>
         </div>
       </VCardText>
-      <VCardText>Theme</VCardText>
+      <v-divider></v-divider>
+      <VCardText>
+        <v-list density="compact" v-if="itemData">
+          <div class="d-flex mb-3">
+            <div>{{ $t('Primary Color') }}:</div>
+            <div class="color-view mx-2" :style="{ background: itemData.primaryColor}"></div>
+          </div>
+          <div class="d-flex my-3">
+            <div>{{ $t('Secondary Color') }}:</div>
+            <div class="color-view mx-2" :style="{ background: itemData.secondaryColor}"></div>
+          </div>
+          <div class="d-flex my-3">
+            <div>{{ $t('Secondary Background Color') }}:</div>
+            <div class="color-view mx-2" :style="{ background: itemData.secondaryBackgroundColor}"></div>
+          </div>
+          <div class="d-flex my-3">
+            <div>{{ $t('Banner') }}:</div>
+            <div class="mx-2 mt-2 img-view">
+              <v-img :src="itemData.bannerImage" height="200" width="300" cover=""></v-img>
+            </div>
+          </div>
+        </v-list>
+      </VCardText>
     </VCard>
     <VSnackbar
       v-model="isOutlinedSnackbarVisible"
@@ -34,6 +56,7 @@
       {{ msgSnackbarVisible }}
     </VSnackbar>
     <Update
+      v-if="itemData"
       v-model:isOpenUpdateDialog="isOpenUpdateDialog"
       :item-data="itemData"
       @update-data="getDataItem"
@@ -43,8 +66,8 @@
 
 <script setup>
 import useTheme from './useTheme'
-import { onMounted } from 'vue'
-import Update from '@/views/features/Update.vue'
+import { onMounted, ref } from 'vue'
+import Update from '@/views/themes/Update.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 
 const {
@@ -54,11 +77,22 @@ const {
   getDataItem,
   isOpenUpdateDialog,
   itemData,
-  lang
+  lang,
 } = useTheme()
 
 onMounted(() => {
   getDataItem()
 })
 </script>
+<style>
+.color-view {
+  width: 50px;
+  height: 20px;
+  background-size: auto 20px;
+
+}
+.img-view{
+  border: #212121 1px solid;
+}
+</style>
 
