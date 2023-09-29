@@ -67,4 +67,20 @@ export default {
         .catch(error => reject(error))
     })
   },
+
+  //*********************************************************************
+  getWebsiteTheme({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`website-themes`, { params: queryParams })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+  updateWebsiteTheme({ state }, { id, queryParams }) {
+    return new Promise((resolve, reject) => {
+      axios.put(`website-themes/${id}`, queryParams)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }
