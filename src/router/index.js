@@ -7,7 +7,11 @@ import { websiteRouters } from '@/router/websiteRouters'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', redirect: '/login' },
+    // {
+    //   path: '/',
+    //   redirect: '/dashboard' ,
+    //   meta:{redirectIfLoggedIn:false}
+    // },
     {
       path: '/dashboard',
       name: 'dashboard',
@@ -112,7 +116,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: () => import('../pages/login.vue'),
       meta: {
@@ -149,17 +153,15 @@ router.beforeEach((to, _, next) => {
 
   if (!canNavigate(to)) {
     // Redirect to log in if not logged in
-    if (!isLoggedIn) return next({ name: 'login', query: { marketplace: to.query.marketplace } })
-
+    if (!isLoggedIn) return next({ name: 'login'})
     // If logged in => not authorized
     return next({ name: 'error' })
   }
 
   // Redirect if logged in
   if (to.meta.redirectIfLoggedIn && isLoggedIn) {
-    next('/')
+    next('/dashboard')
   }
-
   return next()
 })
 export default router
