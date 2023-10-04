@@ -7,11 +7,10 @@ import { websiteRouters } from '@/router/websiteRouters'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: '/',
-    //   redirect: '/dashboard' ,
-    //   meta:{redirectIfLoggedIn:false}
-    // },
+    {
+      path: '/',
+      redirect: '/dashboard' ,
+    },
     {
       path: '/dashboard',
       name: 'dashboard',
@@ -116,7 +115,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: () => import('../pages/login.vue'),
       meta: {
@@ -147,13 +146,16 @@ const router = createRouter({
 })
 
 
+
 router.beforeEach((to, _, next) => {
   const userData = localStorage.getItem('userData')
   const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
 
+  if (!isLoggedIn && to.path!=='/login') return next({ name: 'login',query: { marketplace: to.query.marketplace } })
+
   if (!canNavigate(to)) {
     // Redirect to log in if not logged in
-    if (!isLoggedIn) return next({ name: 'login'})
+    if (!isLoggedIn) return next({ name: 'login',query: { marketplace: to.query.marketplace } })
     // If logged in => not authorized
     return next({ name: 'error' })
   }
