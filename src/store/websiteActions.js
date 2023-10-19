@@ -83,4 +83,27 @@ export default {
         .catch(error => reject(error))
     })
   },
+
+  //*********************************************************************
+  fetchWebsiteCarousels({ state }, queryParams) {
+    return new Promise((resolve, reject) => {
+      axios.get(`website-carousels`, { params: queryParams })
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+  createWebsiteCarousel({ state }, { queryParams }) {
+    return new Promise((resolve, reject) => {
+      axios.post(`website-carousels`, queryParams)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
+  deleteWebsiteCarousel({ state },  { id } ) {
+    return new Promise((resolve, reject) => {
+      axios.delete(`website-carousels/${id}`)
+        .then(response => resolve(response))
+        .catch(error => reject(error))
+    })
+  },
 }
