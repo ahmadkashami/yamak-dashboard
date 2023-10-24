@@ -31,12 +31,17 @@
 
       <!-- sliders -->
       <VWindowItem value="sliders">
-        <Sliders/>
+        <Sliders />
       </VWindowItem>
 
       <!-- Theme -->
       <VWindowItem value="theme">
-        <Theme/>
+        <Theme />
+      </VWindowItem>
+
+      <!-- Carousel -->
+      <VWindowItem value="carousels">
+       <ViewCarousel/>
       </VWindowItem>
 
 
@@ -49,7 +54,7 @@ import { ref } from 'vue'
 import Features from '@/views/features/Index.vue'
 import Sliders from '@/views/sliders/Index.vue'
 import Theme from '@/views/themes/View.vue'
-
+import ViewCarousel from '@/views/carousels/Index.vue'
 
 const route = useRoute()
 const activeTab = ref(route.params.tab)
@@ -89,6 +94,11 @@ const tabs = [
     title: 'Theme',
     icon: 'mdi-view-carousel-outline',
     tab: 'theme',
+  },
+  {
+    title: 'Carousel',
+    icon: 'mdi-view-carousel',
+    tab: 'carousels',
   },
 ]
 </script>
