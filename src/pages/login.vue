@@ -102,8 +102,8 @@ import useValidation from '@/utils/validation'
 
 const isPasswordVisible = ref(false)
 const vm = getCurrentInstance().proxy
-const email = ref('test@mail.com')
-const password = ref('123456')
+const email = ref(null)
+const password = ref(null)
 const loginForm = ref(null)
 const errorMessages = ref([])
 const isOutlinedSnackbarVisible = ref(false)
