@@ -9,6 +9,7 @@ import vehicleActtions from '@/store/vehicleActtions'
 import appUsersActions from '@/store/appUsersActions'
 import adsActions from '@/store/adsActions'
 import websiteActions from '@/store/websiteActions'
+import appSettingActions from '@/store/appSettingActions'
 
 
 export const  store = createStore({
@@ -30,7 +31,8 @@ export const  store = createStore({
     ...vehicleActtions,
     ...appUsersActions,
     ...adsActions,
-    ...websiteActions
+    ...websiteActions,
+    ...appSettingActions
   },
   modules: {},
 })

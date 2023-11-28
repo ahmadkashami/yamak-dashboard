@@ -41,6 +41,16 @@ const router = createRouter({
         layout: 'default',
       },
     },
+    {
+      path: '/app-setting',
+      name: 'app-setting',
+      component: () => import('../views/app-setting/Index.vue'),
+      meta: {
+        resource: 'AppSetting',
+        action: 'read',
+        layout: 'default',
+      },
+    },
     ...companyRouters,
     ...websiteRouters
     ,
