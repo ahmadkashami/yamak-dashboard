@@ -14,6 +14,8 @@ const logoutUser = () => {
   vm.$ability.update(initialAbility)
   router.push({ name: 'login' })
 }
+
+const user=JSON.parse(localStorage.getItem('userData'))
 </script>
 
 <template>
@@ -62,63 +64,63 @@ const logoutUser = () => {
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{user.name}}
             </VListItemTitle>
-            <VListItemSubtitle>Admin</VListItemSubtitle>
+            <VListItemSubtitle>{{user.role}}</VListItemSubtitle>
           </VListItem>
-          <VDivider class="my-2" />
+<!--          <VDivider class="my-2" />-->
 
           <!-- 👉 Profile -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-account-outline"
-                size="22"
-              />
-            </template>
+<!--          <VListItem link>-->
+<!--            <template #prepend>-->
+<!--              <VIcon-->
+<!--                class="me-2"-->
+<!--                icon="mdi-account-outline"-->
+<!--                size="22"-->
+<!--              />-->
+<!--            </template>-->
 
-            <VListItemTitle>Profile</VListItemTitle>
-          </VListItem>
+<!--            <VListItemTitle>Profile</VListItemTitle>-->
+<!--          </VListItem>-->
 
           <!-- 👉 Settings -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-cog-outline"
-                size="22"
-              />
-            </template>
+<!--          <VListItem link>-->
+<!--            <template #prepend>-->
+<!--              <VIcon-->
+<!--                class="me-2"-->
+<!--                icon="mdi-cog-outline"-->
+<!--                size="22"-->
+<!--              />-->
+<!--            </template>-->
 
-            <VListItemTitle>Settings</VListItemTitle>
-          </VListItem>
+<!--            <VListItemTitle>Settings</VListItemTitle>-->
+<!--          </VListItem>-->
 
           <!-- 👉 Pricing -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-currency-usd"
-                size="22"
-              />
-            </template>
+<!--          <VListItem link>-->
+<!--            <template #prepend>-->
+<!--              <VIcon-->
+<!--                class="me-2"-->
+<!--                icon="mdi-currency-usd"-->
+<!--                size="22"-->
+<!--              />-->
+<!--            </template>-->
 
-            <VListItemTitle>Pricing</VListItemTitle>
-          </VListItem>
+<!--            <VListItemTitle>Pricing</VListItemTitle>-->
+<!--          </VListItem>-->
 
           <!-- 👉 FAQ -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-help-circle-outline"
-                size="22"
-              />
-            </template>
+<!--          <VListItem link>-->
+<!--            <template #prepend>-->
+<!--              <VIcon-->
+<!--                class="me-2"-->
+<!--                icon="mdi-help-circle-outline"-->
+<!--                size="22"-->
+<!--              />-->
+<!--            </template>-->
 
-            <VListItemTitle>FAQ</VListItemTitle>
-          </VListItem>
+<!--            <VListItemTitle>FAQ</VListItemTitle>-->
+<!--          </VListItem>-->
 
           <!-- Divider -->
           <VDivider class="my-2" />

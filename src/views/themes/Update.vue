@@ -198,7 +198,7 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    modelObject.value = props.itemData
+    modelObject.value= JSON.parse(JSON.stringify(props.itemData))
   },
 )
 </script>
