@@ -9,9 +9,10 @@ export default function useAppUsers() {
 
   const tableColumns = [
     { title: t('Name'), key: 'name' },
-    { title: t('Phone'), key: 'phoneNum' },
-    { title: t('License Expired'), key: 'licenseExpiredAt' },
-    { title: t('Status'), key: 'status' },
+    { title: t('Phone'), key: 'phone' },
+    { title: t('Email'), key: 'email' },
+    { title: t('Last Login'), key: 'lastLogin' },
+    { title: t('Created At'), key: 'createdAt' },
   ]
 
   const dataList = ref([])
