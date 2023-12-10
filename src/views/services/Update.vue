@@ -56,7 +56,6 @@
                     accept="png,jpeg"
                     @file-uploaded="uploadedLogo"
                     label="Image"
-
                   />
                 </VCol>
                 <VCol cols="12">
@@ -114,6 +113,8 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import useValidation from '@/utils/validation'
+import uploadFilesService from '@/plugins/uploadFilesService'
+
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -149,6 +150,7 @@ const {
 
 onMounted(() => {
 })
+const { uploadFile }=uploadFilesService()
 const uploadedLogo=currentFile=>{
   uploadFile(currentFile.file).then(response=>{
     modelObject.value.logo=response.data.data.url
