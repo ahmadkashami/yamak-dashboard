@@ -72,9 +72,9 @@ export default function useWebsite() {
           totalPages: response.data.data.metadata?.lastPage,
         }
         loading.value = false
-      }).catch(error => {
+      }).catch((error) => {
       isOutlinedSnackbarVisible.value = true
-      msgSnackbarVisible.value = error.response.data.message
+      msgSnackbarVisible.value = error.message
       isOutlinedSnackbarColor.value = 'error'
     })
   }
