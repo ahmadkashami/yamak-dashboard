@@ -7,12 +7,22 @@ import { useLocale } from 'vuetify'
 export default function useVehicle() {
   const { t } = useUtils()
   const route = useRoute()
+
+  const iconsMap=ref([
+    { label: 'Yamak Car', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakCar_zcxjfn.png' },
+    { label: 'Yamak Man', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakMan_ujcuc0.png' },
+    { label: 'Yamak Cran', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakTow_zp9wri.png' },
+    { label: 'Yamak VAN', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakVAN_c6rx9e.png' },
+  ])
+
   const { current } = useLocale()
   const lang=current.value
+
   const tableColumns = [
     { title: t('Branch'), key: 'branch' },
     { title: t('Created At'), key: 'createdAt' },
     { title: t('Status'), key: 'status' },
+    { title: t('Icon'), key: 'iconMap' , align: 'center'},
     // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
@@ -43,20 +53,22 @@ export default function useVehicle() {
   const resetForm = () => {
     form.value.reset()
   }
+
   const modelObject=ref(
     {
-      drivers:[],
-      services:[],
-      branchId:null,
-      companyId:route.params.id,
-      status:"active",
-      currentDriver:null,
-      workStatus:"online",
+      drivers: [],
+      services: [],
+      branchId: null,
+      iconMap: null,
+      companyId: route.params.id,
+      status: "active",
+      currentDriver: null,
+      workStatus: "online",
       geoLocation: {
         latitude: 29.380627,
-        longitude: 47.992982
-      }
-    }
+        longitude: 47.992982,
+      },
+    },
   )
 
 
@@ -65,7 +77,7 @@ export default function useVehicle() {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",
-      companyId:route.params.id
+      companyId: route.params.id,
     })
       .then(response => {
 
@@ -94,7 +106,7 @@ export default function useVehicle() {
     fetchDataList()
   }
 
-  const editItem = (item) => {
+  const editItem = item => {
     itemData.value = item
     isOpenUpdateDialog.value = true
   }
@@ -124,6 +136,7 @@ export default function useVehicle() {
     updateItemsPerPage,
     updateCurrentPage,
     route,
-    lang
+    lang,
+    iconsMap
   }
 }

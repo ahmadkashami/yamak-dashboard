@@ -37,7 +37,9 @@
         <template #item.branch="{ item }">
           <span>{{getTranslations(item.raw.branch.name,lang)}}</span>
         </template>
-
+        <template #item.iconMap="{ item }">
+          <v-img :src="item.raw.iconMap" height="75"  class="pa-2"></v-img>
+        </template>
         <template #item.actions="{ item }">
           <VBtn
             variant="text"
