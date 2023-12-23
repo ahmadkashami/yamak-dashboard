@@ -158,7 +158,6 @@ import useCompanies from './useCompanies'
 import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
-import uploadFilesService from '@/plugins/uploadFilesService'
 import { VPhoneInput } from 'v-phone-input'
 import useValidation from '@/utils/validation'
 
@@ -197,14 +196,10 @@ const {
   emailRules,
 }=useValidation()
 
-const { uploadFile }=uploadFilesService()
 
-const uploadedLogo=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.logo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedLogo=url=>{
+  modelObject.value.logo=url
+
 }
 
 

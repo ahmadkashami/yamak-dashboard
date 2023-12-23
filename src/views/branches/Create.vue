@@ -200,7 +200,6 @@ import useBranches from './useBranches'
 import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
-import uploadFilesService from '@/plugins/uploadFilesService'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 import { useRoute } from 'vue-router'
 import { VPhoneInput } from 'v-phone-input'
@@ -241,14 +240,10 @@ const {
   phoneRules,
 }=useValidation()
 
-const { uploadFile }=uploadFilesService()
 
-const uploadedLogo=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.logo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+
+const uploadedLogo = url => {
+  modelObject.value.logo = url
 }
 
 

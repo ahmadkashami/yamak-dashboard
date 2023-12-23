@@ -113,7 +113,6 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import useValidation from '@/utils/validation'
-import uploadFilesService from '@/plugins/uploadFilesService'
 
 
 const props=defineProps({
@@ -150,13 +149,9 @@ const {
 
 onMounted(() => {
 })
-const { uploadFile }=uploadFilesService()
-const uploadedLogo=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.logo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedLogo=url=>{
+  modelObject.value.logo=url
+
 }
 
 const {

@@ -114,7 +114,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import useValidation from '@/utils/validation'
-import uploadFilesService from '@/plugins/uploadFilesService'
+
 
 const props = defineProps({
   isOpenUpdateDialog: {
@@ -162,14 +162,10 @@ const {
   urlValidator
 } = useValidation()
 
-const { uploadFile } = uploadFilesService()
 
-const uploadedPhoto = currentFile => {
-  uploadFile(currentFile.file).then(response => {
-    modelObject.value.photo = response.data.data.url
-  }).catch(error => {
-    console.log(error)
-  })
+
+const uploadedPhoto = url => {
+    modelObject.value.photo = url
 }
 
 const format = (date) => {

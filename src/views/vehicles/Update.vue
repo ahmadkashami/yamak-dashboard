@@ -128,7 +128,6 @@ import useVehicle from './useVehicle'
 import { computed, onMounted, ref, watch } from 'vue'
 import { store } from '@/store'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
-import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -172,14 +171,10 @@ const resetData = () => {
 }
 
 const loading = ref(false)
-const { uploadFile }=uploadFilesService()
 
-const uploadedPhoto=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.photo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedPhoto=url=>{
+  modelObject.value.photo=url
+
 }
 const onSubmit = () => {
   if (valid.value) {
