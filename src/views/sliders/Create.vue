@@ -170,7 +170,6 @@ const {
 
 const uploadedPhoto=url=>{
   modelObject.value.imageUrl=url
-
 }
 
 

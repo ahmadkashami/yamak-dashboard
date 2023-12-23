@@ -177,7 +177,6 @@ const loading = ref(false)
 
 const uploadedPhoto=url=>{
   modelObject.value.imageUrl=url
-)
 }
 const onSubmit = () => {
   if (valid.value) {
