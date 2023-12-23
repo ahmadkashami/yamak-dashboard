@@ -78,7 +78,6 @@ import useCarousel from './useCarousel'
 import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
-import uploadFilesService from '@/plugins/uploadFilesService'
 import useValidation from '@/utils/validation'
 import { VPhoneInput } from 'v-phone-input'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
@@ -119,14 +118,10 @@ const {
   emailRules,
 }=useValidation()
 
-const { uploadFile }=uploadFilesService()
 
-const uploadedPhoto=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.imageUrl=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedPhoto=url=>{
+  modelObject.value.imageUrl=url
+
 }
 
 

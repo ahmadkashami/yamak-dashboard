@@ -9,10 +9,9 @@ export default function useVehicle() {
   const route = useRoute()
 
   const iconsMap=ref([
-    { label: 'Yamak Car', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakCar_zcxjfn.png' },
-    { label: 'Yamak Man', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakMan_ujcuc0.png' },
-    { label: 'Yamak Cran', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakTow_zp9wri.png' },
-    { label: 'Yamak VAN', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1702933770/YamakVAN_c6rx9e.png' },
+    { label: 'Yamak Wash', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1703351684/MiniVan_dq19rs.png' },
+    { label: 'Yamak Cran', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1703351686/Tow_xpgu8n.png' },
+    { label: 'Yamak VAN', value: 'https://res.cloudinary.com/ds2bezann/image/upload/v1703351688/Van_uozeha.png' },
   ])
 
   const { current } = useLocale()

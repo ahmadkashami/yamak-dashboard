@@ -148,7 +148,6 @@ import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 import { VPhoneInput } from 'v-phone-input'
-import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -193,14 +192,10 @@ const resetData = () => {
 }
 
 const loading = ref(false)
-const { uploadFile }=uploadFilesService()
 
-const uploadedPhoto=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.photo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedPhoto=url=>{
+  modelObject.value.photo=url
+
 }
 const onSubmit = () => {
   if (valid.value) {
