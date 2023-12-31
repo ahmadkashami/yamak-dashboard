@@ -27,6 +27,10 @@ const permissions = [
     subject: 'Websites',
     action: 'read',
   },
+  {
+    subject: 'AppSetting',
+    action: 'read',
+  },
 ]
 
 export default permissions

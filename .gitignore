@@ -29,6 +29,6 @@ dist-ssr
 *.sln
 *.sw?
 .yarn
-
+.env
 # iconify dist files
 src/@iconify/icons-bundle.js

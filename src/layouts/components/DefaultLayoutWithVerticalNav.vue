@@ -98,6 +98,14 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+        v-if="canViewVerticalNavMenuLink({action:'read',subject:'AppSetting'})"
+        :item="{
+          title: 'App Setting',
+          icon: 'mdi-cog',
+          to: '/app-setting',
+        }"
+      />
+      <VerticalNavLink
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'Websites'})"
         :item="{
           title: 'Websites',

@@ -10,8 +10,8 @@ export default function useServices() {
   const tableColumns = [
     { title: t('Name'), key: 'name' },
     { title: t('Status'), key: 'status' },
-
-    // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
+    { title: t('Icon'), key: 'logo' ,align: 'center',},
+    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])

@@ -203,7 +203,6 @@ import useValidation from '@/utils/validation'
 import FileUpload from '@/components/FileUpload.vue'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 import { VPhoneInput } from 'v-phone-input'
-import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props = defineProps({
   isOpenUpdateDialog: {
@@ -254,15 +253,11 @@ const resetData = () => {
 
 const loading = ref(false)
 
-const { uploadFile }=uploadFilesService()
 
-const uploadedLogo=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.logo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedLogo=url=>{
+  modelObject.value.logo=url
 }
+
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
@@ -294,7 +289,7 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    modelObject.value = props.itemData
+    modelObject.value= JSON.parse(JSON.stringify(props.itemData))
   },
 )
 </script>

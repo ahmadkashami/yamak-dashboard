@@ -7,7 +7,10 @@ import { websiteRouters } from '@/router/websiteRouters'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', redirect: '/dashboard' },
+    {
+      path: '/',
+      redirect: '/dashboard' ,
+    },
     {
       path: '/dashboard',
       name: 'dashboard',
@@ -34,6 +37,16 @@ const router = createRouter({
       component: () => import('../views/app-users/Index.vue'),
       meta: {
         resource: 'AppUsers',
+        action: 'read',
+        layout: 'default',
+      },
+    },
+    {
+      path: '/app-setting',
+      name: 'app-setting',
+      component: () => import('../views/app-setting/Index.vue'),
+      meta: {
+        resource: 'AppSetting',
         action: 'read',
         layout: 'default',
       },
@@ -143,23 +156,24 @@ const router = createRouter({
 })
 
 
+
 router.beforeEach((to, _, next) => {
   const userData = localStorage.getItem('userData')
   const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
 
+  if (!isLoggedIn && to.path!=='/login') return next({ name: 'login',query: { marketplace: to.query.marketplace } })
+
   if (!canNavigate(to)) {
     // Redirect to log in if not logged in
-    if (!isLoggedIn) return next({ name: 'login', query: { marketplace: to.query.marketplace } })
-
+    if (!isLoggedIn) return next({ name: 'login',query: { marketplace: to.query.marketplace } })
     // If logged in => not authorized
     return next({ name: 'error' })
   }
 
   // Redirect if logged in
   if (to.meta.redirectIfLoggedIn && isLoggedIn) {
-    next('/')
+    next('/dashboard')
   }
-
   return next()
 })
 export default router

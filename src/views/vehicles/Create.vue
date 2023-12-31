@@ -29,19 +29,45 @@
                   cols="12"
                   md="6"
                 >
-                    <CustomAutoSelect
-                      v-model="modelObject.branchId"
-                      :label="$t('Branch')"
-                      service="fetchBranchByCompany"
-                      :multiple="false"
-                      :query-params="{companyId:route.params.id}"
-                      :rules="requiredRules"
-                    />
-                  </VCol>
+                  <VTextField
+                    v-model="modelObject.labelNumber"
+                    outlined
+                    density="compact"
+                    :label="$t('Label Number')"
+                    :placeholder="$t('Label Number')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
                 <VCol
                   cols="12"
                   md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.modelName"
+                    outlined
+                    density="compact"
+                    :label="$t('Model Name')"
+                    :placeholder="$t('Model Name')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <CustomAutoSelect
+                    v-model="modelObject.branchId"
+                    :label="$t('Branch')"
+                    service="fetchBranchByCompany"
+                    :multiple="false"
+                    :query-params="{companyId:route.params.id}"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
                   v-if="modelObject.branchId"
+                  cols="12"
+                  md="6"
                 >
                   <CustomAutoSelect
                     v-model="modelObject.services"
@@ -53,9 +79,9 @@
                   />
                 </VCol>
                 <VCol
+                  v-if="modelObject.branchId"
                   cols="12"
                   md="6"
-                  v-if="modelObject.branchId"
                 >
                   <CustomAutoSelect
                     v-model="modelObject.drivers"
@@ -66,7 +92,10 @@
                     :rules="[(v) => v.length>0 || 'Item is required in select']"
                   />
                 </VCol>
-                <VCol cols="12" md="6">
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <VSwitch
                     v-model="modelObject.status"
                     hide-details
@@ -75,7 +104,10 @@
                     :label="`${$t('Status')}: ${$t(modelObject.status)}`"
                   />
                 </VCol>
-                <VCol cols="12" md="6">
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <VSwitch
                     v-model="modelObject.workStatus"
                     hide-details
@@ -83,6 +115,28 @@
                     false-value="offline"
                     :label="`${$t('Work Status')}: ${$t(modelObject.workStatus)}`"
                   />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VSelect
+                    v-model="modelObject.iconMap"
+                    :items="iconsMap"
+                    color="blue-grey-lighten-2"
+                    item-title="label"
+                    item-value="value"
+                    label="Icon on  Map"
+                    density="compact"
+                  >
+                    <template #item="{ props, item }">
+                      <VListItem
+                        v-bind="props"
+                        :prepend-avatar="item?.raw?.value"
+                        :title="item?.raw?.label"
+                      />
+                    </template>
+                  </VSelect>
                 </VCol>
               </VRow>
             </VContainer>
@@ -129,7 +183,6 @@ import useVehicle from './useVehicle'
 import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
-import uploadFilesService from '@/plugins/uploadFilesService'
 import useValidation from '@/utils/validation'
 import { VPhoneInput } from 'v-phone-input'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
@@ -161,7 +214,8 @@ const {
   validate,
   resetForm,
   modelObject,
-  route
+  route,
+  iconsMap,
 } = useVehicle()
 
 const {
@@ -170,14 +224,10 @@ const {
   emailRules,
 }=useValidation()
 
-const { uploadFile }=uploadFilesService()
 
-const uploadedPhoto=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.photo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedPhoto=url=>{
+  modelObject.value.photo=url
+
 }
 
 
@@ -191,13 +241,14 @@ const resetData = () => {
 const loading = ref(false)
 const isPasswordVisible = ref(false)
 
-const format = (date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
+const format = date => {
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
 
-  return `${year}-${month}-${day}`;
+  return `${year}-${month}-${day}`
 }
+
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true

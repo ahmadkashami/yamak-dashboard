@@ -28,6 +28,32 @@
                   cols="12"
                   md="6"
                 >
+                  <VTextField
+                    v-model="modelObject.labelNumber"
+                    outlined
+                    density="compact"
+                    :label="$t('Label Number')"
+                    :placeholder="$t('Label Number')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.modelName"
+                    outlined
+                    density="compact"
+                    :label="$t('Model Name')"
+                    :placeholder="$t('Model Name')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <CustomAutoSelect
                     v-model="modelObject.branchId"
                     :label="$t('Branch')"
@@ -51,20 +77,20 @@
                     :rules="[(v) => v.length>0 || 'Item is required in select']"
                   />
                 </VCol>
-                <VCol
-                  cols="12"
-                  md="6"
-                  v-if="modelObject.branchId"
-                >
-                  <CustomAutoSelect
-                    v-model="modelObject.drivers"
-                    :label="$t('Drivers')"
-                    service="fetchFreeDriversByBranch"
-                    :query-params="{branchId:modelObject.branchId}"
-                    :multiple="true"
-                    :rules="[(v) => v.length>0 || 'Item is required in select']"
-                  />
-                </VCol>
+<!--                <VCol-->
+<!--                  cols="12"-->
+<!--                  md="6"-->
+<!--                  v-if="modelObject.branchId"-->
+<!--                >-->
+<!--                  <CustomAutoSelect-->
+<!--                    v-model="modelObject.drivers"-->
+<!--                    :label="$t('Drivers')"-->
+<!--                    service="fetchFreeDriversByBranch"-->
+<!--                    :query-params="{branchId:modelObject.branchId}"-->
+<!--                    :multiple="true"-->
+<!--                    :rules="[(v) => v.length>0 || 'Item is required in select']"-->
+<!--                  />-->
+<!--                </VCol>-->
                 <VCol cols="12" md="6">
                   <VSwitch
                     v-model="modelObject.status"
@@ -128,7 +154,6 @@ import useVehicle from './useVehicle'
 import { computed, onMounted, ref, watch } from 'vue'
 import { store } from '@/store'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
-import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -172,20 +197,16 @@ const resetData = () => {
 }
 
 const loading = ref(false)
-const { uploadFile }=uploadFilesService()
 
-const uploadedPhoto=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.photo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedPhoto=url=>{
+  modelObject.value.photo=url
+
 }
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
     store.dispatch('updateVehicle', {
-      id: props.itemData.id,
+      id: props.itemData._id,
       queryParams: {
         ...modelObject.value
 
@@ -213,7 +234,7 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    modelObject.value = props.itemData
+    modelObject.value= JSON.parse(JSON.stringify(props.itemData))
   },
 )
 </script>

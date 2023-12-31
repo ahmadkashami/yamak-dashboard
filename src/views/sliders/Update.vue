@@ -127,7 +127,6 @@ import { computed, ref, watch } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import useValidation from '@/utils/validation'
-import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -175,14 +174,9 @@ const resetData = () => {
 }
 
 const loading = ref(false)
-const { uploadFile }=uploadFilesService()
 
-const uploadedPhoto=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.imageUrl=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedPhoto=url=>{
+  modelObject.value.imageUrl=url
 }
 const onSubmit = () => {
   if (valid.value) {
@@ -215,7 +209,7 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    modelObject.value = props.itemData
+    modelObject.value= JSON.parse(JSON.stringify(props.itemData))
   },
 )
 </script>

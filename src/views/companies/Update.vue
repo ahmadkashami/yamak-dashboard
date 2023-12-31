@@ -162,7 +162,6 @@ import { store } from '@/store'
 import useValidation from '@/utils/validation'
 import FileUpload from '@/components/FileUpload.vue'
 import { VPhoneInput } from 'v-phone-input'
-import uploadFilesService from '@/plugins/uploadFilesService'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -201,14 +200,10 @@ const {
   phoneRules,
   emailRules,
 }=useValidation()
-const { uploadFile }=uploadFilesService()
 
-const uploadedLogo=currentFile=>{
-  uploadFile(currentFile.file).then(response=>{
-    modelObject.value.logo=response.data.data.url
-  }).catch(error=>{
-    console.log(error)
-  })
+const uploadedLogo=url=>{
+  modelObject.value.logo=url
+
 }
 onMounted(() => {
 })
@@ -252,7 +247,7 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    modelObject.value= props.itemData
+    modelObject.value= JSON.parse(JSON.stringify(props.itemData))
   },
 )
 </script>

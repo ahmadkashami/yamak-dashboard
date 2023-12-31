@@ -1,7 +1,7 @@
 <template>
   <div class="file-upload flex">
     <div>
-      <label class="mx-4 v-field__input">{{label}}:</label>
+      <label class="mx-4 v-field__input">{{ label }}:</label>
     </div>
     <div class="file-upload__area">
       <div v-if="!file.isUploaded">
@@ -38,7 +38,7 @@
           {{ file.fileExtention }}
         </div>
         <span class="file-name">
-          {{ file.name }}{{ file.isImage ? `.${file.fileExtention}` : "" }}
+          {{ file.name }}{{ file.isImage ? `.${file.fileExtention}` : '' }}
         </span>
         <VDivider class="my-2" />
         <VSheet class="d-flex justify-center">
@@ -48,6 +48,7 @@
               size="x-small"
               variant="outlined"
               @click="resetFileInput"
+              :loading='isLoading'
             >
               Change file
             </VBtn>
@@ -70,8 +71,10 @@
 </template>
 
 <script>
+import { uploadFile } from '@/plugins/uploadFilesService'
+
 export default {
-  name: "FileUpload",
+  name: 'FileUpload',
   props: {
     maxSize: {
       type: Number,
@@ -80,12 +83,12 @@ export default {
     },
     accept: {
       type: String,
-      default: "image/*",
+      default: 'image/*',
     },
-    label:{
-      type:String,
+    label: {
+      type: String,
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -94,11 +97,11 @@ export default {
       uploadReady: true,
       acceptFile: false,
       file: {
-        name: "",
+        name: '',
         size: 0,
-        type: "",
-        fileExtention: "",
-        url: "",
+        type: '',
+        fileExtention: '',
+        url: '',
         isImage: false,
         isUploaded: false,
       },
@@ -119,13 +122,13 @@ export default {
             fileSize = Math.round((file.size / 1024 / 1024) * 100) / 100,
 
             // Get file extention
-            fileExtention = file.name.split(".").pop(),
+            fileExtention = file.name.split('.').pop(),
 
             // Get file name
-            fileName = file.name.split(".").shift(),
+            fileName = file.name.split('.').shift(),
 
             // Check if file is an image
-            isImage = ["jpg", "jpeg", "png", "gif"].includes(fileExtention)
+            isImage = ['jpg', 'jpeg', 'png', 'gif'].includes(fileExtention)
 
 
           // Print to console
@@ -134,7 +137,7 @@ export default {
           // Load the FileReader API
           let reader = new FileReader()
           reader.addEventListener(
-            "load",
+            'load',
             () => {
               // Set file data
               this.file = {
@@ -147,7 +150,7 @@ export default {
                 url: reader.result,
                 isUploaded: true,
               }
-              if(this.file.isUploaded) {
+              if (this.file.isUploaded) {
                 this.sendDataToParent()
               }
             },
@@ -156,54 +159,60 @@ export default {
           // Read uploaded file
           reader.readAsDataURL(file)
         } else {
-          console.log("Invalid file")
+          console.log('Invalid file')
         }
       }
     },
     isFileSizeValid(fileSize) {
       if (fileSize <= this.maxSize) {
-        console.log("File size is valid")
+        console.log('File size is valid')
       } else {
         this.errors.push(`File size should be less than ${this.maxSize} MB`)
       }
     },
     isFileTypeValid(fileExtention) {
-      if (this.accept.split(",").includes(fileExtention)) {
-        console.log("File type is valid")
+      if (this.accept.split(',').includes(fileExtention)) {
+        console.log('File type is valid')
       } else {
         this.errors.push(`File type should be ${this.accept}`)
       }
     },
     isFileValid(file) {
       this.isFileSizeValid(Math.round((file.size / 1024 / 1024) * 100) / 100)
-      this.isFileTypeValid(file.name.split(".").pop())
-      if (this.errors.length === 0) {
-        return true
-      } else {
-        return false
-      }
+      this.isFileTypeValid(file.name.split('.').pop())
+
+      return this.errors.length === 0
     },
     resetFileInput() {
       this.uploadReady = false
-      this.acceptFile=false
+      this.acceptFile = false
       this.$nextTick(() => {
         this.uploadReady = true
         this.file = {
           file: null,
-          name: "",
+          name: '',
           size: 0,
-          type: "",
-          data: "",
-          fileExtention: "",
-          url: "",
+          type: '',
+          data: '',
+          fileExtention: '',
+          url: '',
           isImage: false,
           isUploaded: false,
         }
       })
     },
     sendDataToParent() {
-      this.acceptFile=true
-      this.$emit("fileUploaded", this.file)
+      this.acceptFile = true
+      this.uploadedPhoto(this.file)
+    },
+    uploadedPhoto(currentFile) {
+      this.isLoading = true
+      uploadFile(currentFile.file).then(response => {
+        this.$emit('fileUploaded', response.data.data.secure_url)
+        this.isLoading = false
+      }).catch(error => {
+        console.log(error)
+      })
     },
   },
 }
@@ -217,6 +226,7 @@ export default {
   align-items: flex-start;
   justify-content: center;
 }
+
 .file-upload .file-upload__area {
   width: 600px;
   min-height: 150px;
@@ -227,19 +237,23 @@ export default {
   border: 2px dashed #ccc;
   padding: 20px;
 }
+
 .file-upload .file-upload__error {
   margin-top: 10px;
   color: #f00;
   font-size: 12px;
 }
+
 .file-upload .upload-preview {
   text-align: center;
 }
+
 .file-upload .upload-preview .file-image {
   width: 100%;
   height: 150px;
   object-fit: contain;
 }
+
 .file-upload .upload-preview .file-extention {
   height: 100px;
   width: 100px;
@@ -254,6 +268,7 @@ export default {
   text-transform: uppercase;
   font-weight: 500;
 }
+
 .file-upload .upload-preview .file-name {
   font-size: 1.2em;
   font-weight: 500;

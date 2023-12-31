@@ -49,8 +49,17 @@
                 </v-col>
                 <v-col cols="12" md="12">
                   <VTextarea
-                    v-model="modelObject.aboutUs"
-                    :label="$t('About Us')"
+                    v-model="modelObject.aboutUs.ar"
+                    :label="$t('About Us Arabic')"
+                    type="email"
+                    :rules="requiredRules"
+                    density="compact"
+                  />
+                </v-col>
+                <v-col cols="12" md="12">
+                  <VTextarea
+                    v-model="modelObject.aboutUs.en"
+                    :label="$t('About Us English')"
                     type="email"
                     :rules="requiredRules"
                     density="compact"
@@ -84,8 +93,20 @@
                   md="12"
                 >
                   <VTextarea
-                    v-model="modelObject.contactUs.address"
-                    :label="$t('Address')"
+                    v-model="modelObject.contactUs.address.ar"
+                    :label="$t('Address Arabic')"
+                    type="email"
+                    :rules="requiredRules"
+                    density="compact"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="12"
+                >
+                  <VTextarea
+                    v-model="modelObject.contactUs.address.en"
+                    :label="$t('Address English')"
                     type="email"
                     :rules="requiredRules"
                     density="compact"
@@ -145,7 +166,6 @@ import useWebsite from './useWebsite'
 import { computed, ref } from 'vue'
 import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
-import uploadFilesService from '@/plugins/uploadFilesService'
 import useValidation from '@/utils/validation'
 import { VPhoneInput } from 'v-phone-input'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
