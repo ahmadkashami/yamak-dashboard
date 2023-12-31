@@ -43,17 +43,17 @@
                     density="compact"
                   />
                 </v-col>
-                <v-col cols="12" md="6">
-                  <v-text-field
-                    v-model="modelObject.password"
-                    :label="$t('Password')"
-                    :type="isPasswordVisible ? 'text' : 'password'"
-                    :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
-                    @click:append-inner="isPasswordVisible = !isPasswordVisible"
-                    :rules='requiredRules'
-                    density="compact"
-                  />
-                </v-col>
+<!--                <v-col cols="12" md="6">-->
+<!--                  <v-text-field-->
+<!--                    v-model="modelObject.password"-->
+<!--                    :label="$t('Password')"-->
+<!--                    :type="isPasswordVisible ? 'text' : 'password'"-->
+<!--                    :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"-->
+<!--                    @click:append-inner="isPasswordVisible = !isPasswordVisible"-->
+<!--                    :rules='requiredRules'-->
+<!--                    density="compact"-->
+<!--                  />-->
+<!--                </v-col>-->
                 <VCol
                   cols="12"
                   md="6"
@@ -148,6 +148,7 @@ import { store } from '@/store'
 import FileUpload from '@/components/FileUpload.vue'
 import CustomAutoSelect from '@/components/form-inputs/CustomAutoSelect.vue'
 import { VPhoneInput } from 'v-phone-input'
+import useValidation from '@/utils/validation'
 
 const props=defineProps({
   isOpenUpdateDialog: {
@@ -181,6 +182,14 @@ const {
   modelObject,
   route
 } = useDriver()
+
+const {
+  requiredRules,
+  phoneRules,
+  emailRules,
+}=useValidation()
+
+
 
 onMounted(() => {
 })

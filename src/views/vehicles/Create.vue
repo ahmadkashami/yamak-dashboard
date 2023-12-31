@@ -29,6 +29,32 @@
                   cols="12"
                   md="6"
                 >
+                  <VTextField
+                    v-model="modelObject.labelNumber"
+                    outlined
+                    density="compact"
+                    :label="$t('Label Number')"
+                    :placeholder="$t('Label Number')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.modelName"
+                    outlined
+                    density="compact"
+                    :label="$t('Model Name')"
+                    :placeholder="$t('Model Name')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <CustomAutoSelect
                     v-model="modelObject.branchId"
                     :label="$t('Branch')"

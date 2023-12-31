@@ -28,6 +28,32 @@
                   cols="12"
                   md="6"
                 >
+                  <VTextField
+                    v-model="modelObject.labelNumber"
+                    outlined
+                    density="compact"
+                    :label="$t('Label Number')"
+                    :placeholder="$t('Label Number')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.modelName"
+                    outlined
+                    density="compact"
+                    :label="$t('Model Name')"
+                    :placeholder="$t('Model Name')"
+                    :rules="requiredRules"
+                  />
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <CustomAutoSelect
                     v-model="modelObject.branchId"
                     :label="$t('Branch')"
@@ -51,20 +77,20 @@
                     :rules="[(v) => v.length>0 || 'Item is required in select']"
                   />
                 </VCol>
-                <VCol
-                  cols="12"
-                  md="6"
-                  v-if="modelObject.branchId"
-                >
-                  <CustomAutoSelect
-                    v-model="modelObject.drivers"
-                    :label="$t('Drivers')"
-                    service="fetchFreeDriversByBranch"
-                    :query-params="{branchId:modelObject.branchId}"
-                    :multiple="true"
-                    :rules="[(v) => v.length>0 || 'Item is required in select']"
-                  />
-                </VCol>
+<!--                <VCol-->
+<!--                  cols="12"-->
+<!--                  md="6"-->
+<!--                  v-if="modelObject.branchId"-->
+<!--                >-->
+<!--                  <CustomAutoSelect-->
+<!--                    v-model="modelObject.drivers"-->
+<!--                    :label="$t('Drivers')"-->
+<!--                    service="fetchFreeDriversByBranch"-->
+<!--                    :query-params="{branchId:modelObject.branchId}"-->
+<!--                    :multiple="true"-->
+<!--                    :rules="[(v) => v.length>0 || 'Item is required in select']"-->
+<!--                  />-->
+<!--                </VCol>-->
                 <VCol cols="12" md="6">
                   <VSwitch
                     v-model="modelObject.status"
@@ -180,7 +206,7 @@ const onSubmit = () => {
   if (valid.value) {
     loading.value = true
     store.dispatch('updateVehicle', {
-      id: props.itemData.id,
+      id: props.itemData._id,
       queryParams: {
         ...modelObject.value
 

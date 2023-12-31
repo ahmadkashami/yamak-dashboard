@@ -18,11 +18,13 @@ export default function useVehicle() {
   const lang=current.value
 
   const tableColumns = [
+    { title: t('Model Name'), key: 'modelName' },
+    { title: t('Label Number'), key: 'labelNumber' },
     { title: t('Branch'), key: 'branch' },
     { title: t('Created At'), key: 'createdAt' },
     { title: t('Status'), key: 'status' },
     { title: t('Icon'), key: 'iconMap' , align: 'center'},
-    // { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
+    { title: t('Actions'), key: 'actions', align: 'center', sortable: false },
   ]
 
   const dataList = ref([])
@@ -59,6 +61,8 @@ export default function useVehicle() {
       services: [],
       branchId: null,
       iconMap: null,
+      labelNumber: null,
+      modelName: null,
       companyId: route.params.id,
       status: "active",
       currentDriver: null,
