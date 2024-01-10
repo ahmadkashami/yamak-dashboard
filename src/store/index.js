@@ -10,6 +10,7 @@ import appUsersActions from '@/store/appUsersActions'
 import adsActions from '@/store/adsActions'
 import websiteActions from '@/store/websiteActions'
 import appSettingActions from '@/store/appSettingActions'
+import notificationActions from '@/store/notificationActions'
 
 
 export const  store = createStore({
@@ -32,7 +33,8 @@ export const  store = createStore({
     ...appUsersActions,
     ...adsActions,
     ...websiteActions,
-    ...appSettingActions
+    ...appSettingActions,
+    ...notificationActions
   },
   modules: {},
 })

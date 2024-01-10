@@ -31,6 +31,10 @@ const permissions = [
     subject: 'AppSetting',
     action: 'read',
   },
+  {
+    subject: 'Notifications',
+    action: 'read',
+  },
 ]
 
 export default permissions
