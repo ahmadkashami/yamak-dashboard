@@ -24,7 +24,10 @@
           <VCardText>
             <VContainer>
               <VRow>
-                <v-col cols="12" md="6">
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <VTextField
                     v-model="modelObject.name"
                     outlined
@@ -33,27 +36,20 @@
                     :placeholder="$t('Name')"
                     :rules="requiredRules"
                   />
-                </v-col>
-                <v-col cols="12" md="6">
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <VTextField
                     v-model="modelObject.email"
                     :label="$t('Email')"
                     type="email"
-                    :rules='emailRules'
+                    :rules="emailRules"
                     density="compact"
                   />
-                </v-col>
-<!--                <v-col cols="12" md="6">-->
-<!--                  <v-text-field-->
-<!--                    v-model="modelObject.password"-->
-<!--                    :label="$t('Password')"-->
-<!--                    :type="isPasswordVisible ? 'text' : 'password'"-->
-<!--                    :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"-->
-<!--                    @click:append-inner="isPasswordVisible = !isPasswordVisible"-->
-<!--                    :rules='requiredRules'-->
-<!--                    density="compact"-->
-<!--                  />-->
-<!--                </v-col>-->
+                </VCol>
+
                 <VCol
                   cols="12"
                   md="6"
@@ -80,7 +76,10 @@
                     :rules="requiredRules"
                   />
                 </VCol>
-                <VCol cols="12" md="6">
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <VSwitch
                     v-model="modelObject.status"
                     hide-details
@@ -89,16 +88,49 @@
                     :label="`${$t('Status')}: ${$t(modelObject.status)}`"
                   />
                 </VCol>
-                <VCol cols="12" md="6">
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <h6>License Expired</h6>
-                  <VueDatePicker v-model="modelObject.licenseExpiredAt" :format="format"></VueDatePicker>
+                  <VueDatePicker
+                    v-model="modelObject.licenseExpiredAt"
+                    :format="format"
+                  />
+                </VCol>
+
+                <VCol
+                  cols="12"
+                  md="6"
+                >
+                  <VSwitch
+                    v-model="isUpdatePasswordVisible"
+                    hide-details
+                    inset
+                    label="Update Password"
+                  />
+                </VCol>
+                <VCol
+                  v-if="isUpdatePasswordVisible"
+                  cols="12"
+                  md="6"
+                >
+                  <VTextField
+                    v-model="modelObject.password"
+                    :label="$t('Password')"
+                    :type="isPasswordVisible ? 'text' : 'password'"
+                    :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
+                    :rules="requiredRules"
+                    density="compact"
+                    @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                  />
                 </VCol>
                 <VCol cols="12">
                   <FileUpload
                     :max-size="1"
                     accept="png"
-                    @file-uploaded="uploadedPhoto"
                     label="Photo"
+                    @file-uploaded="uploadedPhoto"
                   />
                 </VCol>
               </VRow>
@@ -180,7 +212,7 @@ const {
   name,
   resetForm,
   modelObject,
-  route
+  route,
 } = useDriver()
 
 const {
@@ -194,6 +226,9 @@ const {
 onMounted(() => {
 })
 
+const isPasswordVisible=ref(false)
+const isUpdatePasswordVisible=ref(false)
+
 const resetData = () => {
   resetForm()
   emit('update:is-open-update-dialog', false)
@@ -206,13 +241,18 @@ const uploadedPhoto=url=>{
   modelObject.value.photo=url
 
 }
+
 const onSubmit = () => {
   if (valid.value) {
+    
+    if(!isUpdatePasswordVisible.value){
+      delete   modelObject.value.password
+    }
     loading.value = true
     store.dispatch('updateDriver', {
       id: props.itemData._id,
       queryParams: {
-       ...modelObject.value
+        ...modelObject.value,
       },
     }).then(response => {
       if (response) {
