@@ -11,6 +11,7 @@ import adsActions from '@/store/adsActions'
 import websiteActions from '@/store/websiteActions'
 import appSettingActions from '@/store/appSettingActions'
 import notificationActions from '@/store/notificationActions'
+import dashboardActions from '@/store/dashboardActions'
 
 
 export const  store = createStore({
@@ -34,7 +35,8 @@ export const  store = createStore({
     ...adsActions,
     ...websiteActions,
     ...appSettingActions,
-    ...notificationActions
+    ...notificationActions,
+    ...dashboardActions,
   },
   modules: {},
 })
