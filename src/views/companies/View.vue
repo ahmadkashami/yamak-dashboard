@@ -80,7 +80,7 @@ const itemsBreadcrumbs = [
 // tabs
 const tabs = [
   {
-    title: 'branches',
+    title: 'Bsranches',
     icon: 'mdi-source-branch',
     tab: 'branches',
   },
