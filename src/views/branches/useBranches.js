@@ -25,6 +25,7 @@ export default function useBranches() {
   const isOutlinedSnackbarVisible = ref(false)
   const msgSnackbarVisible = ref('')
   const isOutlinedSnackbarColor = ref('')
+
   const options = ref({
     sortBy: ['id'],
     sortDesc: [true],
@@ -52,9 +53,9 @@ export default function useBranches() {
         block: null,
         stateId: null,
         cityId: null,
-        countryId:null,
+        countryId: null,
         street: null,
-        zipCode: null
+        zipCode: null,
       },
       status: 'active',
       services: [],
@@ -67,11 +68,13 @@ export default function useBranches() {
 
 
   const fetchDataList = () => {
-    store.dispatch('fetchBranchByCompany', {
+    let url=route.params.id?"fetchBranchByCompany":"fetchBranches"
+
+    store.dispatch(url, {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",
-      companyId:route.params.id
+      companyId: route.params.id,
     })
       .then(response => {
 
@@ -132,6 +135,6 @@ export default function useBranches() {
     t,
     updateItemsPerPage,
     updateCurrentPage,
-    route
+    route,
   }
 }

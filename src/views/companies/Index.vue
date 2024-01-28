@@ -1,6 +1,10 @@
 <template>
   <div>
-    <BreadcrumbsComponent :items="itemsBreadcrumbs" :title="$t('Companies')"></BreadcrumbsComponent>
+    <BreadcrumbsComponent
+      v-if="!hiddenBreadcrumbs"
+      :items="itemsBreadcrumbs"
+      :title="$t('Companies')"
+    />
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
         <div class="d-flex align-center  pb-5">
@@ -59,8 +63,8 @@
           <VBtn
             variant="text"
             icon
-            @click="editItem(item.raw)"
             color="secondary"
+            @click="editItem(item.raw)"
           >
             <VIcon size="small">
               mdi-pencil
@@ -72,8 +76,6 @@
               Edit
             </VTooltip>
           </VBtn>
-
-
         </template>
 
 
@@ -121,19 +123,26 @@ import StatusChip from '@/components/StatusChip.vue'
 import { useLocale } from 'vuetify'
 import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
 
+const props=defineProps({
+  hiddenBreadcrumbs: {
+    type: Boolean,
+  },
+})
+
 const { current } = useLocale()
 const lang=current.value
+
 const itemsBreadcrumbs = [
   {
     text: 'Dashboard',
-    disabled:false,
+    disabled: false,
     href: '/',
   },
   {
     text: 'companies',
     disabled: true,
     href: '/companies',
-  }
+  },
 ]
 
 const {

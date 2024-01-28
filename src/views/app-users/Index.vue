@@ -1,6 +1,10 @@
 <template>
   <div>
-    <BreadcrumbsComponent :items="itemsBreadcrumbs" :title="$t('App Users')"></BreadcrumbsComponent>
+    <BreadcrumbsComponent
+      v-if="!hiddenBreadcrumbs"
+      :items="itemsBreadcrumbs"
+      :title="$t('App Users')"
+    />
 
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
@@ -8,8 +12,7 @@
           <h2>{{ $t('App Users') }}</h2>
         </div>
         <VSpacer />
-        <div class="d-flex align-center pb-5">
-        </div>
+        <div class="d-flex align-center pb-5" />
       </VCardText>
       <!-- table -->
       <VDataTable
@@ -53,18 +56,26 @@ import { VDataTable } from 'vuetify/labs/components'
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+
+const props=defineProps({
+  hiddenBreadcrumbs: {
+    type: Boolean,
+  },
+})
+
 const itemsBreadcrumbs = [
   {
     text: 'Dashboard',
-    disabled:false,
+    disabled: false,
     href: '/',
   },
   {
     text: 'App Users',
     disabled: true,
     href: '/app-users',
-  }
+  },
 ]
+
 const {
   tableColumns,
   loading,
