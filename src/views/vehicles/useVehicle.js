@@ -76,7 +76,8 @@ export default function useVehicle() {
 
 
   const fetchDataList = () => {
-    store.dispatch('fetchVehiclesByCompany', {
+    let url=route.params.id?"fetchVehiclesByCompany":"fetchVehicles"
+    store.dispatch(url, {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",
