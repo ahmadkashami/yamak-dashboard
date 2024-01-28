@@ -62,7 +62,9 @@ export default function useDriver() {
 
 
   const fetchDataList = () => {
-    store.dispatch('fetchDriversByCompany', {
+    let url=route.params.id?"fetchDriversByCompany":"fetchDrivers"
+
+    store.dispatch(url, {
       limit: itemsPerPage.value,
       page: currentPage.value ? currentPage.value : 1,
       sort: options.value.sortDesc? "DESC" : "ASC",

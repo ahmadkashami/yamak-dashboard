@@ -57,12 +57,11 @@ export default function useDashboard() {
             count: dataList.value.vehicleCount,
           },
           {
-            title: "Branchs",
+            title: "Branches",
             icon: "mdi-source-branch",
             count: dataList.value.branchCount,
           },
         ]
-
 
         loading.value = false
       }).catch(error => {

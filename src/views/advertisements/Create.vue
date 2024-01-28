@@ -155,7 +155,7 @@ const {
 
 
 const uploadedPhoto=url=>{
-  modelObject.value.photo=utl
+  modelObject.value.photo=url
 }
 
 

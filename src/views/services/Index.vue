@@ -1,6 +1,10 @@
 <template>
   <div>
-    <BreadcrumbsComponent :items="itemsBreadcrumbs" :title="$t('Services')"></BreadcrumbsComponent>
+    <BreadcrumbsComponent
+      v-if="!hiddenBreadcrumbs"
+      :items="itemsBreadcrumbs"
+      :title="$t('Services')"
+    />
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
         <div class="d-flex align-center  pb-5">
@@ -39,7 +43,11 @@
           <StatusChip :status="item.raw.status" />
         </template>
         <template #item.logo="{ item }">
-          <v-img :src="item.raw.logo" height="75"  class="pa-2"></v-img>
+          <VImg
+            :src="item.raw.logo"
+            height="75"
+            class="pa-2"
+          />
         </template>
 
         <template #item.actions="{ item }">
@@ -94,18 +102,26 @@ import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/services/Update.vue'
 import Create from '@/views/services/Create.vue'
 import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+
+const props=defineProps({
+  hiddenBreadcrumbs: {
+    type: Boolean,
+  },
+})
+
 const itemsBreadcrumbs = [
   {
     text: 'Dashboard',
-    disabled:false,
+    disabled: false,
     href: '/',
   },
   {
     text: 'Services',
     disabled: true,
     href: '/Services',
-  }
+  },
 ]
+
 const {
   tableColumns,
   loading,
@@ -123,12 +139,11 @@ const {
   itemData,
   updateItemsPerPage,
   updateCurrentPage,
-  lang
+  lang,
 } = useServices()
 
 onMounted(() => {
   fetchDataList()
 })
-
 </script>
 
