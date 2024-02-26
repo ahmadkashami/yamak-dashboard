@@ -41,10 +41,10 @@
           </VIcon>
         </template>
         <template #item.type="{ item }">
-          <VChip>{{ item.raw.type }}</VChip>
+          <VChip>{{ item.type }}</VChip>
         </template>
         <template #item.role="{ item }">
-          <VChip>{{ item.raw.role }}</VChip>
+          <VChip>{{ item.role }}</VChip>
         </template>
 
         <template #bottom>
@@ -84,7 +84,7 @@ import useUsers from './useUsers'
 import Update from '@/views/users/Update.vue'
 import Create from '@/views/users/Create.vue'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 

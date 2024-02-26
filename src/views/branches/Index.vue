@@ -32,7 +32,7 @@
         hide-default-footer
       >
         <template #item.status="{ item }">
-          <StatusChip :status="item.raw.status" />
+          <StatusChip :status="item.status" />
         </template>
         <template #item.actions="{ item }">
           <VBtn
@@ -89,7 +89,7 @@
 <script setup>
 import useBranches from './useBranches'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/branches/Update.vue'

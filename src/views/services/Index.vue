@@ -37,14 +37,14 @@
         hide-default-footer
       >
         <template #item.name="{ item }">
-          <span>{{ getTranslations(item.raw.name,lang) }}</span>
+          <span>{{ getTranslations(item.name,lang) }}</span>
         </template>
         <template #item.status="{ item }">
-          <StatusChip :status="item.raw.status" />
+          <StatusChip :status="item.status" />
         </template>
         <template #item.logo="{ item }">
           <VImg
-            :src="item.raw.logo"
+            :src="item.logo"
             height="75"
             class="pa-2"
           />
@@ -95,7 +95,7 @@
 <script setup>
 import useServices from './useServices'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import StatusChip from '@/components/StatusChip.vue'

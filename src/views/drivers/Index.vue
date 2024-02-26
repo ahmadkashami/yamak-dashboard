@@ -32,10 +32,10 @@
         hide-default-footer
       >
         <template #item.status="{ item }">
-          <StatusChip :status="item.raw.status" />
+          <StatusChip :status="item.status" />
         </template>
         <template #item.branch="{ item }">
-          <span>{{getTranslations(item.raw.branch.name,lang)}}</span>
+          <span>{{getTranslations(item.branch.name,lang)}}</span>
         </template>
 
         <template #item.actions="{ item }">
@@ -92,7 +92,7 @@
 <script setup>
 import useDriver from './useDriver'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/drivers/Update.vue'
