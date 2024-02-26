@@ -33,7 +33,7 @@
 
 
         <template #item.imageUrl="{ item }">
-          <v-img :src="item.raw.imageUrl" height="75" class="pa-2"></v-img>
+          <v-img :src="item.imageUrl" height="75" class="pa-2"></v-img>
         </template>
 
         <template #item.actions="{ item }">
@@ -91,7 +91,7 @@
 <script setup>
 import useCarousel from './useCarousel'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import Create from '@/views/carousels/Create.vue'
 import DeleteComponent from '@/components/DeleteComponent.vue'

@@ -78,7 +78,7 @@
 <script setup>
 import useAppSetting from './useAppSetting'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import Update from '@/views/app-setting/Update.vue'
 import Create from '@/views/app-setting/Create.vue'

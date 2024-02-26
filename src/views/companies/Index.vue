@@ -37,10 +37,10 @@
         hide-default-footer
       >
         <template #item.name="{ item }">
-          <span>{{ getTranslations(item.raw.name,lang) }}</span>
+          <span>{{ getTranslations(item.name,lang) }}</span>
         </template>
         <template #item.status="{ item }">
-          <StatusChip :status="item.raw.status" />
+          <StatusChip :status="item.status" />
         </template>
 
 
@@ -48,7 +48,7 @@
           <VBtn
             variant="text"
             icon
-            @click="$router.push({name:'company-view',params:{id:item.raw._id}})"
+            @click="$router.push({name:'company-view',params:{id:item._id}})"
           >
             <VIcon size="small">
               mdi-eye
@@ -114,7 +114,7 @@
 <script setup>
 import useCompanies from './useCompanies'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import Update from '@/views/companies/Update.vue'
 import Create from '@/views/companies/Create.vue'

@@ -31,13 +31,13 @@
         hide-default-footer
       >
         <template #item.title="{ item }">
-          {{ getTranslations(item.raw.title, lang) }}
+          {{ getTranslations(item.title, lang) }}
         </template>
         <template #item.status="{ item }">
-          <StatusChip :status="item.raw.status" />
+          <StatusChip :status="item.status" />
         </template>
         <template #item.branch="{ item }">
-          <span>{{getTranslations(item.raw.branch.name,lang)}}</span>
+          <span>{{getTranslations(item.branch.name,lang)}}</span>
         </template>
 
         <template #item.actions="{ item }">
@@ -85,7 +85,7 @@
 <script setup>
 import useFeature from './useFeature'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/features/Update.vue'

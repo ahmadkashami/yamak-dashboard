@@ -32,13 +32,13 @@
         hide-default-footer
       >
         <template #item.status="{ item }">
-          <StatusChip :status="item.raw.status" />
+          <StatusChip :status="item.status" />
         </template>
         <template #item.branch="{ item }">
-          <span>{{getTranslations(item.raw.branch.name,lang)}}</span>
+          <span>{{getTranslations(item.branch.name,lang)}}</span>
         </template>
         <template #item.iconMap="{ item }">
-          <v-img :src="item.raw.iconMap" height="75"  class="pa-2"></v-img>
+          <v-img :src="item.iconMap" height="75"  class="pa-2"></v-img>
         </template>
         <template #item.actions="{ item }">
           <VBtn
@@ -94,7 +94,7 @@
 <script setup>
 import useVehicle from './useVehicle'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
+
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/vehicles/Update.vue'

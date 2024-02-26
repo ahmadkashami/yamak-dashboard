@@ -32,10 +32,10 @@
         hide-default-footer
       >
         <template #item.status="{ item }">
-          <StatusChip :status="item.raw.status" />
+          <StatusChip :status="item.status" />
         </template>
         <template #item.company="{ item }">
-          <span>{{getTranslations(item.raw.company.name,lang)}}</span>
+          <span>{{getTranslations(item.company.name,lang)}}</span>
         </template>
 
         <template #item.actions="{ item }">
@@ -65,7 +65,7 @@
           <VBtn
             variant="text"
             icon
-            @click="$router.push({name:'website-view',params:{websiteId:item.raw._id,companyId:item.raw.companyId,}})"
+            @click="$router.push({name:'website-view',params:{websiteId:item._id,companyId:item.companyId,}})"
           >
             <VIcon size="small">
               mdi-eye
@@ -114,7 +114,6 @@
 <script setup>
 import useWebsite from './useWebsite'
 import { onMounted } from 'vue'
-import { VDataTable } from 'vuetify/labs/components'
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/websites/Update.vue'
