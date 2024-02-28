@@ -16,7 +16,7 @@
       </VCardText>
       <!-- table -->
       <VDataTable
-        v-model:options="options"
+        :items-per-page="options.itemsPerPage"
         :headers="tableColumns"
         :items="dataList"
         :loading="loading"
