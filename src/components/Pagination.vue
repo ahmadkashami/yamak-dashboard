@@ -24,8 +24,10 @@
       class="d-flex justify-end"
     >
       <VPagination
+        class="my-4"
         v-model="currentPageLocal"
         :length="pageInfo.totalPages"
+        rounded="circle"
         @update:model-value="updateCurrentPage"
       />
     </VCol>
