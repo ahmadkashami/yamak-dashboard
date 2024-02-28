@@ -62,7 +62,7 @@ export default function useCarousel() {
       .then(response => {
         dataList.value = response.data.data.list
         pageInfo.value = {
-          totalPages: response.data.data.metadata?.lastPage,
+          totalPages: response.data.data.metaData?.lastPage,
         }
         loading.value = false
       }).catch(error => {
@@ -81,7 +81,7 @@ export default function useCarousel() {
   }
 
   const updateCurrentPage = value => {
-    currentPage.value = value.value
+    currentPage.value = value
     fetchDataList()
   }
 
