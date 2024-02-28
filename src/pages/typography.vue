@@ -5,7 +5,7 @@
         <VCardText class="d-flex flex-column gap-y-8">
           <div>
             <h1 class="text-h1">
-              Heading 1
+              Heading 2
             </h1>
             <span>font-size: 6rem / line-height: 6rem / font-weight: 300</span>
           </div>
