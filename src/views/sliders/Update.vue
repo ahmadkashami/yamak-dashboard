@@ -24,7 +24,10 @@
           <VCardText>
             <VContainer>
               <VRow>
-                <v-col cols="12" md="12">
+                <VCol
+                  cols="12"
+                  md="12"
+                >
                   <VTextField
                     v-model="modelObject.title.ar"
                     outlined
@@ -33,8 +36,11 @@
                     :placeholder="$t('Title Arabic')"
                     :rules="requiredRules"
                   />
-                </v-col>
-                <v-col cols="12" md="12">
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="12"
+                >
                   <VTextField
                     v-model="modelObject.title.en"
                     outlined
@@ -43,8 +49,11 @@
                     :placeholder="$t('Title English')"
                     :rules="requiredRules"
                   />
-                </v-col>
-                <v-col cols="12" md="12">
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="12"
+                >
                   <VTextField
                     v-model="modelObject.subTitle.ar"
                     outlined
@@ -53,8 +62,11 @@
                     :placeholder="$t('Sub Title Arabic')"
                     :rules="requiredRules"
                   />
-                </v-col>
-                <v-col cols="12" md="12">
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="12"
+                >
                   <VTextField
                     v-model="modelObject.subTitle.en"
                     outlined
@@ -63,8 +75,11 @@
                     :placeholder="$t('Sub Title English')"
                     :rules="requiredRules"
                   />
-                </v-col>
-                <VCol cols="12" md="6">
+                </VCol>
+                <VCol
+                  cols="12"
+                  md="6"
+                >
                   <VSwitch
                     v-model="modelObject.status"
                     hide-details
@@ -77,8 +92,8 @@
                   <FileUpload
                     :max-size="1"
                     accept="png,jpeg"
-                    @file-uploaded="uploadedPhoto"
                     label="Image"
+                    @file-uploaded="uploadedPhoto"
                   />
                 </VCol>
               </VRow>
@@ -157,8 +172,9 @@ const {
   validate,
   name,
   resetForm,
-  modelObject
+  modelObject,
 } = useSlider()
+
 const {
   requiredRules,
   phoneRules,
@@ -178,13 +194,14 @@ const loading = ref(false)
 const uploadedPhoto=url=>{
   modelObject.value.imageUrl=url
 }
+
 const onSubmit = () => {
   if (valid.value) {
     loading.value = true
     store.dispatch('updateWebsiteSlider', {
       id: props.itemData._id,
       queryParams: {
-        ...modelObject.value
+        ...modelObject.value,
       },
     }).then(response => {
       if (response) {
@@ -209,7 +226,8 @@ const onSubmit = () => {
 watch(
   () => (props.isOpenUpdateDialog),
   () => {
-    modelObject.value= JSON.parse(JSON.stringify(props.itemData))
+    console.log(props.itemData)
+    modelObject.value= props.itemData
   },
 )
 </script>

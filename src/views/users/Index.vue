@@ -35,7 +35,7 @@
           <VIcon
             size="small"
             class="me-2"
-            @click="editItem(item.raw)"
+            @click="editItem(item)"
           >
             mdi-pencil
           </VIcon>

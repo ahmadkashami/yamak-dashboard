@@ -46,7 +46,7 @@
           <VBtn
             variant="text"
             icon
-            @click="editItem(item.raw)"
+            @click="editItem(item)"
             color="secondary"
           >
             <VIcon size="small">

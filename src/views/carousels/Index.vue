@@ -41,7 +41,7 @@
             variant="text"
             icon
             color="error"
-            @click="deleteItem(item.raw)"
+            @click="deleteItem(item)"
           >
             <VIcon size="small">
               mdi-delete-empty-outline

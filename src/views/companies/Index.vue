@@ -64,7 +64,7 @@
             variant="text"
             icon
             color="secondary"
-            @click="editItem(item.raw)"
+            @click="editItem(item)"
           >
             <VIcon size="small">
               mdi-pencil
