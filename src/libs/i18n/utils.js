@@ -15,12 +15,13 @@ export const t = key => {
 }
 
 
-export const  getTranslations=(data,local)=>
+export const  getTranslations=(data, local)=>
 {
   if(data[local]!==undefined) {
     return data[local]
   }
- return data
+  
+  return data
 }
 
 export const _ = null

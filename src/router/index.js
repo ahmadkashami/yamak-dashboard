@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import { canNavigate } from '@/plugins/acl/routeProtection'
 import { companyRouters } from '@/router/companyRouters'
 import { websiteRouters } from '@/router/websiteRouters'
+import { createRouter, createWebHistory } from 'vue-router'
 
 
 const router = createRouter({
@@ -9,7 +9,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/dashboard' ,
+      redirect: '/dashboard',
     },
     {
       path: '/dashboard',
@@ -37,6 +37,16 @@ const router = createRouter({
       component: () => import('../views/app-users/Index.vue'),
       meta: {
         resource: 'AppUsers',
+        action: 'read',
+        layout: 'default',
+      },
+    },
+    {
+      path: '/app-requests',
+      name: 'app-requests',
+      component: () => import('../views/app-requests/Index.vue'),
+      meta: {
+        resource: 'AppRequests',
         action: 'read',
         layout: 'default',
       },
@@ -121,11 +131,12 @@ router.beforeEach((to, _, next) => {
   const userData = localStorage.getItem('userData')
   const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
 
-  if (!isLoggedIn && to.path!=='/login') return next({ name: 'login',query: { marketplace: to.query.marketplace } })
+  if (!isLoggedIn && to.path!=='/login') return next({ name: 'login', query: { marketplace: to.query.marketplace } })
 
   if (!canNavigate(to)) {
     // Redirect to log in if not logged in
-    if (!isLoggedIn) return next({ name: 'login',query: { marketplace: to.query.marketplace } })
+    if (!isLoggedIn) return next({ name: 'login', query: { marketplace: to.query.marketplace } })
+
     // If logged in => not authorized
     return next({ name: 'error' })
   }
@@ -134,6 +145,7 @@ router.beforeEach((to, _, next) => {
   if (to.meta.redirectIfLoggedIn && isLoggedIn) {
     next('/dashboard')
   }
+  
   return next()
 })
 export default router

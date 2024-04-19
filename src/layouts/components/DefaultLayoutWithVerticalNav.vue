@@ -1,10 +1,9 @@
 <script setup>
-import { useTheme } from 'vuetify'
 import upgradeBannerDark from '@images/pro/upgrade-banner-dark.png'
 import upgradeBannerLight from '@images/pro/upgrade-banner-light.png'
 import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue'
 import VerticalNavLink from '@layouts/components/VerticalNavLink.vue'
-import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTitle.vue'
+import { useTheme } from 'vuetify'
 
 // Components
 import Footer from '@/layouts/components/Footer.vue'
@@ -90,6 +89,14 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+        v-if="canViewVerticalNavMenuLink({action:'read',subject:'AppRequests'})"
+        :item="{
+          title: 'App Requests',
+          icon: 'mdi-account-multiple-check-outline',
+          to: '/app-requests',
+        }"
+      />
+      <VerticalNavLink
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'Ads'})"
         :item="{
           title: 'Ads',
@@ -121,7 +128,6 @@ const upgradeBanner = computed(() => {
           to: '/notifications',
         }"
       />
-
     </template>
     <!-- 👉 Pages -->
     <slot />

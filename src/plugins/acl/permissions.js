@@ -20,6 +20,10 @@ const permissions = [
     action: 'read',
   },
   {
+    subject: 'AppRequests',
+    action: 'read',
+  },
+  {
     subject: 'Ads',
     action: 'read',
   },
