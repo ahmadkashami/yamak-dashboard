@@ -17,11 +17,27 @@ export const t = key => {
 
 export const  getTranslations=(data, local)=>
 {
+  if (data === null || data === undefined) {
+    return ''
+  }
+
+  if (typeof data !== 'object') {
+    return data
+  }
+
   if(data[local]!==undefined) {
     return data[local]
   }
+
+  if(data.en!==undefined) {
+    return data.en
+  }
+
+  if(data.ar!==undefined) {
+    return data.ar
+  }
   
-  return data
+  return ''
 }
 
 export const _ = null
