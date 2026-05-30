@@ -1,5 +1,4 @@
 <script setup>
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import { useTheme } from 'vuetify'
 import logo from '@images/logo.svg?raw'
 import authV1MaskDark from '@images/pages/auth-v1-mask-dark.png'
@@ -119,22 +118,6 @@ const isPasswordVisible = ref(false)
               </RouterLink>
             </VCol>
 
-            <VCol
-              cols="12"
-              class="d-flex align-center"
-            >
-              <VDivider />
-              <span class="mx-4">or</span>
-              <VDivider />
-            </VCol>
-
-            <!-- auth providers -->
-            <VCol
-              cols="12"
-              class="text-center"
-            >
-              <AuthProvider />
-            </VCol>
           </VRow>
         </VForm>
       </VCardText>
