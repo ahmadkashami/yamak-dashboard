@@ -1,35 +1,50 @@
-# vue
+# yamak-dashboard (Admin Dashboard)
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue 3 + Vuetify 4 admin dashboard for Yamak operators and managers. Connects to the Laravel backend dashboard API area.
 
-## Recommended IDE Setup
+- **Framework:** Vue 3
+- **UI library:** Vuetify 4
+- **Bundler:** Vite 8
+- **API target:** `http://127.0.0.1:8000/api/dashboard/v1`
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+## Setup
 
-## Type Support for `.vue` Imports in TS
-
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates.
-
-However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can run `Volar: Switch TS Plugin on/off` from VSCode command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```bash
+yarn install
 ```
 
-### Compile and Hot-Reload for Development
+A `postinstall` script runs automatically to build the Iconify icon bundle.
 
-```sh
-npm run dev
+## Running
+
+```bash
+yarn dev      # Vite dev server (hot reload)
+yarn build    # Production build → dist/
+yarn preview  # Preview production build on port 5050
 ```
 
-### Type-Check, Compile and Minify for Production
+## Code Style
 
-```sh
-npm run build
+```bash
+yarn lint     # ESLint + auto-fix
 ```
+
+## Key Features
+
+- **Authentication** — Sanctum bearer tokens; role-based access via CASL (`@casl/vue`)
+- **Charts** — ApexCharts + Chart.js
+- **Data tables & grids** — Vuetify data tables
+- **Date pickers** — Vue Datepicker + Flatpickr
+- **Calendar** — FullCalendar (day grid, time grid, list views)
+- **Internationalization** — vue-i18n
+- **State management** — Pinia
+- **HTTP client** — Axios
+- **Icons** — MDI + Iconify
+
+## Environment
+
+Create a `.env` file to configure the API base URL and other runtime values. The Vite config exposes env variables to the app via `import.meta.env`.
+
+## Build Output
+
+Production assets are written to `dist/`. The dashboard is a SPA — configure the web server to serve `index.html` for all routes.
