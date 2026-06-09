@@ -11,10 +11,6 @@ $card-transition-property-custom: box-shadow, opacity;
   $color-pack: false !default,
 
   // 👉 Shadow opacity
-  $shadow-key-umbra-opacity: $shadow-key-umbra-opacity-custom !default,
-  $shadow-key-penumbra-opacity: $shadow-key-penumbra-opacity-custom !default,
-  $shadow-key-ambient-opacity: $shadow-key-ambient-opacity-custom !default,
-
     // 👉 Card
   $card-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default,
   $card-elevation: 6 !default,

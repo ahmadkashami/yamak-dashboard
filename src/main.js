@@ -14,9 +14,9 @@ import { i18n } from '@/plugins/i18n'
 import ability from '@/plugins/acl/ability'
 import { abilitiesPlugin } from '@casl/vue'
 import 'flag-icons/css/flag-icons.min.css'
-import 'v-phone-input/dist/v-phone-input.css'
+import 'v-phone-input/styles'
 import { createVPhoneInput } from 'v-phone-input'
-import VueDatePicker from '@vuepic/vue-datepicker';
+import { VueDatePicker } from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
 loadFonts()

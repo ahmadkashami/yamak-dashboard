@@ -68,9 +68,10 @@ const fetchItems = () => {
         ...props.queryParams,
       })
         .then(response => {
-          list.value =response.data.data.list.filter(item => {
-            return  item.name=getTranslations(item.name,current.value)
-          })
+          list.value = (response.data.data.list || []).map(item => ({
+            ...item,
+            name: getTranslations(item?.name, current.value),
+          }))
           loading.value=false
         }).catch(error => {
           console.error(error)
