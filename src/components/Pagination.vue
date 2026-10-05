@@ -48,7 +48,7 @@ const emit=defineEmits(['updateCurrentPage', 'updateItemsPerPage'])
 const itemsPerPage = ref(10)
 const currentPageLocal = ref(10)
 
-// eslint-disable-next-line vue/no-setup-props-destructure
+// eslint-disable-next-line vue/no-setup-props-reactivity-loss
 currentPageLocal.value = props.currentPage
 
 const updateCurrentPage = () => {

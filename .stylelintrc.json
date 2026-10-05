@@ -4,7 +4,8 @@
         "stylelint-config-idiomatic-order"
     ],
     "plugins": [
-        "stylelint-use-logical-spec"
+        "stylelint-plugin-logical-css",
+        "@stylistic/stylelint-plugin"
     ],
     "overrides": [
         {
@@ -21,14 +22,10 @@
         }
     ],
     "rules": {
-        "max-line-length": [
-            120,
-            {
-                "ignore": "comments"
-            }
-        ],
-        "liberty/use-logical-spec": true,
+        "@stylistic/max-line-length": [120, { "ignore": ["comments"] }],
         "selector-class-pattern": null,
-        "color-function-notation": null
+        "color-function-notation": null,
+        "logical-css/require-logical-properties": true,
+        "logical-css/require-logical-keywords": true
     }
 }

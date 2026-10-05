@@ -92,7 +92,7 @@
                 </VCol>
                 <VCol cols="12" md="6">
                   <h6>License Expired</h6>
-                  <VueDatePicker v-model="modelObject.licenseExpiredAt" :format="format"></VueDatePicker>
+                  <VueDatePicker v-model="modelObject.licenseExpiredAt" :formats="{ input: format }" :week-start="1"></VueDatePicker>
                 </VCol>
                 <VCol cols="12">
                   <FileUpload

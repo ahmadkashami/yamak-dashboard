@@ -15,8 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const node_fs_1 = require("node:fs");
 const node_path_1 = require("node:path");
 // Installation: npm install --save-dev @iconify/tools @iconify/utils @iconify/json @iconify/iconify
-const tools_1 = require("@iconify/tools");
-const utils_1 = require("@iconify/utils");
 const sources = {
     svg: [
     // {
@@ -68,6 +66,8 @@ const target = (0, node_path_1.join)(__dirname, 'icons-bundle.js');
  */
 // eslint-disable-next-line sonarjs/cognitive-complexity
 (async function () {
+    const tools_1 = await import("@iconify/tools");
+    const utils_1 = await import("@iconify/utils");
     let bundle = commonJS
         ? `const { addCollection } = require('${component}');\n\n`
         : `import { addCollection } from '${component}';\n\n`;
@@ -87,7 +87,7 @@ const target = (0, node_path_1.join)(__dirname, 'icons-bundle.js');
     if (sources.icons) {
         const sourcesJSON = sources.json ? sources.json : (sources.json = []);
         // Sort icons by prefix
-        const organizedList = organizeIconsList(sources.icons);
+        const organizedList = organizeIconsList(sources.icons, utils_1.stringToIcon);
         for (const prefix in organizedList) {
             const filename = require.resolve(`@iconify/json/json/${prefix}.json`);
             sourcesJSON.push({
@@ -179,6 +179,7 @@ const target = (0, node_path_1.join)(__dirname, 'icons-bundle.js');
     console.log(`Saved ${target} (${bundle.length} bytes)`);
 })().catch(err => {
     console.error(err);
+    process.exitCode = 1;
 });
 /**
  * Remove metadata from icon set
@@ -199,10 +200,10 @@ function removeMetaData(iconSet) {
 /**
  * Sort icon names by prefix
  */
-function organizeIconsList(icons) {
+function organizeIconsList(icons, stringToIcon) {
     const sorted = Object.create(null);
     icons.forEach(icon => {
-        const item = (0, utils_1.stringToIcon)(icon);
+        const item = stringToIcon(icon);
         if (!item)
             return;
         const prefix = item.prefix;

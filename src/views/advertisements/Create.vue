@@ -46,11 +46,11 @@
                 </v-col>
                 <VCol cols="12" md="6">
                   <h6>{{$t('Started At')}}</h6>
-                  <VueDatePicker v-model="modelObject.startedAt" :format="format"></VueDatePicker>
+                  <VueDatePicker v-model="modelObject.startedAt" :formats="{ input: format }" :week-start="1"></VueDatePicker>
                 </VCol>
                 <VCol cols="12" md="6">
                   <h6>{{$t('Expired At')}}</h6>
-                  <VueDatePicker v-model="modelObject.expiredAt" :format="format"></VueDatePicker>
+                  <VueDatePicker v-model="modelObject.expiredAt" :formats="{ input: format }" :week-start="1"></VueDatePicker>
                 </VCol>
                 <VCol cols="12" md="6">
                   <VSwitch

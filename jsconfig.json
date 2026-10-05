@@ -41,12 +41,16 @@
       ],
       "@styles/*": [
         "src/styles/*"
+      ],
+      "@configured-variables": [
+        "src/styles/variables/_template.scss"
+      ],
+      "@axios": [
+        "src/plugins/axios.js"
       ]
     },
     "types": [
-      "vite/client",
-      "vite-plugin-pages/client",
-      "vite-plugin-vue-layouts/client"
+      "vite/client"
     ]
   }
 }

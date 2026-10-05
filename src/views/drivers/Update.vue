@@ -95,7 +95,8 @@
                   <h6>License Expired</h6>
                   <VueDatePicker
                     v-model="modelObject.licenseExpiredAt"
-                    :format="format"
+                    :formats="{ input: format }"
+                    :week-start="1"
                   />
                 </VCol>
 

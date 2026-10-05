@@ -31,7 +31,7 @@
           :allowed-dates="allowedDates"
           :readonly="readonly"
           :disabled="readonly"
-          @input='updateDate'
+          @update:model-value='updateDate'
           :min="min"
           :max="max"
         />
@@ -45,7 +45,7 @@
 import { mdiCalendar } from '@mdi/js'
 import formatDate from '../../plugins/custom-date'
 import { ref, watch } from 'vue'
-import {VDatePicker} from 'vuetify/labs/components'
+import {VDatePicker} from 'vuetify/components/VDatePicker'
 
 export default {
   props: {

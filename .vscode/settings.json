@@ -33,8 +33,8 @@
   },
   "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,
-  "eslint.packageManager": "yarn",
-  "stylelint.packageManager": "yarn",
+  "eslint.packageManager": "npm",
+  "stylelint.packageManager": "npm",
   "stylelint.validate": [
     "css",
     "scss",

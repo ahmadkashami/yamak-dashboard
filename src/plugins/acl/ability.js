@@ -1,4 +1,4 @@
-import { Ability } from '@casl/ability'
+import { createMongoAbility } from '@casl/ability'
 import { initialAbility } from './config'
 
 //  Read ability from localStorage
@@ -7,4 +7,4 @@ import { initialAbility } from './config'
 // ! Anyone can update localStorage so be careful and please update this
 const existingAbility = JSON.parse(localStorage.getItem('userAbility'))
 
-export default new Ability(existingAbility || initialAbility)
+export default createMongoAbility(existingAbility || initialAbility)

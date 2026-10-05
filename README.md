@@ -9,8 +9,10 @@ Vue 3 + Vuetify 4 admin dashboard for Yamak operators and managers. Connects to 
 
 ## Setup
 
+Use Node.js 22.22.2+, 24.15.0+, or 26+ and npm 12.2.0. The project uses `package-lock.json` as its dependency lockfile.
+
 ```bash
-yarn install
+npm ci
 ```
 
 A `postinstall` script runs automatically to build the Iconify icon bundle.
@@ -18,15 +20,17 @@ A `postinstall` script runs automatically to build the Iconify icon bundle.
 ## Running
 
 ```bash
-yarn dev      # Vite dev server (hot reload)
-yarn build    # Production build → dist/
-yarn preview  # Preview production build on port 5050
+npm run dev      # Vite dev server (hot reload)
+npm run build    # Production build → dist/
+npm run preview  # Preview production build on port 5050
 ```
 
 ## Code Style
 
 ```bash
-yarn lint     # ESLint + auto-fix
+npm run lint         # ESLint + auto-fix
+npm run lint:check   # ESLint without changing source files
+npm run lint:styles  # Stylelint without changing source files
 ```
 
 ## Key Features
