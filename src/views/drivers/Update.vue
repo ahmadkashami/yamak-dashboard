@@ -31,7 +31,6 @@
                   <VTextField
                     v-model="modelObject.name"
                     outlined
-                    density="compact"
                     :label="$t('Name')"
                     :placeholder="$t('Name')"
                     :rules="requiredRules"
@@ -46,7 +45,6 @@
                     :label="$t('Email')"
                     type="email"
                     :rules="emailRules"
-                    density="compact"
                   />
                 </VCol>
 
@@ -58,7 +56,6 @@
                     v-model="modelObject.phoneNum"
                     :label="$t('Phone')"
                     :placeholder="$t('Phone')"
-                    density="compact"
                     class="phone-input"
                     :rules="phoneRules"
                   />
@@ -122,7 +119,6 @@
                     :type="isPasswordVisible ? 'text' : 'password'"
                     :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
                     :rules="requiredRules"
-                    density="compact"
                     @click:append-inner="isPasswordVisible = !isPasswordVisible"
                   />
                 </VCol>
@@ -145,7 +141,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

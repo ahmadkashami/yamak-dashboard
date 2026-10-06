@@ -29,7 +29,6 @@
                     <VTextField
                       v-model="fullName"
                       outlined
-                      density="compact"
                       :label="$t('Full Name')"
                       :placeholder="$t('Full Name')"
                       :rules="requiredRules"
@@ -41,7 +40,6 @@
                       :label="$t('Email')"
                       type="email"
                       :rules='emailRules'
-                      density="compact"
                     />
                   </v-col>
                   <v-col cols="12" md="6">
@@ -52,7 +50,6 @@
                       :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
                       @click:append-inner="isPasswordVisible = !isPasswordVisible"
                       :rules='requiredRules'
-                      density="compact"
                     />
                   </v-col>
                   <v-col  cols="12"  md="6">
@@ -64,7 +61,6 @@
                        item-value="value"
                        variant="outlined"
                        :rules="requiredRules"
-                       density="compact"
                     ></v-select>
                   </v-col>
                   <v-col cols="12"  md="6">
@@ -84,7 +80,6 @@
                       item-value="value"
                       variant="outlined"
                       :rules="requiredRules"
-                      density="compact"
                     ></v-select>
                   </v-col>
                 </v-row>
@@ -98,7 +93,6 @@
                 type="submit"
                 :loading="loading"
                 :disabled="loading"
-                variant="outlined"
               >
                 {{ $t('Create') }}
               </VBtn>

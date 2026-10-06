@@ -31,7 +31,6 @@
                   <VTextField
                     v-model="modelObject.androidVersionCode"
                     outlined
-                    density="compact"
                     :label="$t('Android Version Code')"
                     :placeholder="$t('Android Version Code')"
                     :rules="requiredRules"
@@ -44,7 +43,6 @@
                   <VTextField
                     v-model="modelObject.androidRecommendedVersion"
                     outlined
-                    density="compact"
                     :label="$t('Android Recommended Version')"
                     :placeholder="$t('Android Recommended Version')"
                     :rules="requiredRules"
@@ -57,7 +55,6 @@
                   <VTextField
                     v-model="modelObject.iosVersion"
                     outlined
-                    density="compact"
                     :label="$t('Ios Version')"
                     :placeholder="$t('Ios Version')"
                     :rules="requiredRules"
@@ -70,7 +67,6 @@
                   <VTextField
                     v-model="modelObject.iosRecommendedVersion"
                     outlined
-                    density="compact"
                     :label="$t('Ios Recommended Version')"
                     :placeholder="$t('Ios Recommended Version')"
                     :rules="requiredRules"
@@ -87,7 +83,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

@@ -7,8 +7,13 @@
     />
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
-        <div class="d-flex align-center  pb-5">
-          <h2>{{ $t('Companies') }}</h2>
+        <div
+          v-if="hiddenBreadcrumbs"
+          class="d-flex align-center pb-5"
+        >
+          <h2>
+            {{ $t('Companies') }}
+          </h2>
         </div>
         <VSpacer />
         <div class="d-flex align-center pb-5">
@@ -168,4 +173,3 @@ onMounted(() => {
   fetchDataList()
 })
 </script>
-

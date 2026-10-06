@@ -80,7 +80,7 @@
               {{ $t('Created') }}
             </div>
             <div class="text-body-2">
-              {{ detail.createdAt }}
+              {{ formatDateTime(detail.createdAt) }}
             </div>
           </VCol>
           <VCol
@@ -91,7 +91,7 @@
               {{ $t('Updated') }}
             </div>
             <div class="text-body-2">
-              {{ detail.updatedAt }}
+              {{ formatDateTime(detail.updatedAt) }}
             </div>
           </VCol>
         </VRow>
@@ -216,6 +216,7 @@ import { useRoute } from 'vue-router'
 import useOnboardings from './useOnboardings'
 import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
 import StatusChip from '@/components/StatusChip.vue'
+import { formatDateTime } from '@/utils/date-display'
 
 const route = useRoute()
 

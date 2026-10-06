@@ -28,7 +28,6 @@
                   <VTextField
                     v-model="modelObject.title.ar"
                     outlined
-                    density="compact"
                     :label="$t('Title Arabic')"
                     :placeholder="$t('Title Arabic')"
                     :rules="requiredRules"
@@ -38,7 +37,6 @@
                   <VTextField
                     v-model="modelObject.title.en"
                     outlined
-                    density="compact"
                     :label="$t('Title English')"
                     :placeholder="$t('Title English')"
                     :rules="requiredRules"
@@ -48,7 +46,6 @@
                   <VTextarea
                     v-model="modelObject.description.ar"
                     outlined
-                    density="compact"
                     :label="$t('Description Arabic')"
                     :placeholder="$t('Description Arabic')"
                     :rules="requiredRules"
@@ -58,7 +55,6 @@
                   <VTextarea
                     v-model="modelObject.description.en"
                     outlined
-                    density="compact"
                     :label="$t('Description English')"
                     :placeholder="$t('Description English')"
                     :rules="requiredRules"
@@ -92,7 +88,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

@@ -5,11 +5,11 @@
       width="500"
       persistent
     >
-      <VCard>
-        <VCardTitle>
+      <VCard class="delete-confirmation-card">
+        <VCardTitle class="delete-confirmation-title">
           Are you sure you want to delete this item?
         </VCardTitle>
-        <VCardActions>
+        <VCardActions class="delete-confirmation-actions">
           <VSpacer />
           <VBtn
             color="error"
@@ -90,3 +90,24 @@ const deleteItem = () => {
   )
 }
 </script>
+
+<style lang="scss" scoped>
+.delete-confirmation-card {
+  border: 1px solid var(--yamak-border);
+  border-radius: var(--yamak-radius-lg);
+  box-shadow: var(--yamak-shadow-md);
+}
+
+.delete-confirmation-title {
+  color: var(--yamak-text-primary);
+  font-weight: var(--yamak-font-weight-semibold);
+  padding-block: var(--yamak-space-6) var(--yamak-space-3);
+  padding-inline: var(--yamak-space-6);
+}
+
+.delete-confirmation-actions {
+  gap: var(--yamak-space-2);
+  padding-block: var(--yamak-space-3) var(--yamak-space-4);
+  padding-inline: var(--yamak-space-4);
+}
+</style>

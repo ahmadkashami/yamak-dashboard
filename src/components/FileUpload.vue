@@ -218,61 +218,104 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .file-upload {
-  height: 250px;
-  width: 100%;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--yamak-space-3);
+  inline-size: 100%;
+
+  > div:first-child {
+    flex: 0 0 auto;
+  }
 }
 
 .file-upload .file-upload__area {
-  width: 600px;
-  min-height: 150px;
-  max-height: 250px;
   display: flex;
+  box-sizing: border-box;
+  flex: 1 1 auto;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #ccc;
-  padding: 20px;
+  border: 1px dashed var(--yamak-border);
+  border-radius: var(--yamak-radius-md);
+  background-color: var(--yamak-surface-secondary);
+  inline-size: 100%;
+  min-block-size: 112px;
+  min-inline-size: 0;
+  padding-block: var(--yamak-space-4);
+  padding-inline: var(--yamak-space-4);
+
+  input[type="file"] {
+    color: var(--yamak-text-secondary);
+    max-inline-size: 100%;
+
+    &::file-selector-button {
+      border: 1px solid var(--yamak-border);
+      border-radius: var(--yamak-radius-sm);
+      background-color: var(--yamak-surface);
+      color: var(--yamak-text-primary);
+      cursor: pointer;
+      margin-inline-end: var(--yamak-space-2);
+      padding-block: var(--yamak-space-2);
+      padding-inline: var(--yamak-space-3);
+    }
+
+    &::file-selector-button:hover {
+      border-color: var(--yamak-primary);
+    }
+  }
 }
 
 .file-upload .file-upload__error {
-  margin-top: 10px;
-  color: #f00;
-  font-size: 12px;
+  color: var(--yamak-danger);
+  font-size: var(--yamak-font-size-xs);
+  margin-block-start: var(--yamak-space-2);
 }
 
 .file-upload .upload-preview {
+  inline-size: 100%;
   text-align: center;
 }
 
 .file-upload .upload-preview .file-image {
-  width: 100%;
-  height: 150px;
+  block-size: 120px;
+  inline-size: 100%;
+  max-inline-size: 100%;
   object-fit: contain;
 }
 
 .file-upload .upload-preview .file-extention {
-  height: 100px;
-  width: 100px;
-  border-radius: 8px;
-  background: #ccc;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 0.5em auto;
-  font-size: 1.2em;
+  justify-content: center;
   padding: 1em;
+  border-radius: var(--yamak-radius-sm);
+  margin: 0.5em auto;
+  background: var(--yamak-surface-elevated);
+  block-size: 80px;
+  color: var(--yamak-text-secondary);
+  font-size: var(--yamak-font-size-md);
+  font-weight: var(--yamak-font-weight-medium);
+  inline-size: 80px;
   text-transform: uppercase;
-  font-weight: 500;
 }
 
 .file-upload .upload-preview .file-name {
-  font-size: 1.2em;
-  font-weight: 500;
-  color: #000;
-  opacity: 0.5;
+  color: var(--yamak-text-secondary);
+  font-size: var(--yamak-font-size-sm);
+  font-weight: var(--yamak-font-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+@media (width <= 600px) {
+  .file-upload {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .file-upload .file-upload__area {
+    flex-basis: auto;
+  }
 }
 </style>

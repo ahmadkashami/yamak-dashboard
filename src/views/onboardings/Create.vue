@@ -104,7 +104,6 @@
                           type="number"
                           min="1"
                           outlined
-                          density="compact"
                           :label="$t('Order')"
                           :rules="positiveOrderRules"
                         />
@@ -116,7 +115,6 @@
                         <VTextField
                           v-model="slide.title_en"
                           outlined
-                          density="compact"
                           :label="$t('Title (EN)')"
                           :placeholder="$t('Title (EN)')"
                           :rules="requiredTitleRules"
@@ -129,7 +127,6 @@
                         <VTextField
                           v-model="slide.title_ar"
                           outlined
-                          density="compact"
                           :label="$t('Title (AR)')"
                           :placeholder="$t('Title (AR)')"
                         />
@@ -141,7 +138,6 @@
                         <VTextarea
                           v-model="slide.description_en"
                           outlined
-                          density="compact"
                           :label="$t('Description (EN)')"
                           :placeholder="$t('Description (EN)')"
                         />
@@ -153,7 +149,6 @@
                         <VTextarea
                           v-model="slide.description_ar"
                           outlined
-                          density="compact"
                           :label="$t('Description (AR)')"
                           :placeholder="$t('Description (AR)')"
                         />
@@ -191,7 +186,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Save Draft') }}
             </VBtn>
@@ -330,7 +324,7 @@ const onSubmit = () => {
 /* Caps the scrollable slide area so the header and action bar stay reachable
    with many slides inside a 1024px dialog. */
 .onboarding-dialog-body {
-  max-height: 70vh;
-  overflow-y: auto;
+  max-block-size: 70vh;
+  overflow-block: auto;
 }
 </style>

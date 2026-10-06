@@ -8,11 +8,13 @@
 
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
-        <div class="d-flex align-center  pb-5">
+        <div
+          v-if="hiddenBreadcrumbs"
+          class="d-flex align-center pb-5"
+        >
           <h2>{{ $t('App Users') }}</h2>
         </div>
         <VSpacer />
-        <div class="d-flex align-center pb-5" />
       </VCardText>
       <!-- table -->
       <VDataTable
@@ -25,6 +27,12 @@
       >
         <template #item.status="{ item }">
           <StatusChip :status="item.status" />
+        </template>
+        <template #item.lastLogin="{ item }">
+          {{ formatDateTime(item.lastLogin) }}
+        </template>
+        <template #item.createdAt="{ item }">
+          {{ formatDateTime(item.createdAt) }}
         </template>
         <template #bottom>
           <Pagination
@@ -56,6 +64,7 @@ import { onMounted } from 'vue'
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+import { formatDateTime } from '@/utils/date-display'
 
 const props=defineProps({
   hiddenBreadcrumbs: {
@@ -99,4 +108,3 @@ onMounted(() => {
   fetchDataList()
 })
 </script>
-

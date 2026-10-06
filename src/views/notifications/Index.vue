@@ -1,5 +1,9 @@
 <template>
   <div>
+    <BreadcrumbsComponent
+      :items="itemsBreadcrumbs"
+      :title="$t('Notifications')"
+    />
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center justify-center flex-wrap">
           <VBtn
@@ -49,6 +53,20 @@
 import useNotification from './useNotification'
 import PushToUser from '@/views/notifications/PushToUser.vue'
 import PushByTopic from '@/views/notifications/PushByTopic.vue'
+import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+
+const itemsBreadcrumbs = [
+  {
+    text: 'Dashboard',
+    disabled: false,
+    href: '/',
+  },
+  {
+    text: 'Notifications',
+    disabled: true,
+    href: '/notifications',
+  },
+]
 
 const {
   isOpenPushToUser,
@@ -59,4 +77,3 @@ const {
   lang,
 } = useNotification()
 </script>
-

@@ -32,7 +32,6 @@
                   <VTextField
                     v-model="modelObject.labelNumber"
                     outlined
-                    density="compact"
                     :label="$t('Label Number')"
                     :placeholder="$t('Label Number')"
                     :rules="requiredRules"
@@ -45,7 +44,6 @@
                   <VTextField
                     v-model="modelObject.modelName"
                     outlined
-                    density="compact"
                     :label="$t('Model Name')"
                     :placeholder="$t('Model Name')"
                     :rules="requiredRules"
@@ -123,11 +121,9 @@
                   <VSelect
                     v-model="modelObject.iconMap"
                     :items="iconsMap"
-                    color="blue-grey-lighten-2"
                     item-title="label"
                     item-value="value"
                     label="Icon on  Map"
-                    density="compact"
                   >
                     <template #item="{ props, item }">
                       <VListItem
@@ -149,7 +145,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Create') }}
             </VBtn>

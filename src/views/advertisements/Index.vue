@@ -37,6 +37,12 @@
         <template #item.branch="{ item }">
           <span>{{ getTranslations(item.branch.name, lang) }}</span>
         </template>
+        <template #item.startedAt="{ item }">
+          {{ formatDateOnly(item.startedAt) }}
+        </template>
+        <template #item.expiredAt="{ item }">
+          {{ formatDateOnly(item.expiredAt) }}
+        </template>
 
         <template #item.actions="{ item }">
           <VBtn
@@ -98,6 +104,7 @@ import StatusChip from '@/components/StatusChip.vue'
 import { getTranslations } from '@/libs/i18n/utils'
 import Update from '@/views/advertisements/Update.vue'
 import Create from '@/views/advertisements/Create.vue'
+import { formatDateOnly } from '@/utils/date-display'
 
 const {
   tableColumns,
@@ -123,4 +130,3 @@ onMounted(() => {
   fetchDataList()
 })
 </script>
-

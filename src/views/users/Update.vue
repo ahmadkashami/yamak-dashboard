@@ -28,7 +28,6 @@
                   <VTextField
                     v-model="name"
                     outlined
-                    density="compact"
                     :label="$t('Name')"
                     :placeholder="$t('Name')"
                     :rules="[v => !!v || 'Item is required']"
@@ -45,7 +44,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

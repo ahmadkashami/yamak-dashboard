@@ -37,6 +37,9 @@
         <template #item.branch="{ item }">
           <span>{{getTranslations(item.branch.name,lang)}}</span>
         </template>
+        <template #item.createdAt="{ item }">
+          {{ formatDateTime(item.createdAt) }}
+        </template>
         <template #item.iconMap="{ item }">
           <v-img :src="item.iconMap" height="75"  class="pa-2"></v-img>
         </template>
@@ -100,6 +103,7 @@ import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/vehicles/Update.vue'
 import Create from '@/views/vehicles/Create.vue'
 import { getTranslations } from '../../libs/i18n/utils'
+import { formatDateTime } from '@/utils/date-display'
 
 
 const {
@@ -126,4 +130,3 @@ onMounted(() => {
   fetchDataList()
 })
 </script>
-

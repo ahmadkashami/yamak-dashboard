@@ -31,7 +31,7 @@
                   <VTextField
                     v-model="modelObject.name.en"
                     outlined
-                    density="compact"
+                    density="comfortable"
                     :label="$t('English Name')"
                     :placeholder="$t('English Name')"
                     :rules="requiredRules"
@@ -44,7 +44,7 @@
                   <VTextField
                     v-model="modelObject.name.ar"
                     outlined
-                    density="compact"
+                    density="comfortable"
                     :label="$t('Arabic Name')"
                     :placeholder="$t('Arabic Name')"
                     :rules="requiredRules"
@@ -59,7 +59,7 @@
                     :label="$t('Email')"
                     type="email"
                     :rules="emailRules"
-                    density="compact"
+                    density="comfortable"
                   />
                 </VCol>
                 <VCol
@@ -70,7 +70,7 @@
                     v-model="modelObject.phone"
                     :label="$t('Phone')"
                     :placeholder="$t('Phone')"
-                    density="compact"
+                    density="comfortable"
                     :rules="phoneRules"
                   />
                 </VCol>
@@ -95,7 +95,7 @@
                   <VTextarea
                     v-model="modelObject.address"
                     outlined
-                    density="compact"
+                    density="comfortable"
                     :label="$t('Address')"
                     :placeholder="$t('Address')"
                     :rules="requiredRules"
@@ -106,7 +106,7 @@
                   <VTextarea
                     v-model="modelObject.description"
                     outlined
-                    density="compact"
+                    density="comfortable"
                     rows="2"
                     :label="$t('Description')"
                     :placeholder="$t('Description')"
@@ -124,7 +124,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

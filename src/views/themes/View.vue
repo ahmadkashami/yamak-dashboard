@@ -2,8 +2,6 @@
   <div>
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0 mb-3">
-        <div class="d-flex align-center  ">
-        </div>
         <VSpacer />
         <div class="d-flex align-center ">
           <VBtn
@@ -23,7 +21,7 @@
       </VCardText>
       <v-divider></v-divider>
       <VCardText>
-        <v-list density="compact" v-if="itemData">
+        <v-list v-if="itemData">
           <div class="d-flex mb-3">
             <div>{{ $t('Primary Color') }}:</div>
             <div class="color-view mx-2" :style="{ background: itemData.primaryColor}"></div>
@@ -86,13 +84,12 @@ onMounted(() => {
 </script>
 <style>
 .color-view {
-  width: 50px;
-  height: 20px;
   background-size: auto 20px;
-
+  block-size: 20px;
+  inline-size: 50px;
 }
+
 .img-view{
-  border: #212121 1px solid;
+  border: 1px solid var(--yamak-border);
 }
 </style>
-

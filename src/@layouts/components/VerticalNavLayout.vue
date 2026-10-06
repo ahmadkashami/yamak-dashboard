@@ -76,6 +76,38 @@ export default defineComponent({
   // TODO(v2): Check why we need height in vertical nav & min-height in horizontal nav
   block-size: 100%;
 
+  .layout-navbar {
+    backdrop-filter: blur(12px);
+    background-color: rgb(var(--v-theme-surface) / 94%);
+    border-block-end: 1px solid var(--yamak-border);
+    box-shadow: none;
+
+    .navbar-content-container > .d-flex {
+      min-inline-size: 0;
+    }
+
+    .navbar-content-container > .d-flex > .v-btn {
+      border-radius: var(--yamak-radius-sm);
+      block-size: 40px;
+      color: var(--yamak-text-primary);
+      inline-size: 40px;
+      min-block-size: 40px;
+      min-inline-size: 40px;
+      transition: background-color 0.15s ease, color 0.15s ease;
+
+      &:hover {
+        background-color: var(--yamak-background);
+        color: var(--yamak-primary-hover);
+      }
+    }
+
+    .navbar-content-container > .d-flex > .v-badge .v-avatar {
+      border: 1px solid var(--yamak-border);
+      block-size: 40px;
+      inline-size: 40px;
+    }
+  }
+
   .layout-content-wrapper {
     display: flex;
     flex-direction: column;
@@ -89,7 +121,10 @@ export default defineComponent({
     z-index: variables.$layout-vertical-nav-layout-navbar-z-index;
 
     .navbar-content-container {
+      box-sizing: border-box;
       block-size: variables.$layout-vertical-nav-navbar-height;
+      margin-inline: auto;
+      max-inline-size: 1600px;
     }
 
     @at-root {
@@ -101,6 +136,10 @@ export default defineComponent({
             .navbar-content-container {
               @include mixins.boxed-content;
             }
+          }
+
+          .navbar-content-container {
+            padding-inline: clamp(16px, 2vw, 30px);
           }
         }
       }
@@ -162,7 +201,7 @@ export default defineComponent({
 
         > :first-child {
           max-block-size: 100%;
-          overflow-y: auto;
+          overflow-block: auto;
         }
       }
     }

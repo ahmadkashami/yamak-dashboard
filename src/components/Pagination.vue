@@ -1,5 +1,5 @@
 <template>
-  <VRow class="border-t mt-2">
+  <VRow class="pagination-footer border-t mt-2">
     <VCol
       cols="12"
       md="3"
@@ -24,7 +24,7 @@
       class="d-flex justify-end"
     >
       <VPagination
-        class="my-4"
+        class="pagination-controls my-4"
         v-model="currentPageLocal"
         :length="pageInfo.totalPages"
         rounded="circle"
@@ -65,6 +65,54 @@ watch(
 
 <style>
 .item-per-page {
-  max-width: 130px;
+  max-inline-size: 130px;
+}
+</style>
+
+<style lang="scss">
+.pagination-footer {
+  align-items: center;
+  border-color: var(--yamak-border) !important;
+  color: var(--yamak-text-secondary);
+  padding-block-start: var(--yamak-space-2);
+
+  .item-per-page {
+    .v-field-label {
+      color: var(--yamak-text-secondary);
+      opacity: 1;
+    }
+
+    .v-field__input,
+    .v-select__selection-text {
+      color: var(--yamak-text-primary);
+    }
+  }
+}
+
+.pagination-controls {
+  .v-pagination__item .v-btn {
+    border-radius: var(--yamak-radius-sm);
+    color: var(--yamak-text-secondary);
+    font-weight: var(--yamak-font-weight-medium);
+  }
+
+  .v-pagination__prev .v-btn,
+  .v-pagination__next .v-btn {
+    color: var(--yamak-text-secondary);
+
+    &.v-btn--disabled {
+      color: color-mix(in srgb, var(--yamak-text-secondary) 65%, var(--yamak-surface));
+      opacity: 1;
+    }
+  }
+
+  .v-pagination__item--is-active .v-btn {
+    background-color: color-mix(in srgb, var(--yamak-primary) 18%, var(--yamak-surface));
+    color: var(--yamak-text-primary);
+  }
+
+  .v-pagination__item--is-active .v-btn.v-btn--disabled {
+    opacity: 1;
+  }
 }
 </style>

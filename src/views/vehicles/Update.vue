@@ -31,7 +31,6 @@
                   <VTextField
                     v-model="modelObject.labelNumber"
                     outlined
-                    density="compact"
                     :label="$t('Label Number')"
                     :placeholder="$t('Label Number')"
                     :rules="requiredRules"
@@ -44,7 +43,6 @@
                   <VTextField
                     v-model="modelObject.modelName"
                     outlined
-                    density="compact"
                     :label="$t('Model Name')"
                     :placeholder="$t('Model Name')"
                     :rules="requiredRules"
@@ -120,7 +118,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

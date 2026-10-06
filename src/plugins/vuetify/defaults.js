@@ -26,6 +26,11 @@ export default {
   VBtn: {
     // set v-btn default color to primary
     color: 'primary',
+    height: 40,
+    rounded: 'md',
+  },
+  VCard: {
+    rounded: 'lg',
   },
   VChip: {
     elevation: 0,
@@ -35,6 +40,7 @@ export default {
   },
   VPagination: {
     activeColor: 'primary',
+    density: 'comfortable',
   },
   VTabs: {
     // set v-tabs default color to primary
@@ -67,6 +73,7 @@ export default {
   VSelect: {
     variant: 'outlined',
     color: 'primary',
+    density: 'comfortable',
     hideDetails: 'auto',
   },
   VRangeSlider: {
@@ -93,26 +100,31 @@ export default {
   VTextField: {
     variant: 'outlined',
     color: 'primary',
+    density: 'comfortable',
     hideDetails: 'auto',
   },
   VAutocomplete: {
     variant: 'outlined',
     color: 'primary',
+    density: 'comfortable',
     hideDetails: 'auto',
   },
   VCombobox: {
     variant: 'outlined',
     color: 'primary',
+    density: 'comfortable',
     hideDetails: 'auto',
   },
   VFileInput: {
     variant: 'outlined',
     color: 'primary',
+    density: 'comfortable',
     hideDetails: 'auto',
   },
   VTextarea: {
     variant: 'outlined',
     color: 'primary',
+    density: 'comfortable',
     hideDetails: 'auto',
   },
   VSwitch: {

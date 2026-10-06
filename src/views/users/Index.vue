@@ -1,10 +1,11 @@
 <template>
   <div>
+    <BreadcrumbsComponent
+      :items="itemsBreadcrumbs"
+      :title="$t('Users')"
+    />
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
-        <div class="d-flex align-center  pb-5">
-          <h2>{{ $t('Users') }}</h2>
-        </div>
         <VSpacer />
         <div class="d-flex align-center pb-5">
           <VBtn
@@ -87,6 +88,20 @@ import { onMounted } from 'vue'
 
 import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
+import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+
+const itemsBreadcrumbs = [
+  {
+    text: 'Dashboard',
+    disabled: false,
+    href: '/',
+  },
+  {
+    text: 'Users',
+    disabled: true,
+    href: '/users',
+  },
+]
 
 const {
   tableColumns,
@@ -112,4 +127,3 @@ onMounted(() => {
   fetchDataList()
 })
 </script>
-

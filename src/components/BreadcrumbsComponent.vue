@@ -1,17 +1,22 @@
 <template>
-  <div>
-    <h4 class="pl-1 text-uppercase font-weight-bold">{{ title }}</h4>
-    <v-breadcrumbs class="mb-3 pl-1" :items="items">
-      <template v-slot:title="{ item }">
-        <v-breadcrumbs-item
+  <div class="shared-page-heading">
+    <h4 class="shared-page-title">
+      {{ title }}
+    </h4>
+    <VBreadcrumbs
+      class="shared-page-breadcrumbs"
+      :items="items"
+    >
+      <template #title="{ item }">
+        <VBreadcrumbsItem
           :href="item.href"
           :disabled="item.disabled"
-          class="pl-0"
+          class="shared-page-breadcrumb-item"
         >
-          <span class="text-uppercase text-subtitle-2 font-weight-bold">  {{ item.text }}</span>
-        </v-breadcrumbs-item>
+          <span>{{ item.text }}</span>
+        </VBreadcrumbsItem>
       </template>
-    </v-breadcrumbs>
+    </VBreadcrumbs>
   </div>
 </template>
 
@@ -20,11 +25,41 @@ export default {
   name: "BreadcrumbsComponent",
   props: {
     title: {
-      required: true
+      required: true,
     },
     items: {
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
+
+<style lang="scss" scoped>
+.shared-page-title {
+  margin: 0;
+  color: var(--yamak-text-primary);
+  font-size: var(--yamak-font-size-lg);
+  font-weight: var(--yamak-font-weight-bold);
+  line-height: 1.3;
+}
+
+.shared-page-breadcrumbs {
+  color: var(--yamak-text-secondary);
+  min-block-size: auto;
+  padding-block: var(--yamak-space-2) 0;
+  padding-inline: 0;
+}
+
+.shared-page-breadcrumb-item {
+  color: var(--yamak-text-secondary);
+  font-size: var(--yamak-font-size-xs);
+  font-weight: var(--yamak-font-weight-medium);
+  opacity: 1;
+  text-transform: uppercase;
+
+  &:focus-visible {
+    outline: 2px solid var(--yamak-primary-hover);
+    outline-offset: 2px;
+  }
+}
+</style>

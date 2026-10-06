@@ -28,7 +28,6 @@
                   <VTextField
                     v-model="modelObject.primaryColor"
                     outlined
-                    density="compact"
                     :label="$t('Primary Color')"
                     :placeholder="$t('Primary Color')"
                     hint="HEXA Code example #ff00ffff"
@@ -39,7 +38,6 @@
                   <VTextField
                     v-model="modelObject.secondaryColor"
                     outlined
-                    density="compact"
                     :label="$t('Secondary Color')"
                     :placeholder="$t('Secondary Color')"
                     hint="HEXA Code example #ff00ffff"
@@ -50,7 +48,6 @@
                   <VTextField
                     v-model="modelObject.secondaryBackgroundColor"
                     outlined
-                    density="compact"
                     :label="$t('Secondary Background Color')"
                     :placeholder="$t('Secondary Background Color')"
                     hint="HEXA Code example #ff00ffff"
@@ -76,7 +73,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

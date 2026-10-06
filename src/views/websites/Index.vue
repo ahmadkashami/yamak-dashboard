@@ -1,8 +1,16 @@
 <template>
   <div>
+    <BreadcrumbsComponent
+      v-if="$route.name !== 'dashboard'"
+      :items="itemsBreadcrumbs"
+      :title="$t('Websites')"
+    />
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
-        <div class="d-flex align-center  pb-5">
+        <div
+          v-if="$route.name === 'dashboard'"
+          class="d-flex align-center pb-5"
+        >
           <h2>{{ $t('Websites') }}</h2>
         </div>
         <VSpacer />
@@ -28,7 +36,7 @@
         :headers="tableColumns"
         :items="dataList"
         :loading="loading"
-        class="text-no-wrap"
+        class="websites-table"
         hide-default-footer
       >
         <template #item.status="{ item }">
@@ -36,6 +44,9 @@
         </template>
         <template #item.company="{ item }">
           <span>{{getTranslations(item.company.name,lang)}}</span>
+        </template>
+        <template #item.createdAt="{ item }">
+          {{ formatDateTime(item.createdAt) }}
         </template>
 
         <template #item.actions="{ item }">
@@ -119,6 +130,21 @@ import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/websites/Update.vue'
 import Create from '@/views/websites/Create.vue'
 import { getTranslations } from '@/libs/i18n/utils'
+import BreadcrumbsComponent from '@/components/BreadcrumbsComponent.vue'
+import { formatDateTime } from '@/utils/date-display'
+
+const itemsBreadcrumbs = [
+  {
+    text: 'Dashboard',
+    disabled: false,
+    href: '/',
+  },
+  {
+    text: 'Websites',
+    disabled: true,
+    href: '/websites',
+  },
+]
 
 const {
   tableColumns,
@@ -145,3 +171,54 @@ onMounted(() => {
 })
 </script>
 
+<style lang="scss">
+.websites-table {
+  .v-table__wrapper {
+    overflow-inline: auto;
+  }
+
+  table {
+    inline-size: 100%;
+    table-layout: fixed;
+  }
+
+  .v-data-table__th,
+  .v-data-table__td {
+    padding-inline: 8px;
+  }
+
+  .v-data-table__th:nth-child(1),
+  .v-data-table__td:nth-child(1) {
+    inline-size: 19%;
+  }
+
+  .v-data-table__th:nth-child(2),
+  .v-data-table__td:nth-child(2) {
+    inline-size: 27%;
+  }
+
+  .v-data-table__th:nth-child(3),
+  .v-data-table__td:nth-child(3) {
+    inline-size: 12%;
+  }
+
+  .v-data-table__th:nth-child(4),
+  .v-data-table__td:nth-child(4) {
+    inline-size: 29%;
+  }
+
+  .v-data-table__th:nth-child(5),
+  .v-data-table__td:nth-child(5) {
+    inline-size: 13%;
+  }
+
+  .v-data-table__td:nth-child(2),
+  .v-data-table__td:nth-child(4) {
+    overflow-wrap: anywhere;
+  }
+
+  .v-data-table__td:nth-child(5) {
+    white-space: nowrap;
+  }
+}
+</style>

@@ -18,7 +18,7 @@
 
     &::before,
     &::after {
-      border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+      border-block-end: 1px solid rgb(var(--v-border-color) / var(--v-border-opacity));
       content: "";
     }
 
@@ -41,12 +41,8 @@
 }
 
 %vertical-nav-item-interactive {
-  // Add pill shape styles
-  block-size: 2.625rem !important;
-  border-end-end-radius: 3.125rem !important;
-  border-end-start-radius: 0 !important;
-  border-start-end-radius: 3.125rem !important;
-  border-start-start-radius: 0 !important;
+  border-radius: var(--yamak-radius-md) !important;
+  block-size: 46px !important;
 }
 
 %vertical-nav-item-interactive {

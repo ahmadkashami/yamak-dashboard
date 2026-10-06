@@ -31,7 +31,6 @@
                   <VTextField
                     v-model="modelObject.name"
                     outlined
-                    density="compact"
                     :label="$t('Name')"
                     :placeholder="$t('Name')"
                     :rules="requiredRules"
@@ -45,7 +44,6 @@
                     v-model="modelObject.phone"
                     :label="$t('Phone')"
                     :placeholder="$t('Phone')"
-                    density="compact"
                     :rules="phoneRules"
                   />
                 </VCol>
@@ -126,7 +124,6 @@
                   <VTextField
                     v-model="modelObject.address.block"
                     outlined
-                    density="compact"
                     :label="$t('Block')"
                     :placeholder="$t('Block')"
                   />
@@ -138,7 +135,6 @@
                   <VTextField
                     v-model="modelObject.address.street"
                     outlined
-                    density="compact"
                     :label="$t('Street')"
                     :placeholder="$t('Street')"
                   />
@@ -150,7 +146,6 @@
                   <VTextField
                     v-model="modelObject.address.zipCode"
                     outlined
-                    density="compact"
                     :label="$t('Zip Code')"
                     :placeholder="$t('Zip Code')"
                   />
@@ -166,7 +161,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

@@ -2,8 +2,6 @@
   <div>
     <VCard id="$$example-list">
       <VCardText class="d-flex align-center flex-wrap pb-0">
-        <div class="d-flex align-center  ">
-        </div>
         <VSpacer />
         <div class="d-flex align-center ">
           <VBtn
@@ -122,4 +120,3 @@ onMounted(() => {
   fetchDataList()
 })
 </script>
-

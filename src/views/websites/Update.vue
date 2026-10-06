@@ -40,7 +40,6 @@
                   <VTextField
                     v-model="modelObject.domainUrl"
                     outlined
-                    density="compact"
                     :label="$t('Domain')"
                     :placeholder="$t('Domain')"
                     :rules="domainValidator"
@@ -52,7 +51,6 @@
                     :label="$t('About Us Arabic')"
                     type="email"
                     :rules="requiredRules"
-                    density="compact"
                   />
                 </v-col>
                 <v-col cols="12" md="12">
@@ -61,7 +59,6 @@
                     :label="$t('About Us English')"
                     type="email"
                     :rules="requiredRules"
-                    density="compact"
                   />
                 </v-col>
 
@@ -71,7 +68,6 @@
                     :label="$t('Email')"
                     type="email"
                     :rules="emailRules"
-                    density="compact"
                   />
                 </v-col>
                 <VCol
@@ -82,7 +78,6 @@
                     v-model="modelObject.contactUs.phone"
                     :label="$t('Phone')"
                     :placeholder="$t('Phone')"
-                    density="compact"
                     class="phone-input"
                     :rules="phoneRules"
                   />
@@ -96,7 +91,6 @@
                     :label="$t('Address Arabic')"
                     type="email"
                     :rules="requiredRules"
-                    density="compact"
                   />
                 </VCol>
                 <VCol
@@ -108,7 +102,6 @@
                     :label="$t('Address English')"
                     type="email"
                     :rules="requiredRules"
-                    density="compact"
                   />
                 </VCol>
                 <VCol cols="12" md="6">
@@ -131,7 +124,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

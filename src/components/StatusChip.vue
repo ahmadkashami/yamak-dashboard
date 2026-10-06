@@ -1,7 +1,9 @@
 <template>
   <VChip
     small
+    class="status-chip"
     :color="color?color:statusColor[status]"
+    variant="tonal"
   >
     <template v-if="typeof status=='boolean'">
       <span v-if="status===true">   {{ $t('Done') }}</span>
@@ -45,8 +47,12 @@ export default {
 }
 </script>
 
-<style scoped>
-.span-color {
-  color: aliceblue;
+<style lang="scss" scoped>
+.status-chip {
+  border-radius: 999px;
+  font-size: var(--yamak-font-size-xs);
+  font-weight: var(--yamak-font-weight-semibold);
+  letter-spacing: normal;
+  padding-inline: 9px;
 }
 </style>

@@ -31,7 +31,6 @@
                   <VTextField
                     v-model="modelObject.name.en"
                     outlined
-                    density="compact"
                     :label="$t('English Name')"
                     :placeholder="$t('English Name')"
                     :rules="requiredRules"
@@ -44,7 +43,6 @@
                   <VTextField
                     v-model="modelObject.name.ar"
                     outlined
-                    density="compact"
                     :label="$t('Arabic Name')"
                     :placeholder="$t('Arabic Name')"
                     :rules="requiredRules"
@@ -78,7 +76,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Update') }}
             </VBtn>

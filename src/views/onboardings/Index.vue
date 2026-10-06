@@ -51,6 +51,12 @@
             :color="item.isSkippable ? 'success' : 'info'"
           />
         </template>
+        <template #item.createdAt="{ item }">
+          {{ formatDateTime(item.createdAt) }}
+        </template>
+        <template #item.updatedAt="{ item }">
+          {{ formatDateTime(item.updatedAt) }}
+        </template>
 
         <template #item.actions="{ item }">
           <!-- Published versions are immutable: only lifecycle actions remain. -->
@@ -238,6 +244,7 @@ import Pagination from '@/components/Pagination.vue'
 import StatusChip from '@/components/StatusChip.vue'
 import Update from '@/views/onboardings/Update.vue'
 import Create from '@/views/onboardings/Create.vue'
+import { formatDateTime } from '@/utils/date-display'
 
 const {
   tableColumns,

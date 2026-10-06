@@ -44,7 +44,6 @@
               type="submit"
               :loading="loading"
               :disabled="loading"
-              variant="outlined"
             >
               {{ $t('Create') }}
             </VBtn>
