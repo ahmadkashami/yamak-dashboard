@@ -8,6 +8,7 @@ import driverActions from '@/store/driverActions'
 import vehicleActtions from '@/store/vehicleActtions'
 import appUsersActions from '@/store/appUsersActions'
 import adsActions from '@/store/adsActions'
+import onboardingActions from '@/store/onboardingActions'
 import websiteActions from '@/store/websiteActions'
 import appSettingActions from '@/store/appSettingActions'
 import notificationActions from '@/store/notificationActions'
@@ -33,6 +34,7 @@ export const  store = createStore({
     ...vehicleActtions,
     ...appUsersActions,
     ...adsActions,
+    ...onboardingActions,
     ...websiteActions,
     ...appSettingActions,
     ...notificationActions,

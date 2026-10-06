@@ -28,6 +28,10 @@ const permissions = [
     action: 'read',
   },
   {
+    subject: 'Onboarding',
+    action: 'read',
+  },
+  {
     subject: 'Websites',
     action: 'read',
   },

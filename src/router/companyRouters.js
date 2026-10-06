@@ -28,5 +28,25 @@ export  const companyRouters= [
       action: 'read',
       layout: 'default',
     },
-  }
+  },
+  {
+    path: '/onboardings',
+    name: 'onboardings',
+    component: () => import('../views/onboardings/Index.vue'),
+    meta: {
+      resource: 'Onboarding',
+      action: 'read',
+      layout: 'default',
+    },
+  },
+  {
+    path: '/onboardings/:id',
+    name: 'onboarding-view',
+    component: () => import('../views/onboardings/View.vue'),
+    meta: {
+      resource: 'Onboarding',
+      action: 'read',
+      layout: 'default',
+    },
+  },
 ]
