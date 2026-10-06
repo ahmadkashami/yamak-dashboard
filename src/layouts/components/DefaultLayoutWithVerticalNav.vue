@@ -105,6 +105,14 @@ const upgradeBanner = computed(() => {
         }"
       />
       <VerticalNavLink
+        v-if="canViewVerticalNavMenuLink({action:'read',subject:'Onboarding'})"
+        :item="{
+          title: 'Onboarding',
+          icon: 'mdi-rocket-launch-outline',
+          to: '/onboardings',
+        }"
+      />
+      <VerticalNavLink
         v-if="canViewVerticalNavMenuLink({action:'read',subject:'AppSetting'})"
         :item="{
           title: 'App Setting',
