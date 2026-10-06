@@ -4,14 +4,14 @@ const theme = {
     light: {
       dark: false,
       colors: {
-        'primary': '#f7b123',
+        'primary': '#F9AD19',
         'secondary': '#8A8D93',
         'on-secondary': '#fff',
         'success': '#56CA00',
         'info': '#16B1FF',
         'warning': '#FFB400',
         'error': '#FF4C51',
-        'on-primary': '#FFFFFF',
+        'on-primary': '#17120A',
         'on-success': '#FFFFFF',
         'on-warning': '#FFFFFF',
         'background': '#F4F5FA',
@@ -54,14 +54,14 @@ const theme = {
     dark: {
       dark: true,
       colors: {
-        'primary': '#f7b123',
+        'primary': '#F9AD19',
         'secondary': '#8A8D93',
         'on-secondary': '#fff',
         'success': '#56CA00',
         'info': '#16B1FF',
         'warning': '#FFB400',
         'error': '#FF4C51',
-        'on-primary': '#FFFFFF',
+        'on-primary': '#17120A',
         'on-success': '#FFFFFF',
         'on-warning': '#FFFFFF',
         'background': '#28243D',
